@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" />
+  <xs:element name="GetItemList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemListResult" nillable="true" type="q1:ArrayOfInventoryItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemListExtended">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemListExtendedResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemListExtendedResult" nillable="true" type="q2:ArrayOfInventoryItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="itemNumber" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemResult" nillable="true" type="q3:InventoryItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModifierGroupsForItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="itemNumber" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModifierGroupsForItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierGroupsForItemResult" nillable="true" type="q4:ArrayOfModifierGroup" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModifierItemsForItem">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="itemNumber" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetModifierItemsForItemResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q5="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierItemsForItemResult" nillable="true" type="q5:ArrayOfModifierItem" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

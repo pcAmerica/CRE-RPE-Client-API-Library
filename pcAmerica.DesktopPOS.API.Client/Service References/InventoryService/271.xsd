@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfInventoryItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="InventoryItem" nillable="true" type="tns:InventoryItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfInventoryItem" nillable="true" type="tns:ArrayOfInventoryItem" />
+  <xs:complexType name="InventoryItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Cost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IsModifier" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastSold" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="ModifierGroups" nillable="true" type="tns:ArrayOfModifierGroup" />
+      <xs:element minOccurs="0" name="ModifierItems" nillable="true" type="tns:ArrayOfModifierItem" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="PromptDescription" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PromptPrice" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PromptQuantity" type="xs:boolean" />
+      <xs:element minOccurs="0" name="StockLevel" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InventoryItem" nillable="true" type="tns:InventoryItem" />
+  <xs:complexType name="ArrayOfModifierGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModifierGroup" nillable="true" type="tns:ModifierGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModifierGroup" nillable="true" type="tns:ArrayOfModifierGroup" />
+  <xs:complexType name="ModifierGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Charged" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Forced" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ModifierItems" nillable="true" type="tns:ArrayOfModifierItem" />
+      <xs:element minOccurs="0" name="NumberToSelect" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prompt" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ModifierGroup" nillable="true" type="tns:ModifierGroup" />
+  <xs:complexType name="ArrayOfModifierItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ModifierItem" nillable="true" type="tns:ModifierItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfModifierItem" nillable="true" type="tns:ArrayOfModifierItem" />
+  <xs:complexType name="ModifierItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ModifierItem" nillable="true" type="tns:ModifierItem" />
+</xs:schema>

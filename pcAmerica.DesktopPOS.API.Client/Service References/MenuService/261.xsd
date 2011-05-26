@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/MenuService/DataContracts/2009/10/26" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/MenuService/DataContracts/2009/10/26" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Menu">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Departments" nillable="true" type="tns:ArrayOfButton" />
+      <xs:element minOccurs="0" name="ExpirationDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Menu" nillable="true" type="tns:Menu" />
+  <xs:complexType name="ArrayOfButton">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Button" nillable="true" type="tns:Button" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfButton" nillable="true" type="tns:ArrayOfButton" />
+  <xs:complexType name="Button">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BackColor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ChildButtons" nillable="true" type="tns:ArrayOfButton" />
+      <xs:element minOccurs="0" name="ExpirationDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ForeColor" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Visible" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Button" nillable="true" type="tns:Button" />
+</xs:schema>

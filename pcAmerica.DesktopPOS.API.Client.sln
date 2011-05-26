@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "pcAmerica.DesktopPOS.API.Client", "pcAmerica.DesktopPOS.API.Client\pcAmerica.DesktopPOS.API.Client.csproj", "{2E00C553-C523-47C3-A32B-BA297F476048}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APITester", "APITester\APITester.csproj", "{3AC8F015-5D9F-4E51-9A51-AF15BDBF5375}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{2E00C553-C523-47C3-A32B-BA297F476048}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E00C553-C523-47C3-A32B-BA297F476048}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E00C553-C523-47C3-A32B-BA297F476048}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E00C553-C523-47C3-A32B-BA297F476048}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AC8F015-5D9F-4E51-9A51-AF15BDBF5375}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AC8F015-5D9F-4E51-9A51-AF15BDBF5375}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AC8F015-5D9F-4E51-9A51-AF15BDBF5375}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AC8F015-5D9F-4E51-9A51-AF15BDBF5375}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

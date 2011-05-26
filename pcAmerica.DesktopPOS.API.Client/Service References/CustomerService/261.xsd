@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/CustomerService/DataContracts/2009/10/26" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/CustomerService/DataContracts/2009/10/26" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="MessageAction">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="CreateOrUpdate" />
+      <xs:enumeration value="Delete" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="MessageAction" nillable="true" type="tns:MessageAction" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AccountClosedDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AccountMaxBalance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="AccountOpenDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="AccountType" type="xs:int" />
+      <xs:element minOccurs="0" name="Address1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BillToName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Birthday" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="BonusPlanMember" type="xs:boolean" />
+      <xs:element minOccurs="0" name="BonusPoints" type="xs:int" />
+      <xs:element minOccurs="0" name="ChargeAtCost" type="xs:boolean" />
+      <xs:element minOccurs="0" name="CheckingAcctNum" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Company" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contact1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Contact2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreditCardExpiration" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreditCardNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CreditCardType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CustomerNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Disabled" type="xs:boolean" />
+      <xs:element minOccurs="0" name="DiscountLevel" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DiscountPercentage" type="xs:float" />
+      <xs:element minOccurs="0" name="DriversLicenseNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LoyaltyPlanID" type="xs:long" />
+      <xs:element minOccurs="0" name="MaxChargeAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="MaxChargeNumDays" type="xs:int" />
+      <xs:element minOccurs="0" name="MembershipExpirationDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Notes" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber3" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber4" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PrintCustomerNotesOnReceipt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ReferralSource" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="RequiresPONumber" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ResaleNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SecretCode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ShipToInfo" nillable="true" type="tns:ArrayOfShipToInfo" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TaxExempt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TaxRateID" type="xs:int" />
+      <xs:element minOccurs="0" name="Terms" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfShipToInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ShipToInfo" nillable="true" type="tns:ShipToInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfShipToInfo" nillable="true" type="tns:ArrayOfShipToInfo" />
+  <xs:complexType name="ShipToInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Address2" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="City" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Company" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FirstName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LastName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PhoneNumber1" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ReferenceCustomerNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Zip" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ShipToInfo" nillable="true" type="tns:ShipToInfo" />
+</xs:schema>

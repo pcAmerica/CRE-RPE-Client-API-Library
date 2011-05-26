@@ -1,0 +1,174 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/Imports">
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" />
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="SalesService_GetTotals_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotals" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetTotals_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetTotalsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetItemsSold_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemsSold" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetItemsSold_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetItemsSoldResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetOnHoldInvoicesForCashier_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnHoldInvoicesForCashier" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetOnHoldInvoicesForCashier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetOnHoldInvoicesForCashierResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetAllOnHoldInvoices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOnHoldInvoices" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetAllOnHoldInvoices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllOnHoldInvoicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_StartNewInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:StartNewInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_StartNewInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:StartNewInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetInvoiceHeader_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceHeader" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_GetInvoiceHeader_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetInvoiceHeaderResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_LockInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:LockInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_LockInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LockInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_UnLockInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:UnLockInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_UnLockInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UnLockInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_ModifyItems_InputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyItems" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_ModifyItems_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ModifyItemsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_PrintReceipt_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrintReceipt" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_PrintReceipt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrintReceiptResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SendToKitchen_InputMessage">
+    <wsdl:part name="parameters" element="tns:SendToKitchen" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SendToKitchen_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SendToKitchenResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_ApplyCardPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyCardPayment" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_ApplyCardPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyCardPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SplitInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:SplitInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SplitInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SplitInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SplitInvoiceByGuest_InputMessage">
+    <wsdl:part name="parameters" element="tns:SplitInvoiceByGuest" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SplitInvoiceByGuest_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SplitInvoiceByGuestResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_CombineSplits_InputMessage">
+    <wsdl:part name="parameters" element="tns:CombineSplits" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_CombineSplits_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CombineSplitsResponse" />
+  </wsdl:message>
+  <wsdl:portType name="SalesService">
+    <wsdl:operation name="GetTotals">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetTotals" message="tns:SalesService_GetTotals_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetTotalsResponse" message="tns:SalesService_GetTotals_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetItemsSold">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetItemsSold" message="tns:SalesService_GetItemsSold_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetItemsSoldResponse" message="tns:SalesService_GetItemsSold_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOnHoldInvoicesForCashier">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetOnHoldInvoicesForCashier" message="tns:SalesService_GetOnHoldInvoicesForCashier_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetOnHoldInvoicesForCashierResponse" message="tns:SalesService_GetOnHoldInvoicesForCashier_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllOnHoldInvoices">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetAllOnHoldInvoices" message="tns:SalesService_GetAllOnHoldInvoices_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetAllOnHoldInvoicesResponse" message="tns:SalesService_GetAllOnHoldInvoices_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="StartNewInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoice" message="tns:SalesService_StartNewInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoiceResponse" message="tns:SalesService_StartNewInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetInvoice" message="tns:SalesService_GetInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetInvoiceResponse" message="tns:SalesService_GetInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetInvoiceHeader">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetInvoiceHeader" message="tns:SalesService_GetInvoiceHeader_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetInvoiceHeaderResponse" message="tns:SalesService_GetInvoiceHeader_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="LockInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/LockInvoice" message="tns:SalesService_LockInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/LockInvoiceResponse" message="tns:SalesService_LockInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UnLockInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/UnLockInvoice" message="tns:SalesService_UnLockInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/UnLockInvoiceResponse" message="tns:SalesService_UnLockInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ModifyItems">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ModifyItems" message="tns:SalesService_ModifyItems_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ModifyItemsResponse" message="tns:SalesService_ModifyItems_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="PrintReceipt">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceipt" message="tns:SalesService_PrintReceipt_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptResponse" message="tns:SalesService_PrintReceipt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SendToKitchen">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SendToKitchen" message="tns:SalesService_SendToKitchen_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SendToKitchenResponse" message="tns:SalesService_SendToKitchen_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ApplyCardPayment">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPayment" message="tns:SalesService_ApplyCardPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPaymentResponse" message="tns:SalesService_ApplyCardPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SplitInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SplitInvoice" message="tns:SalesService_SplitInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SplitInvoiceResponse" message="tns:SalesService_SplitInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SplitInvoiceByGuest">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SplitInvoiceByGuest" message="tns:SalesService_SplitInvoiceByGuest_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SplitInvoiceByGuestResponse" message="tns:SalesService_SplitInvoiceByGuest_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CombineSplits">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/CombineSplits" message="tns:SalesService_CombineSplits_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/CombineSplitsResponse" message="tns:SalesService_CombineSplits_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

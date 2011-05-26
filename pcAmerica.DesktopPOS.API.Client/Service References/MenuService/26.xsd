@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Context">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StationID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StoreID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Context" nillable="true" type="tns:Context" />
+</xs:schema>

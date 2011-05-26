@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27/Imports">
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/EmployeeService/DataContracts/2010/07/27" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="EmployeeService_GetCurrentUser_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUser" />
+  </wsdl:message>
+  <wsdl:message name="EmployeeService_GetCurrentUser_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetCurrentUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="EmployeeService_AuthenticateEmployee_InputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateEmployee" />
+  </wsdl:message>
+  <wsdl:message name="EmployeeService_AuthenticateEmployee_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AuthenticateEmployeeResponse" />
+  </wsdl:message>
+  <wsdl:portType name="EmployeeService">
+    <wsdl:operation name="GetCurrentUser">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27/EmployeeService/GetCurrentUser" message="tns:EmployeeService_GetCurrentUser_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27/EmployeeService/GetCurrentUserResponse" message="tns:EmployeeService_GetCurrentUser_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AuthenticateEmployee">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27/EmployeeService/AuthenticateEmployee" message="tns:EmployeeService_AuthenticateEmployee_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/EmployeeService/ServiceContracts/2010/07/27/EmployeeService/AuthenticateEmployeeResponse" message="tns:EmployeeService_AuthenticateEmployee_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+</wsdl:definitions>

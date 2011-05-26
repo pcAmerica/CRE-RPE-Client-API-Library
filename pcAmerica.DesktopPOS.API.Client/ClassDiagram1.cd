@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" GroupingSetting="Alphabetical" MembersFormat="FullSignature">
+  <Class Name="pcAmerica.DesktopPOS.API.Client.EmployeeService.Employee">
+    <Position X="10.5" Y="0.5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>BBAEEECiAAAACAAAAAAAAAgAgAAAAAAEAAABAAIAAQg=</HashCode>
+      <FileName>Service References\EmployeeService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem">
+    <Position X="0.75" Y="8.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAFCAACRQAEAggBAEJBCBCAlBABAQAEAAAEAIIAAgA=</HashCode>
+      <FileName>Service References\InventoryService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup">
+    <Position X="4.5" Y="8.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAgACAAAACAAAABBACCCAhBAgAAAEAAAAQAIIAAA=</HashCode>
+      <FileName>Service References\InventoryService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem">
+    <Position X="8.25" Y="8.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAEAAACAAAAAAAAAAAAAACAhBAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>Service References\InventoryService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.MenuService.Menu">
+    <Position X="0.75" Y="21.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAACAgAAAgSAAAAQAgAAAAAAEAAAAAAIAAAA=</HashCode>
+      <FileName>Service References\MenuService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.MenuService.Button">
+    <Position X="4.5" Y="21.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AEAEAQCCIAAAgAAAgQAAIAAAgAAAAAEMAAAACAIDAAA=</HashCode>
+      <FileName>Service References\MenuService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.MenuService.Context">
+    <Position X="7" Y="5.75" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAACAAAAAAAAAAAAAAgAgBgAAAAEAAAAAAIABQA=</HashCode>
+      <FileName>Service References\MenuService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardRequest">
+    <Position X="12" Y="5" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>IIBEAAACAAAEAAwBAEAAAACAgAIAAAgEBAAAAAIDIAA=</HashCode>
+      <FileName>Service References\PaymentService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse">
+    <Position X="12" Y="10.25" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>IABEAAACAAAEAAAAAAAAAASAgAAAAAAEBAAIAAIBIAA=</HashCode>
+      <FileName>Service References\PaymentService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.SalesService.Invoice">
+    <Position X="0.75" Y="16" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAQAAEAAgAGAAgAgAIAGAEMCAAAAgIAAYA=</HashCode>
+      <FileName>Service References\SalesService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.SalesService.LineItem">
+    <Position X="4.5" Y="16" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>IAAGAAACBQAQAAAAAAAAAACAhBAAACAEAgAghAIAAAA=</HashCode>
+      <FileName>Service References\SalesService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="pcAmerica.DesktopPOS.API.Client.SalesService.OnHoldInfo">
+    <Position X="8.25" Y="16" Width="3.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAACAAAAAAAAAgAEAAgAgAAACAEMAAAAAAIAAYA=</HashCode>
+      <FileName>Service References\SalesService\Reference.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="pcAmerica.DesktopPOS.API.Client.CustomerService.CustomerService">
+    <Position X="0.75" Y="0.5" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\CustomerService\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="pcAmerica.DesktopPOS.API.Client.EmployeeService.EmployeeService">
+    <Position X="0.75" Y="2" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAACAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\EmployeeService\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryService">
+    <Position X="5.75" Y="2" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAEAAAAAAAAAACAAAAAAAAgAAAAAAQAA=</HashCode>
+      <FileName>Service References\InventoryService\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="pcAmerica.DesktopPOS.API.Client.MenuService.MenuService">
+    <Position X="7" Y="4" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\MenuService\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="pcAmerica.DesktopPOS.API.Client.SalesService.SalesService">
+    <Position X="0.75" Y="4" Width="5.75" />
+    <TypeIdentifier>
+      <HashCode>AAAABAACAACBAAAAEQAAAIQAAEAIAAAQEAAAAAAAABA=</HashCode>
+      <FileName>Service References\SalesService\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentService">
+    <Position X="5.5" Y="0.5" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Service References\PaymentService\Reference.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

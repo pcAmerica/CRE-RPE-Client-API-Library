@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="6c28dcad-90e3-4b0c-bcf0-f0a870109ff1" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.pipe://localhost/pcAmerica/Services/SalesService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="27.wsdl" MetadataType="Wsdl" ID="af30649e-b451-4e26-b7bf-303cfd597f5d" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="1e506ba0-07ce-43d7-8f1f-7e993cfc43dd" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="27.xsd" MetadataType="Schema" ID="b79f6e4b-36b1-46c3-a646-2d517da0c7f0" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="dd975c38-338e-4bc9-bda1-cea8e160cbd2" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="271.xsd" MetadataType="Schema" ID="f01eae2f-5bfa-45ec-ba49-7a98c573cd33" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="26.xsd" MetadataType="Schema" ID="2e6553a1-c63c-408f-ac25-5ab542943c57" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="261.xsd" MetadataType="Schema" ID="3d351bfe-5e91-4408-938e-5a200f7aa48c" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

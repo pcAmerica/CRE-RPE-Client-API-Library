@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="SalesTotals">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
+      <xs:element minOccurs="0" name="NetSales" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalTax" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="SalesTotals" nillable="true" type="tns:SalesTotals" />
+  <xs:complexType name="ArrayOfItemSale">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ItemSale" nillable="true" type="tns:ItemSale" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfItemSale" nillable="true" type="tns:ArrayOfItemSale" />
+  <xs:complexType name="ItemSale">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashierID" type="xs:decimal" />
+      <xs:element minOccurs="0" name="DateSold" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Discount" type="xs:double" />
+      <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ItemSale" nillable="true" type="tns:ItemSale" />
+  <xs:complexType name="ArrayOfOnHoldInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="OnHoldInfo" nillable="true" type="tns:OnHoldInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfOnHoldInfo" nillable="true" type="tns:ArrayOfOnHoldInfo" />
+  <xs:complexType name="OnHoldInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
+      <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="OnHoldInfo" nillable="true" type="tns:OnHoldInfo" />
+  <xs:complexType name="Invoice">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
+      <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
+      <xs:element minOccurs="0" name="LineItems" nillable="true" type="tns:ArrayOfLineItem" />
+      <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
+      <xs:element xmlns:q1="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="OrderType" type="q1:EntityState" />
+      <xs:element minOccurs="0" name="TipAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="TotalTax" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Invoice" nillable="true" type="tns:Invoice" />
+  <xs:complexType name="ArrayOfLineItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LineItem" nillable="true" type="tns:LineItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLineItem" nillable="true" type="tns:ArrayOfLineItem" />
+  <xs:complexType name="LineItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="ser:guid" />
+      <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ParentId" type="ser:guid" />
+      <xs:element minOccurs="0" name="Price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:double" />
+      <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="State" type="q2:EntityState" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LineItem" nillable="true" type="tns:LineItem" />
+</xs:schema>
