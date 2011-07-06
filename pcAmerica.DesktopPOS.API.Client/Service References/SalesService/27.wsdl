@@ -75,6 +75,12 @@
   <wsdl:message name="SalesService_PrintReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:PrintReceiptResponse" />
   </wsdl:message>
+  <wsdl:message name="SalesService_EmailReceipt_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmailReceipt" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_EmailReceipt_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmailReceiptResponse" />
+  </wsdl:message>
   <wsdl:message name="SalesService_SendToKitchen_InputMessage">
     <wsdl:part name="parameters" element="tns:SendToKitchen" />
   </wsdl:message>
@@ -149,6 +155,10 @@
     <wsdl:operation name="PrintReceipt">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceipt" message="tns:SalesService_PrintReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptResponse" message="tns:SalesService_PrintReceipt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmailReceipt">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceipt" message="tns:SalesService_EmailReceipt_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptResponse" message="tns:SalesService_EmailReceipt_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendToKitchen">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SendToKitchen" message="tns:SalesService_SendToKitchen_InputMessage" />

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="71ed09f0-4d42-48d6-87f4-efcb9ce0b55f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:38568/Services/TableService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="27.wsdl" MetadataType="Wsdl" ID="46c7d104-00f7-4db9-9b5a-34e95c8aa092" SourceId="1" SourceUrl="http://localhost:38568/Services/TableService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="3835dc6f-e95e-4ea0-9723-4367d659dab5" SourceId="1" SourceUrl="http://localhost:38568/Services/TableService/mex" />
+    <MetadataFile FileName="27.xsd" MetadataType="Schema" ID="49d6833d-31a0-439a-a7fc-ab3e0823b897" SourceId="1" SourceUrl="http://localhost:38568/Services/TableService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="bcac8422-b2a7-476b-8076-ee725d6bc988" SourceId="1" SourceUrl="http://localhost:38568/Services/TableService/mex" />
+    <MetadataFile FileName="26.xsd" MetadataType="Schema" ID="062a9311-b8cf-4857-bb24-d660f78c882c" SourceId="1" SourceUrl="http://localhost:38568/Services/TableService/mex" />
+    <MetadataFile FileName="271.xsd" MetadataType="Schema" ID="dfd2da28-f506-45e7-bb48-84c57b9be5f6" SourceId="1" SourceUrl="http://localhost:38568/Services/TableService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

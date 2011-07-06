@@ -3,7 +3,7 @@
   <xs:complexType name="Menu">
     <xs:sequence>
       <xs:element minOccurs="0" name="Departments" nillable="true" type="tns:ArrayOfButton" />
-      <xs:element minOccurs="0" name="ExpirationDateTime" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ExpirationDateTime" type="xs:dateTime" />
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
@@ -18,7 +18,6 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="BackColor" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ChildButtons" nillable="true" type="tns:ArrayOfButton" />
-      <xs:element minOccurs="0" name="ExpirationDateTime" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ForeColor" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string" />

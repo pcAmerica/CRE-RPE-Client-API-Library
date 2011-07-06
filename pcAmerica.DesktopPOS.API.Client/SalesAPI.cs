@@ -8,7 +8,7 @@ namespace pcAmerica.DesktopPOS.API.Client
 {
     public class SalesAPI
     {
-        public static SalesTotals GetTotals(DateTime startDateTime, DateTime endDateTime)
+        public SalesTotals GetTotals(DateTime startDateTime, DateTime endDateTime)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -17,7 +17,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static List<ItemSale> GetItemsSold(DateTime startDateTime, DateTime endDateTime)
+        public List<ItemSale> GetItemsSold(DateTime startDateTime, DateTime endDateTime)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -26,7 +26,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static List<OnHoldInfo> GetOnHoldInvoicesForCashier(Context context)
+        public List<OnHoldInfo> GetOnHoldInvoicesForCashier(Context context)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -35,7 +35,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static List<OnHoldInfo> GetAllOnHoldInvoices(Context context)
+        public List<OnHoldInfo> GetAllOnHoldInvoices(Context context)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -44,7 +44,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static Invoice StartNewInvoice(Context context, String onHoldID)
+        public Invoice StartNewInvoice(Context context, String onHoldID)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -53,7 +53,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static Invoice GetInvoice(Context context, long invoiceNumber)
+        public Invoice GetInvoice(Context context, long invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -62,7 +62,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static Invoice GetInvoiceHeader(Context context, long invoiceNumber)
+        public Invoice GetInvoiceHeader(Context context, long invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -71,7 +71,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool LockInvoice(Context context, Int64 invoiceNumber)
+        public bool LockInvoice(Context context, Int64 invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -80,7 +80,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool UnLockInvoice(Context context, Int64 invoiceNumber)
+        public bool UnLockInvoice(Context context, Int64 invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -89,16 +89,16 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static Invoice ModifyItems(Context context, Int64 invoiceNumber, List<LineItem> items)
+        public Invoice ModifyItems(Context context, Int64 invoiceNumber, List<LineItem> items)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.ModifyItems(context, invoiceNumber, items.ToArray());
+                return client.ModifyItems(context, invoiceNumber, items);
             }
         }
 
-        public static bool PrintReceipt(Context context, Int64 invoiceNumber)
+        public bool PrintReceipt(Context context, Int64 invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -107,7 +107,16 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool SendToKitchen(Context context, Int64 invoiceNumber)
+        public bool PrintReceipt(Context context, Int64 invoiceNumber, string emailAddress)
+        {
+            using (SalesServiceClient client = new SalesServiceClient())
+            {
+                client.Open();
+                return client.EmailReceipt(context, invoiceNumber, emailAddress);
+            }
+        }
+
+        public bool SendToKitchen(Context context, Int64 invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -116,7 +125,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool ApplyCardPayment(Context context, Int64 invoiceNumber, CreditCardRequest request)
+        public bool ApplyCardPayment(Context context, Int64 invoiceNumber, CreditCardRequest request)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -125,7 +134,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool SplitInvoice(Context context, Int64 invoiceNumber, int numberOfWays)
+        public bool SplitInvoice(Context context, Int64 invoiceNumber, int numberOfWays)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -134,7 +143,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool SplitInvoiceByGuest(Context context, Int64 invoiceNumber)
+        public bool SplitInvoiceByGuest(Context context, Int64 invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
@@ -143,7 +152,7 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public static bool CombineSplits(Context context, Int64 invoiceNumber)
+        public bool CombineSplits(Context context, Int64 invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {

@@ -167,10 +167,26 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="SendToKitchen">
+  <xs:element name="EmailReceipt">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q19="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q19:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="emailAddress" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EmailReceiptResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EmailReceiptResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SendToKitchen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q20:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
@@ -185,9 +201,9 @@
   <xs:element name="ApplyCardPayment">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q20:Context" />
+        <xs:element xmlns:q21="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q21:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
-        <xs:element xmlns:q21="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="request" nillable="true" type="q21:CreditCardRequest" />
+        <xs:element xmlns:q22="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="request" nillable="true" type="q22:CreditCardRequest" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -201,7 +217,7 @@
   <xs:element name="SplitInvoice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q22:Context" />
+        <xs:element xmlns:q23="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q23:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
         <xs:element minOccurs="0" name="numberOfWays" type="xs:int" />
       </xs:sequence>
@@ -217,7 +233,7 @@
   <xs:element name="SplitInvoiceByGuest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q23:Context" />
+        <xs:element xmlns:q24="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q24:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
@@ -232,7 +248,7 @@
   <xs:element name="CombineSplits">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q24:Context" />
+        <xs:element xmlns:q25="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q25:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>

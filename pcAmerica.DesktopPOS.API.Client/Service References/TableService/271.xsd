@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfTableInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="TableInfo" nillable="true" type="tns:TableInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfTableInfo" nillable="true" type="tns:ArrayOfTableInfo" />
+  <xs:complexType name="TableInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Identifier" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Occupied" type="xs:boolean" />
+      <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="SectionID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TableNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Total" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="TableInfo" nillable="true" type="tns:TableInfo" />
+</xs:schema>

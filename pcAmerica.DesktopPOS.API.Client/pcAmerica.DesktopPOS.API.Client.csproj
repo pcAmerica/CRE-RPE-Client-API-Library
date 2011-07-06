@@ -97,6 +97,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="Service References\TableService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="TableAPI.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config">
@@ -129,6 +135,9 @@
     </None>
     <None Include="Service References\EmployeeService\service.wsdl" />
     <None Include="Service References\EmployeeService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\InventoryService\26.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\InventoryService\27.wsdl" />
@@ -211,6 +220,23 @@
     <None Include="Service References\SalesService\service.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\TableService\26.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TableService\27.wsdl" />
+    <None Include="Service References\TableService\27.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TableService\271.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\TableService\pcAmerica.DesktopPOS.API.Client.TableService.TableInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\TableService\service.wsdl" />
+    <None Include="Service References\TableService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
@@ -239,6 +265,7 @@
     <WCFMetadataStorage Include="Service References\MenuService\" />
     <WCFMetadataStorage Include="Service References\PaymentService\" />
     <WCFMetadataStorage Include="Service References\SalesService\" />
+    <WCFMetadataStorage Include="Service References\TableService\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\EmployeeService\configuration91.svcinfo" />
@@ -308,6 +335,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\MenuService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TableService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TableService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\TableService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>

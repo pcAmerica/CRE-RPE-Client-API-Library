@@ -5,6 +5,7 @@
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" />
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="InventoryService_GetItemList_InputMessage">

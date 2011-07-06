@@ -1,0 +1,5 @@
+
+APITester/bin/*
+APITester/obj/*
+*.suo
+pcAmerica.DesktopPOS.API.Client/obj/*

@@ -98,6 +98,12 @@ namespace APITester
                     Console.WriteLine("No employee is currently logged into the POS application.");
                 else
                     Console.WriteLine(String.Format("Employee ID:{0} FirstName:{1} LastName:{2} AccessLevel:{3}", employee.CashierID, employee.FirstName, employee.LastName, employee.AccessLevel));
+
+                employee = api.AuthenticateEmployee("100101", "cashier");
+                if (employee == null)
+                    Console.WriteLine("***ERROR*** Invalid username/password");
+                else
+                    Console.WriteLine(String.Format("Authenticated employee: Employee ID:{0} FirstName:{1} LastName:{2} AccessLevel:{3}", employee.CashierID, employee.FirstName, employee.LastName, employee.AccessLevel));
             }
             catch (Exception ex)
             {
@@ -118,6 +124,29 @@ namespace APITester
             {
                 List<InventoryItem> items = api.GetItemList();
                 Console.WriteLine(String.Format("There are currently {0} items in the POS database.", items.Count));
+
+                pcAmerica.DesktopPOS.API.Client.InventoryService.Context context = new pcAmerica.DesktopPOS.API.Client.InventoryService.Context();
+                context.StoreID = "1001";
+                context.StationID = "01";
+                context.CashierID = "100101";
+
+                InventoryItem item = api.GetItem(context, "Non_Inventory");
+                if (item == null)
+                    Console.WriteLine("***ERROR*** Could not retrieve Non_Inventory item");
+                else
+                    Console.WriteLine("Retrieved Non_Inventory item");
+
+                List<ModifierGroup> modGroups = api.GetModiferGroupsForItem(context, "Non_Inventory");
+                if (modGroups == null || modGroups.Count == 0)
+                    Console.WriteLine("No modifier groups exist for the Non_Inventory item!");
+                else
+                    Console.WriteLine(String.Format("Found {0} modifier groups for the Non_Inventory item!", modGroups.Count));
+
+                List<ModifierItem> modifiers = api.GetModifierItemsForItem(context, "Non_Inventory");
+                if (modifiers == null || modifiers.Count == 0)
+                    Console.WriteLine("No modifiers exist for the Non_Inventory item!");
+                else
+                    Console.WriteLine(String.Format("Found {0} modifiers for the Non_Inventory item!", modifiers.Count));
             }
             catch (Exception ex)
             {
@@ -134,14 +163,65 @@ namespace APITester
         {
             try
             {
+                SalesAPI api = new SalesAPI();
+
                 DateTime startDateTime = DateTime.Parse("1/1/2010");
                 DateTime endDateTime = DateTime.Parse("12/31/2010");
 
-                SalesTotals totals = SalesAPI.GetTotals(startDateTime, endDateTime);
+                SalesTotals totals = api.GetTotals(startDateTime, endDateTime);
                 Console.WriteLine(String.Format("Sales totals between {0}-{1} -- NetSales:{2} TotalTax:{3} GrandTotal:{4}", startDateTime, endDateTime, totals.NetSales, totals.TotalTax, totals.GrandTotal));
 
-                List<ItemSale> sales = SalesAPI.GetItemsSold(startDateTime, endDateTime);
+                List<ItemSale> sales = api.GetItemsSold(startDateTime, endDateTime);
                 Console.WriteLine(String.Format("Between {0}-{1}, there are {2} records of items being sold", startDateTime, endDateTime, sales.Count));
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                // StartNewInvoice
+                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
+                Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
+
+                // GetInvoiceHeader
+                inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoiceHeader with #: {0}", inv.InvoiceNumber));
+
+                // GetInvoice
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoice with #: {0}", inv.InvoiceNumber));
+
+                // ModifyItems
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Non Inventory", ItemNumber = "Non_Inventory", Price = 1, Quantity = 1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Non Inventory", ItemNumber = "Non_Inventory", Price = 2, Quantity = 1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Non Inventory", ItemNumber = "Non_Inventory", Price = 3, Quantity = 1, State = EntityState.Added, ParentId = inv.LineItems[1].Id });
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems new invoice value: {0}", inv.GrandTotal));
+                inv.LineItems[0].State = EntityState.Deleted;
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems DELETED 1st item, new invoice value: {0}", inv.GrandTotal));
+                inv.LineItems[0].Quantity = 2;
+                inv.LineItems[0].State = EntityState.Modified;
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems CHANGED 1st item QUANTITY, new invoice value: {0}", inv.GrandTotal));
+                inv.LineItems.Add(new LineItem() { ItemNumber = "1", ItemName = "Hot dog", Price = 1, Quantity = 1, State = EntityState.Added });
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems ADDED item # 1, new invoice value: {0}", inv.GrandTotal));
+
+                // SendToKitchen
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                    Console.WriteLine("Invoice was printed in kitchen");
+                else
+                    Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
+
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                    Console.WriteLine("Invoice was printed in kitchen, it should not have printed anything out the 2nd time");
+                else
+                    Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
+
+                //TODO: api.ApplyCardPayment
+
+                //api.CombineSplits
             }
             catch (Exception ex)
             {

@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace pcAmerica.DesktopPOS.API.Client.MenuService {
+namespace pcAmerica.DesktopPOS.API.Client.TableService {
     using System.Runtime.Serialization;
     using System;
     
@@ -92,21 +92,39 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Menu", Namespace="http://pcAmerica.com/DesktopPOS/MenuService/DataContracts/2009/10/26")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="TableInfo", Namespace="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27")]
     [System.SerializableAttribute()]
-    public partial class Menu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class TableInfo : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.MenuService.Button[] DepartmentsField;
+        private string CashierIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime ExpirationDateTimeField;
+        private string IdentifierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long InvoiceNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool OccupiedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OnHoldIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SectionIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TableNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal TotalField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -119,27 +137,40 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.MenuService.Button[] Departments {
+        public string CashierID {
             get {
-                return this.DepartmentsField;
+                return this.CashierIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.DepartmentsField, value) != true)) {
-                    this.DepartmentsField = value;
-                    this.RaisePropertyChanged("Departments");
+                if ((object.ReferenceEquals(this.CashierIDField, value) != true)) {
+                    this.CashierIDField = value;
+                    this.RaisePropertyChanged("CashierID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime ExpirationDateTime {
+        public string Identifier {
             get {
-                return this.ExpirationDateTimeField;
+                return this.IdentifierField;
             }
             set {
-                if ((this.ExpirationDateTimeField.Equals(value) != true)) {
-                    this.ExpirationDateTimeField = value;
-                    this.RaisePropertyChanged("ExpirationDateTime");
+                if ((object.ReferenceEquals(this.IdentifierField, value) != true)) {
+                    this.IdentifierField = value;
+                    this.RaisePropertyChanged("Identifier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long InvoiceNumber {
+            get {
+                return this.InvoiceNumberField;
+            }
+            set {
+                if ((this.InvoiceNumberField.Equals(value) != true)) {
+                    this.InvoiceNumberField = value;
+                    this.RaisePropertyChanged("InvoiceNumber");
                 }
             }
         }
@@ -157,127 +188,67 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Button", Namespace="http://pcAmerica.com/DesktopPOS/MenuService/DataContracts/2009/10/26")]
-    [System.SerializableAttribute()]
-    public partial class Button : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string BackColorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.MenuService.Button[] ChildButtonsField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ForeColorField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TextField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool VisibleField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string BackColor {
+        public bool Occupied {
             get {
-                return this.BackColorField;
+                return this.OccupiedField;
             }
             set {
-                if ((object.ReferenceEquals(this.BackColorField, value) != true)) {
-                    this.BackColorField = value;
-                    this.RaisePropertyChanged("BackColor");
+                if ((this.OccupiedField.Equals(value) != true)) {
+                    this.OccupiedField = value;
+                    this.RaisePropertyChanged("Occupied");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.MenuService.Button[] ChildButtons {
+        public string OnHoldID {
             get {
-                return this.ChildButtonsField;
+                return this.OnHoldIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.ChildButtonsField, value) != true)) {
-                    this.ChildButtonsField = value;
-                    this.RaisePropertyChanged("ChildButtons");
+                if ((object.ReferenceEquals(this.OnHoldIDField, value) != true)) {
+                    this.OnHoldIDField = value;
+                    this.RaisePropertyChanged("OnHoldID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ForeColor {
+        public string SectionID {
             get {
-                return this.ForeColorField;
+                return this.SectionIDField;
             }
             set {
-                if ((object.ReferenceEquals(this.ForeColorField, value) != true)) {
-                    this.ForeColorField = value;
-                    this.RaisePropertyChanged("ForeColor");
+                if ((object.ReferenceEquals(this.SectionIDField, value) != true)) {
+                    this.SectionIDField = value;
+                    this.RaisePropertyChanged("SectionID");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ID {
+        public string TableNumber {
             get {
-                return this.IDField;
+                return this.TableNumberField;
             }
             set {
-                if ((object.ReferenceEquals(this.IDField, value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
+                if ((object.ReferenceEquals(this.TableNumberField, value) != true)) {
+                    this.TableNumberField = value;
+                    this.RaisePropertyChanged("TableNumber");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Text {
+        public decimal Total {
             get {
-                return this.TextField;
+                return this.TotalField;
             }
             set {
-                if ((object.ReferenceEquals(this.TextField, value) != true)) {
-                    this.TextField = value;
-                    this.RaisePropertyChanged("Text");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Visible {
-            get {
-                return this.VisibleField;
-            }
-            set {
-                if ((this.VisibleField.Equals(value) != true)) {
-                    this.VisibleField = value;
-                    this.RaisePropertyChanged("Visible");
+                if ((this.TotalField.Equals(value) != true)) {
+                    this.TotalField = value;
+                    this.RaisePropertyChanged("Total");
                 }
             }
         }
@@ -293,44 +264,44 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://pcAmerica.com/DesktopPOS/MenuService/ServiceContracts/2011/05/13", ConfigurationName="MenuService.MenuService")]
-    public interface MenuService {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27", ConfigurationName="TableService.TableService")]
+    public interface TableService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/MenuService/ServiceContracts/2011/05/13/MenuServi" +
-            "ce/GetCurrentMenu", ReplyAction="http://pcAmerica.com/DesktopPOS/MenuService/ServiceContracts/2011/05/13/MenuServi" +
-            "ce/GetCurrentMenuResponse")]
-        pcAmerica.DesktopPOS.API.Client.MenuService.Menu GetCurrentMenu(pcAmerica.DesktopPOS.API.Client.MenuService.Context context);
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableSer" +
+            "vice/GetTables", ReplyAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableSer" +
+            "vice/GetTablesResponse")]
+        pcAmerica.DesktopPOS.API.Client.TableService.TableInfo[] GetTables(pcAmerica.DesktopPOS.API.Client.TableService.Context context);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface MenuServiceChannel : pcAmerica.DesktopPOS.API.Client.MenuService.MenuService, System.ServiceModel.IClientChannel {
+    public interface TableServiceChannel : pcAmerica.DesktopPOS.API.Client.TableService.TableService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class MenuServiceClient : System.ServiceModel.ClientBase<pcAmerica.DesktopPOS.API.Client.MenuService.MenuService>, pcAmerica.DesktopPOS.API.Client.MenuService.MenuService {
+    public partial class TableServiceClient : System.ServiceModel.ClientBase<pcAmerica.DesktopPOS.API.Client.TableService.TableService>, pcAmerica.DesktopPOS.API.Client.TableService.TableService {
         
-        public MenuServiceClient() {
+        public TableServiceClient() {
         }
         
-        public MenuServiceClient(string endpointConfigurationName) : 
+        public TableServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public MenuServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public TableServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public MenuServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public TableServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public MenuServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public TableServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
-        public pcAmerica.DesktopPOS.API.Client.MenuService.Menu GetCurrentMenu(pcAmerica.DesktopPOS.API.Client.MenuService.Context context) {
-            return base.Channel.GetCurrentMenu(context);
+        public pcAmerica.DesktopPOS.API.Client.TableService.TableInfo[] GetTables(pcAmerica.DesktopPOS.API.Client.TableService.Context context) {
+            return base.Channel.GetTables(context);
         }
     }
 }

@@ -16,12 +16,12 @@ namespace pcAmerica.DesktopPOS.API.Client
                 return new List<InventoryItem>(client.GetItemList());
             }
         }
-        public InventoryItem GetItem(string itemNumber)
+        public InventoryItem GetItem(Context context, string itemNumber)
         {
             using (InventoryServiceClient client = new InventoryServiceClient())
             {
                 client.Open();
-                return client.GetItem(itemNumber);
+                return client.GetItem(context, itemNumber);
             }
         }
         public List<InventoryItem> GetItemListExtended()
@@ -32,20 +32,20 @@ namespace pcAmerica.DesktopPOS.API.Client
                 return new List<InventoryItem>(client.GetItemListExtended());
             }
         }
-        public List<ModifierGroup> GetModiferGroupsForItem(string itemNumber)
+        public List<ModifierGroup> GetModiferGroupsForItem(Context context, string itemNumber)
         {
             using (InventoryServiceClient client = new InventoryServiceClient())
             {
                 client.Open();
-                return new List<ModifierGroup>(client.GetModifierGroupsForItem(itemNumber));
+                return new List<ModifierGroup>(client.GetModifierGroupsForItem(context, itemNumber));
             }
         }
-        public List<ModifierItem> GetModifierItemsForItem(string itemNumber)
+        public List<ModifierItem> GetModifierItemsForItem(Context context, string itemNumber)
         {
             using (InventoryServiceClient client = new InventoryServiceClient())
             {
                 client.Open();
-                return new List<ModifierItem>(client.GetModifierItemsForItem(itemNumber));
+                return new List<ModifierItem>(client.GetModifierItemsForItem(context, itemNumber));
             }
         }
     }
