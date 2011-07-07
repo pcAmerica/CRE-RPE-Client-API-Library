@@ -157,7 +157,7 @@ namespace pcAmerica.DesktopPOS.API.Client.CustomerService {
         private string SecretCodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.CustomerService.ShipToInfo[] ShipToInfoField;
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.CustomerService.ShipToInfo> ShipToInfoField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string StateField;
@@ -718,7 +718,7 @@ namespace pcAmerica.DesktopPOS.API.Client.CustomerService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.CustomerService.ShipToInfo[] ShipToInfo {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.CustomerService.ShipToInfo> ShipToInfo {
             get {
                 return this.ShipToInfoField;
             }

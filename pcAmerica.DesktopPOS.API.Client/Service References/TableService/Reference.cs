@@ -270,7 +270,7 @@ namespace pcAmerica.DesktopPOS.API.Client.TableService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableSer" +
             "vice/GetTables", ReplyAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableSer" +
             "vice/GetTablesResponse")]
-        pcAmerica.DesktopPOS.API.Client.TableService.TableInfo[] GetTables(pcAmerica.DesktopPOS.API.Client.TableService.Context context);
+        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.TableService.TableInfo> GetTables(pcAmerica.DesktopPOS.API.Client.TableService.Context context);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -300,7 +300,7 @@ namespace pcAmerica.DesktopPOS.API.Client.TableService {
                 base(binding, remoteAddress) {
         }
         
-        public pcAmerica.DesktopPOS.API.Client.TableService.TableInfo[] GetTables(pcAmerica.DesktopPOS.API.Client.TableService.Context context) {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.TableService.TableInfo> GetTables(pcAmerica.DesktopPOS.API.Client.TableService.Context context) {
             return base.Channel.GetTables(context);
         }
     }

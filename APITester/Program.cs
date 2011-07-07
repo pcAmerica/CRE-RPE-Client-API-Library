@@ -7,6 +7,8 @@ using pcAmerica.DesktopPOS.API.Client.CustomerService;
 using pcAmerica.DesktopPOS.API.Client.EmployeeService;
 using pcAmerica.DesktopPOS.API.Client.InventoryService;
 using pcAmerica.DesktopPOS.API.Client.SalesService;
+using pcAmerica.DesktopPOS.API.Client.MenuService;
+using pcAmerica.DesktopPOS.API.Client.TableService;
 
 namespace APITester
 {
@@ -14,11 +16,13 @@ namespace APITester
     {
         static void Main(string[] args)
         {
-            //TestCreditCard();
-            //TestCustomers();
-            //TestEmployee();
-            //TestInventory();
+            TestCreditCard();
+            TestCustomers();
+            TestEmployee();
+            TestInventory();
             TestSales();
+            TestMenus();
+            TestTables();
         }
 
         static void TestCreditCard()
@@ -284,6 +288,61 @@ namespace APITester
                     Console.WriteLine("Receipt was emailed");
                 else
                     Console.WriteLine("***ERROR*** Receipt was NOT emailed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+
+        static void TestMenus()
+        {
+            try
+            {
+                pcAmerica.DesktopPOS.API.Client.MenuService.Context context = new pcAmerica.DesktopPOS.API.Client.MenuService.Context();
+                context.CashierID = "100101";
+                context.StationID = "01";
+                context.StoreID = "1001";
+
+                MenuAPI api = new MenuAPI();
+                Menu menu = api.GetCurrentMenu(context);
+                if (menu == null)
+                    Console.WriteLine("***ERROR*** No menu was returned");
+                else
+                    Console.WriteLine(String.Format("Menu contains {0} departments", menu.Departments.Count));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+
+        static void TestTables()
+        {
+            try
+            {
+                pcAmerica.DesktopPOS.API.Client.TableService.Context context = new pcAmerica.DesktopPOS.API.Client.TableService.Context();
+                context.CashierID = "100101";
+                context.StationID = "01";
+                context.StoreID = "1001";
+
+                TableAPI api = new TableAPI();
+
+                List<TableInfo> tables = api.GetTables(context);
+                if (tables == null)
+                    Console.WriteLine("***ERROR*** No tables were returned");
+                else
+                    Console.WriteLine(String.Format("There were {0} open invoices returned", tables.Count));
             }
             catch (Exception ex)
             {

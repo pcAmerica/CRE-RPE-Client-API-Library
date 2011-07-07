@@ -11,7 +11,7 @@
     /// </summary>
     public class TableAPI
     {
-        public static List<TableInfo> GetTables(Context context)
+        public List<TableInfo> GetTables(Context context)
         {
             using (TableServiceClient client = new TableServiceClient())
             {

@@ -41,10 +41,10 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         private System.DateTime LastSoldField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup[] ModifierGroupsField;
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup> ModifierGroupsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem[] ModifierItemsField;
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem> ModifierItemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal PriceField;
@@ -150,7 +150,7 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup[] ModifierGroups {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup> ModifierGroups {
             get {
                 return this.ModifierGroupsField;
             }
@@ -163,7 +163,7 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem[] ModifierItems {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem> ModifierItems {
             get {
                 return this.ModifierItemsField;
             }
@@ -272,7 +272,7 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         private string ItemNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem[] ModifierItemsField;
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem> ModifierItemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string NumberToSelectField;
@@ -343,7 +343,7 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem[] ModifierItems {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem> ModifierItems {
             get {
                 return this.ModifierItemsField;
             }
@@ -536,12 +536,12 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItemList", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItemListResponse")]
-        pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem[] GetItemList();
+        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemList();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItemListExtended", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItemListExtendedResponse")]
-        pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem[] GetItemListExtended();
+        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemListExtended();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItem", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
@@ -551,12 +551,12 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetModifierGroupsForItem", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetModifierGroupsForItemResponse")]
-        pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup[] GetModifierGroupsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber);
+        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup> GetModifierGroupsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetModifierItemsForItem", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetModifierItemsForItemResponse")]
-        pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem[] GetModifierItemsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber);
+        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem> GetModifierItemsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -586,11 +586,11 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
                 base(binding, remoteAddress) {
         }
         
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem[] GetItemList() {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemList() {
             return base.Channel.GetItemList();
         }
         
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem[] GetItemListExtended() {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemListExtended() {
             return base.Channel.GetItemListExtended();
         }
         
@@ -598,11 +598,11 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
             return base.Channel.GetItem(context, itemNumber);
         }
         
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup[] GetModifierGroupsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber) {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierGroup> GetModifierGroupsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber) {
             return base.Channel.GetModifierGroupsForItem(context, itemNumber);
         }
         
-        public pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem[] GetModifierItemsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber) {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.ModifierItem> GetModifierItemsForItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber) {
             return base.Channel.GetModifierItemsForItem(context, itemNumber);
         }
     }

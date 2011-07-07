@@ -100,7 +100,7 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.MenuService.Button[] DepartmentsField;
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.MenuService.Button> DepartmentsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime ExpirationDateTimeField;
@@ -119,7 +119,7 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.MenuService.Button[] Departments {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.MenuService.Button> Departments {
             get {
                 return this.DepartmentsField;
             }
@@ -180,7 +180,7 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
         private string BackColorField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private pcAmerica.DesktopPOS.API.Client.MenuService.Button[] ChildButtonsField;
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.MenuService.Button> ChildButtonsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ForeColorField;
@@ -218,7 +218,7 @@ namespace pcAmerica.DesktopPOS.API.Client.MenuService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public pcAmerica.DesktopPOS.API.Client.MenuService.Button[] ChildButtons {
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.MenuService.Button> ChildButtons {
             get {
                 return this.ChildButtonsField;
             }
