@@ -50,6 +50,7 @@
       <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
       <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
       <xs:element minOccurs="0" name="LineItems" nillable="true" type="tns:ArrayOfLineItem" />
+      <xs:element minOccurs="0" name="NumberOfSplitChecks" type="xs:int" />
       <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
       <xs:element xmlns:q1="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="OrderType" type="q1:OrderTypes" />
       <xs:element minOccurs="0" name="TipAmount" type="xs:decimal" />
@@ -65,6 +66,7 @@
   <xs:element name="ArrayOfLineItem" nillable="true" type="tns:ArrayOfLineItem" />
   <xs:complexType name="LineItem">
     <xs:sequence>
+      <xs:element minOccurs="0" name="Guest" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Id" type="ser:guid" />
       <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />

@@ -439,6 +439,9 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.SalesService.LineItem> LineItemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int NumberOfSplitChecksField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OnHoldIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -508,6 +511,19 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
                 if ((object.ReferenceEquals(this.LineItemsField, value) != true)) {
                     this.LineItemsField = value;
                     this.RaisePropertyChanged("LineItems");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int NumberOfSplitChecks {
+            get {
+                return this.NumberOfSplitChecksField;
+            }
+            set {
+                if ((this.NumberOfSplitChecksField.Equals(value) != true)) {
+                    this.NumberOfSplitChecksField = value;
+                    this.RaisePropertyChanged("NumberOfSplitChecks");
                 }
             }
         }
@@ -584,6 +600,9 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GuestField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.Guid IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -611,6 +630,19 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Guest {
+            get {
+                return this.GuestField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GuestField, value) != true)) {
+                    this.GuestField = value;
+                    this.RaisePropertyChanged("Guest");
+                }
             }
         }
         
@@ -766,9 +798,9 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CreditCardRequest", Namespace="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PaymentResponse", Namespace="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26")]
     [System.SerializableAttribute()]
-    public partial class CreditCardRequest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class PaymentResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
@@ -780,22 +812,13 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         private string CardNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CardSwipeField;
+        private int ReferenceNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ExpirationMonthField;
+        private bool ResultField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int ExpirationYearField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ReferenceNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TransactionNumberField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool VoidField;
+        private long TransactionNumberField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -834,51 +857,12 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CardSwipe {
-            get {
-                return this.CardSwipeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.CardSwipeField, value) != true)) {
-                    this.CardSwipeField = value;
-                    this.RaisePropertyChanged("CardSwipe");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ExpirationMonth {
-            get {
-                return this.ExpirationMonthField;
-            }
-            set {
-                if ((this.ExpirationMonthField.Equals(value) != true)) {
-                    this.ExpirationMonthField = value;
-                    this.RaisePropertyChanged("ExpirationMonth");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ExpirationYear {
-            get {
-                return this.ExpirationYearField;
-            }
-            set {
-                if ((this.ExpirationYearField.Equals(value) != true)) {
-                    this.ExpirationYearField = value;
-                    this.RaisePropertyChanged("ExpirationYear");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ReferenceNumber {
+        public int ReferenceNumber {
             get {
                 return this.ReferenceNumberField;
             }
             set {
-                if ((object.ReferenceEquals(this.ReferenceNumberField, value) != true)) {
+                if ((this.ReferenceNumberField.Equals(value) != true)) {
                     this.ReferenceNumberField = value;
                     this.RaisePropertyChanged("ReferenceNumber");
                 }
@@ -886,27 +870,27 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TransactionNumber {
+        public bool Result {
             get {
-                return this.TransactionNumberField;
+                return this.ResultField;
             }
             set {
-                if ((object.ReferenceEquals(this.TransactionNumberField, value) != true)) {
-                    this.TransactionNumberField = value;
-                    this.RaisePropertyChanged("TransactionNumber");
+                if ((this.ResultField.Equals(value) != true)) {
+                    this.ResultField = value;
+                    this.RaisePropertyChanged("Result");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool Void {
+        public long TransactionNumber {
             get {
-                return this.VoidField;
+                return this.TransactionNumberField;
             }
             set {
-                if ((this.VoidField.Equals(value) != true)) {
-                    this.VoidField = value;
-                    this.RaisePropertyChanged("Void");
+                if ((this.TransactionNumberField.Equals(value) != true)) {
+                    this.TransactionNumberField = value;
+                    this.RaisePropertyChanged("TransactionNumber");
                 }
             }
         }
@@ -993,7 +977,7 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCardPayment", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCardPaymentResponse")]
-        bool ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardRequest request);
+        bool ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1090,8 +1074,8 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             return base.Channel.SendToKitchen(context, invoiceNumber);
         }
         
-        public bool ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardRequest request) {
-            return base.Channel.ApplyCardPayment(context, invoiceNumber, request);
+        public bool ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response) {
+            return base.Channel.ApplyCardPayment(context, invoiceNumber, SubCheckNumber, Response);
         }
         
         public bool SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int numberOfWays) {

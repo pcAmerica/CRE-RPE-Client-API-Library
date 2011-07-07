@@ -14,10 +14,10 @@ namespace APITester
     {
         static void Main(string[] args)
         {
-            TestCreditCard();
-            TestCustomers();
-            TestEmployee();
-            TestInventory();
+            //TestCreditCard();
+            //TestCustomers();
+            //TestEmployee();
+            //TestInventory();
             TestSales();
         }
 
@@ -31,7 +31,7 @@ namespace APITester
                 request.ExpirationMonth = 12;
                 request.ExpirationYear = 12;
 
-                PaymentResponse response = PaymentAPI.ProcessCreditCard(request);
+                pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse response = PaymentAPI.ProcessCreditCard(request);
                 Console.WriteLine(String.Format("Response: Result={0}, CardNumber={1}, Amount={2}, Reference={3}, TransactionNumber={4}", response.Result, response.CardNumber, response.Amount, response.ReferenceNumber, response.TransactionNumber));
             }
             catch (Exception ex)
@@ -179,10 +179,22 @@ namespace APITester
                 context.StoreID = "1001";
                 context.StationID = "01";
 
-                // StartNewInvoice
+                // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
                 Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
                 Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
 
+                // Unlock Invoice
+                if (api.UnLockInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine(String.Format("Unlocked invoice # {0}", inv.InvoiceNumber));
+                else
+                    Console.WriteLine(String.Format("Failed to unlock invoice # {0}", inv.InvoiceNumber));
+
+                // Lock Invoice
+                if (api.LockInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine(String.Format("Locked invoice # {0}", inv.InvoiceNumber));
+                else
+                    Console.WriteLine(String.Format("Failed to lock invoice # {0}", inv.InvoiceNumber));
+                
                 // GetInvoiceHeader
                 inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
                 Console.WriteLine(String.Format("GetInvoiceHeader with #: {0}", inv.InvoiceNumber));
@@ -219,8 +231,20 @@ namespace APITester
                 else
                     Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
 
-                //TODO: api.ApplyCardPayment
+                // Splitcheck
+                if (api.SplitInvoice(context, inv.InvoiceNumber, 2))
+                    Console.WriteLine("Split invoice 2 ways");
+                else
+                    Console.WriteLine("***ERROR*** Invoice could be split");
 
+                // CombineSplits
+                if (api.CombineSplits(context, inv.InvoiceNumber))
+                    Console.WriteLine("Combined split checks");
+                else
+                    Console.WriteLine("***ERROR*** Invoice could be split");
+
+                //TODO: api.ApplyCardPayment
+                
                 //api.CombineSplits
             }
             catch (Exception ex)

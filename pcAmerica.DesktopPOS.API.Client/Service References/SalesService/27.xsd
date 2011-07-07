@@ -203,7 +203,8 @@
       <xs:sequence>
         <xs:element xmlns:q21="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q21:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
-        <xs:element xmlns:q22="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="request" nillable="true" type="q22:CreditCardRequest" />
+        <xs:element minOccurs="0" name="SubCheckNumber" type="xs:int" />
+        <xs:element xmlns:q22="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="Response" nillable="true" type="q22:PaymentResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

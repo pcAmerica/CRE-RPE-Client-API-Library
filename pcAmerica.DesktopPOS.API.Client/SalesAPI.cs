@@ -125,12 +125,12 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public bool ApplyCardPayment(Context context, Int64 invoiceNumber, CreditCardRequest request)
+        public bool ApplyCardPayment(Context context, Int64 invoiceNumber, Int32 splitCheckNumber, SalesService.PaymentResponse response)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.ApplyCardPayment(context, invoiceNumber, request);
+                return client.ApplyCardPayment(context, invoiceNumber, splitCheckNumber, response);
             }
         }
 
