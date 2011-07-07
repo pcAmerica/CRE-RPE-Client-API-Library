@@ -965,9 +965,19 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         bool PrintReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/PrintReceiptForSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/PrintReceiptForSplitCheckResponse")]
+        bool PrintReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/EmailReceipt", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/EmailReceiptResponse")]
         bool EmailReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, string emailAddress);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/EmailReceiptForSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/EmailReceiptForSplitCheckResponse")]
+        bool EmailReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber, string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SendToKitchen", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1066,8 +1076,16 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             return base.Channel.PrintReceipt(context, invoiceNumber);
         }
         
+        public bool PrintReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber) {
+            return base.Channel.PrintReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber);
+        }
+        
         public bool EmailReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, string emailAddress) {
             return base.Channel.EmailReceipt(context, invoiceNumber, emailAddress);
+        }
+        
+        public bool EmailReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber, string emailAddress) {
+            return base.Channel.EmailReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber, emailAddress);
         }
         
         public bool SendToKitchen(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {

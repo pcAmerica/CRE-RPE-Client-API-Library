@@ -107,12 +107,30 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
 
-        public bool PrintReceipt(Context context, Int64 invoiceNumber, string emailAddress)
+        public bool PrintReceiptForSplitCheck(Context context, Int64 invoiceNumber, Int32 splitCheckNumber)
+        {
+            using (SalesServiceClient client = new SalesServiceClient())
+            {
+                client.Open();
+                return client.PrintReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber);
+            }
+        }
+
+        public bool EmailReceipt(Context context, Int64 invoiceNumber, string emailAddress)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
                 return client.EmailReceipt(context, invoiceNumber, emailAddress);
+            }
+        }
+
+        public bool EmailReceiptForSplitCheck(Context context, Int64 invoiceNumber, Int32 splitCheckNumber, string emailAddress)
+        {
+            using (SalesServiceClient client = new SalesServiceClient())
+            {
+                client.Open();
+                return client.EmailReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber, emailAddress);
             }
         }
 

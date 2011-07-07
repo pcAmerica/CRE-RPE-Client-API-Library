@@ -243,9 +243,47 @@ namespace APITester
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");
 
-                //TODO: api.ApplyCardPayment
-                
-                //api.CombineSplits
+                // GetAllOnHoldInvoices
+                List<OnHoldInfo> onHoldInfos = api.GetAllOnHoldInvoices(context);
+                if (onHoldInfos == null)
+                    Console.WriteLine("***ERROR*** Could not retrieve GetAllOnHoldInvoices");
+                else
+                    Console.WriteLine(String.Format("Retrieved {0} OnHoldInfo from GetAllOnHoldInvoices", onHoldInfos.Count));
+
+                // GetOnHoldInvoicesForCashier
+                onHoldInfos = api.GetOnHoldInvoicesForCashier(context);
+                if (onHoldInfos == null)
+                    Console.WriteLine("***ERROR*** Could not retrieve GetOnHoldInvoicesForCashier");
+                else
+                    Console.WriteLine(String.Format("Retrieved {0} OnHoldInfo from GetOnHoldInvoicesForCashier", onHoldInfos.Count));
+
+                //TODO: ApplyCardPayment
+
+                //TODO: CompleteTransaction
+
+                // PrintReceipt
+                if (api.PrintReceipt(context, inv.InvoiceNumber))
+                    Console.WriteLine("Receipt was printed");
+                else
+                    Console.WriteLine("***ERROR*** Receive was NOT printed");
+
+                // PrintReceipt - providing -1 for a split check prints the main check
+                if (api.PrintReceiptForSplitCheck(context, inv.InvoiceNumber, -1))
+                    Console.WriteLine("Receipt was printed");
+                else
+                    Console.WriteLine("***ERROR*** Receive was NOT printed");
+
+                // EmailReceipt
+                if (api.EmailReceipt(context, inv.InvoiceNumber, "asdsadsa"))
+                    Console.WriteLine("Receipt was emailed");
+                else
+                    Console.WriteLine("***ERROR*** Receipt was NOT emailed");
+
+                // EmailReceipt - providing -1 for a split check prints the main check
+                if (api.EmailReceiptForSplitCheck(context, inv.InvoiceNumber, -1, "asdsadsa"))
+                    Console.WriteLine("Receipt was emailed");
+                else
+                    Console.WriteLine("***ERROR*** Receipt was NOT emailed");
             }
             catch (Exception ex)
             {

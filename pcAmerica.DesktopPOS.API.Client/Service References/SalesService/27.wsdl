@@ -75,11 +75,23 @@
   <wsdl:message name="SalesService_PrintReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:PrintReceiptResponse" />
   </wsdl:message>
+  <wsdl:message name="SalesService_PrintReceiptForSplitCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:PrintReceiptForSplitCheck" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_PrintReceiptForSplitCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PrintReceiptForSplitCheckResponse" />
+  </wsdl:message>
   <wsdl:message name="SalesService_EmailReceipt_InputMessage">
     <wsdl:part name="parameters" element="tns:EmailReceipt" />
   </wsdl:message>
   <wsdl:message name="SalesService_EmailReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:EmailReceiptResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_EmailReceiptForSplitCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:EmailReceiptForSplitCheck" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_EmailReceiptForSplitCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EmailReceiptForSplitCheckResponse" />
   </wsdl:message>
   <wsdl:message name="SalesService_SendToKitchen_InputMessage">
     <wsdl:part name="parameters" element="tns:SendToKitchen" />
@@ -156,9 +168,17 @@
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceipt" message="tns:SalesService_PrintReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptResponse" message="tns:SalesService_PrintReceipt_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="PrintReceiptForSplitCheck">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheck" message="tns:SalesService_PrintReceiptForSplitCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheckResponse" message="tns:SalesService_PrintReceiptForSplitCheck_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="EmailReceipt">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceipt" message="tns:SalesService_EmailReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptResponse" message="tns:SalesService_EmailReceipt_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EmailReceiptForSplitCheck">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheck" message="tns:SalesService_EmailReceiptForSplitCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheckResponse" message="tns:SalesService_EmailReceiptForSplitCheck_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendToKitchen">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SendToKitchen" message="tns:SalesService_SendToKitchen_InputMessage" />
