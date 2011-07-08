@@ -29,6 +29,7 @@ Use the LineItem.EntityState to direct how the server should handle the modifica
 + *Deleted* = line item should be removed from the invoice
 + *Existing* = line item will not be modified
 + *Modified* = the line item's price or quantity will be changed
+
 ###Send the ordered items to the kitchen printer
 Call the SalesAPI.SendToKitchen method to send the new/modified items to the kitchen.
 If you're finished working with this invoice, call the SalesAPI.UnLockInvoice method to make it available for use on other devices.
