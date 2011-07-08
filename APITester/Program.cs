@@ -262,8 +262,6 @@ namespace APITester
                 else
                     Console.WriteLine(String.Format("Retrieved {0} OnHoldInfo from GetOnHoldInvoicesForCashier", onHoldInfos.Count));
 
-                //TODO: ApplyCardPayment
-
                 // ApplyCashPayment - applying grand total minus 1 dollar
                 AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, -1, inv.GrandTotal -1);
                 if (payResponse.Success)
@@ -271,7 +269,7 @@ namespace APITester
                 else
                     Console.WriteLine("***ERROR*** Could not apply payment");
 
-                // ApplyCardPayment - applying remaining 1 dollar
+                // ApplyCardPayment - applying remaining 1 dollar as a credit card
                 payResponse = api.ApplyCardPayment(context, 
                     inv.InvoiceNumber, 
                     -1,
