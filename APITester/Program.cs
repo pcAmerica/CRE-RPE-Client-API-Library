@@ -16,10 +16,10 @@ namespace APITester
     {
         static void Main(string[] args)
         {
-            //TestCreditCard();
-            //TestCustomers();
-            //TestEmployee();
-            //TestInventory();
+            TestCreditCard();
+            TestCustomers();
+            TestEmployee();
+            TestInventory();
             TestSales();
             TestMenus();
             TestTables();
@@ -221,7 +221,7 @@ namespace APITester
                 inv.LineItems[0].State = EntityState.Modified;
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems CHANGED 1st item QUANTITY, new invoice value: {0}", inv.GrandTotal));
-                inv.LineItems.Add(new LineItem() { ItemNumber = "1", ItemName = "Hot dog", Price = 1, Quantity = 1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { ItemNumber = "Non_Inventory", ItemName = "Hot dog", Price = 1, Quantity = 1, State = EntityState.Added });
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems ADDED item # 1, new invoice value: {0}", inv.GrandTotal));
 
