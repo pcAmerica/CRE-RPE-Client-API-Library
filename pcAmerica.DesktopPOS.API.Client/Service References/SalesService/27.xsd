@@ -236,7 +236,6 @@
       <xs:sequence>
         <xs:element xmlns:q23="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q23:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
-        <xs:element minOccurs="0" name="SubCheckNumber" type="xs:int" />
         <xs:element xmlns:q24="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="Response" nillable="true" type="q24:PaymentResponse" />
       </xs:sequence>
     </xs:complexType>
@@ -244,14 +243,64 @@
   <xs:element name="ApplyCardPaymentResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ApplyCardPaymentResult" type="xs:boolean" />
+        <xs:element xmlns:q25="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="ApplyCardPaymentResult" nillable="true" type="q25:AppliedPaymentResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyCardPaymentToSplitCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q26:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="SubCheckNumber" type="xs:int" />
+        <xs:element xmlns:q27="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="Response" nillable="true" type="q27:PaymentResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyCardPaymentToSplitCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="ApplyCardPaymentToSplitCheckResult" nillable="true" type="q28:AppliedPaymentResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyCashPayment">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q29:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyCashPaymentResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="ApplyCashPaymentResult" nillable="true" type="q30:AppliedPaymentResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyCashPaymentToSplitCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q31:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="subCheckNumber" type="xs:int" />
+        <xs:element minOccurs="0" name="Amount" type="xs:decimal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ApplyCashPaymentToSplitCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="ApplyCashPaymentToSplitCheckResult" nillable="true" type="q32:AppliedPaymentResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SplitInvoice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q25:Context" />
+        <xs:element xmlns:q33="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q33:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
         <xs:element minOccurs="0" name="numberOfWays" type="xs:int" />
       </xs:sequence>
@@ -267,7 +316,7 @@
   <xs:element name="SplitInvoiceByGuest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q26:Context" />
+        <xs:element xmlns:q34="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q34:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
@@ -282,7 +331,7 @@
   <xs:element name="CombineSplits">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q27:Context" />
+        <xs:element xmlns:q35="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q35:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
@@ -291,6 +340,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="CombineSplitsResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndInvoice">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q36:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndInvoiceResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EndInvoiceResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

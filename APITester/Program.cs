@@ -16,10 +16,10 @@ namespace APITester
     {
         static void Main(string[] args)
         {
-            TestCreditCard();
-            TestCustomers();
-            TestEmployee();
-            TestInventory();
+            //TestCreditCard();
+            //TestCustomers();
+            //TestEmployee();
+            //TestInventory();
             TestSales();
             TestMenus();
             TestTables();
@@ -263,7 +263,18 @@ namespace APITester
 
                 //TODO: ApplyCardPayment
 
-                //TODO: CompleteTransaction
+                // ApplyCashPayment
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, inv.GrandTotal);
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied payment, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply payment");
+                
+                // EndInvoice
+                if (api.EndInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine("Ended invoice successfully");
+                else
+                    Console.WriteLine("***ERROR*** Could not end invoice");
 
                 // PrintReceipt
                 if (api.PrintReceipt(context, inv.InvoiceNumber))

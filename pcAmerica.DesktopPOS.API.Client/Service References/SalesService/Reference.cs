@@ -818,6 +818,9 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         private bool ResultField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal TipAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private long TransactionNumberField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
@@ -883,6 +886,19 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal TipAmount {
+            get {
+                return this.TipAmountField;
+            }
+            set {
+                if ((this.TipAmountField.Equals(value) != true)) {
+                    this.TipAmountField = value;
+                    this.RaisePropertyChanged("TipAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public long TransactionNumber {
             get {
                 return this.TransactionNumberField;
@@ -891,6 +907,99 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
                 if ((this.TransactionNumberField.Equals(value) != true)) {
                     this.TransactionNumberField = value;
                     this.RaisePropertyChanged("TransactionNumber");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AppliedPaymentResponse", Namespace="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26")]
+    [System.SerializableAttribute()]
+    public partial class AppliedPaymentResponse : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal ChangeAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool SuccessField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal TipAmountField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal ChangeAmount {
+            get {
+                return this.ChangeAmountField;
+            }
+            set {
+                if ((this.ChangeAmountField.Equals(value) != true)) {
+                    this.ChangeAmountField = value;
+                    this.RaisePropertyChanged("ChangeAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Success {
+            get {
+                return this.SuccessField;
+            }
+            set {
+                if ((this.SuccessField.Equals(value) != true)) {
+                    this.SuccessField = value;
+                    this.RaisePropertyChanged("Success");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal TipAmount {
+            get {
+                return this.TipAmountField;
+            }
+            set {
+                if ((this.TipAmountField.Equals(value) != true)) {
+                    this.TipAmountField = value;
+                    this.RaisePropertyChanged("TipAmount");
                 }
             }
         }
@@ -987,7 +1096,22 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCardPayment", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCardPaymentResponse")]
-        bool ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response);
+        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/ApplyCardPaymentToSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/ApplyCardPaymentToSplitCheckResponse")]
+        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/ApplyCashPayment", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/ApplyCashPaymentResponse")]
+        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, decimal Amount);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/ApplyCashPaymentToSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/ApplyCashPaymentToSplitCheckResponse")]
+        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, decimal Amount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1003,6 +1127,11 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             "vice/CombineSplits", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/CombineSplitsResponse")]
         bool CombineSplits(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/EndInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
+            "vice/EndInvoiceResponse")]
+        bool EndInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -1092,8 +1221,20 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             return base.Channel.SendToKitchen(context, invoiceNumber);
         }
         
-        public bool ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response) {
-            return base.Channel.ApplyCardPayment(context, invoiceNumber, SubCheckNumber, Response);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response) {
+            return base.Channel.ApplyCardPayment(context, invoiceNumber, Response);
+        }
+        
+        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response) {
+            return base.Channel.ApplyCardPaymentToSplitCheck(context, invoiceNumber, SubCheckNumber, Response);
+        }
+        
+        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, decimal Amount) {
+            return base.Channel.ApplyCashPayment(context, invoiceNumber, Amount);
+        }
+        
+        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, decimal Amount) {
+            return base.Channel.ApplyCashPaymentToSplitCheck(context, invoiceNumber, subCheckNumber, Amount);
         }
         
         public bool SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int numberOfWays) {
@@ -1106,6 +1247,10 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         
         public bool CombineSplits(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
             return base.Channel.CombineSplits(context, invoiceNumber);
+        }
+        
+        public bool EndInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
+            return base.Channel.EndInvoice(context, invoiceNumber);
         }
     }
 }
