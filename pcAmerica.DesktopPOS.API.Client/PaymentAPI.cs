@@ -7,7 +7,7 @@ namespace pcAmerica.DesktopPOS.API.Client
 {
     public class PaymentAPI
     {
-        public static PaymentResponse ProcessCreditCard(CreditCardRequest request)
+        public PaymentResponse ProcessCreditCard(CreditCardRequest request)
         {
             using (PaymentServiceClient client = new PaymentServiceClient())
             {

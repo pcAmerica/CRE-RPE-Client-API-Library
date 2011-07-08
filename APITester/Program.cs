@@ -35,7 +35,8 @@ namespace APITester
                 request.ExpirationMonth = 12;
                 request.ExpirationYear = 12;
 
-                pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse response = PaymentAPI.ProcessCreditCard(request);
+                PaymentAPI api = new PaymentAPI();
+                pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse response = api.ProcessCreditCard(request);
                 Console.WriteLine(String.Format("Response: Result={0}, CardNumber={1}, Amount={2}, Reference={3}, TransactionNumber={4}", response.Result, response.CardNumber, response.Amount, response.ReferenceNumber, response.TransactionNumber));
             }
             catch (Exception ex)
