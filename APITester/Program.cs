@@ -276,7 +276,7 @@ namespace APITester
                     -1,
                     new pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse() 
                     { Amount = 1,
-                        CardNumber = "4012888888881",
+                        CardNumber = "4***********1",
                         ReferenceNumber = 123456, 
                         Result = true, 
                         TipAmount = 1, 
@@ -299,7 +299,7 @@ namespace APITester
                     Console.WriteLine("***ERROR*** Receive was NOT printed");
 
                 // EmailReceipt - providing -1 for the split check # when there are no split checks
-                if (api.EmailReceipt(context, inv.InvoiceNumber, -1, "asdsadsa"))
+                if (api.EmailReceipt(context, inv.InvoiceNumber, -1, "asdsadsad"))
                     Console.WriteLine("Receipt was emailed");
                 else
                     Console.WriteLine("***ERROR*** Receipt was NOT emailed");
