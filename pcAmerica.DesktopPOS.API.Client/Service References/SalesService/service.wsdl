@@ -148,26 +148,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PrintReceiptForSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheck" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="EmailReceipt">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceipt" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EmailReceiptForSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheck" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -193,26 +175,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ApplyCardPaymentToSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPaymentToSplitCheck" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ApplyCashPayment">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPayment" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ApplyCashPaymentToSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPaymentToSplitCheck" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -358,26 +322,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PrintReceiptForSplitCheck">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheck" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="EmailReceipt">
       <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceipt" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EmailReceiptForSplitCheck">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheck" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -403,26 +349,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ApplyCardPaymentToSplitCheck">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPaymentToSplitCheck" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ApplyCashPayment">
       <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPayment" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ApplyCashPaymentToSplitCheck">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPaymentToSplitCheck" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -570,26 +498,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PrintReceiptForSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheck" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="EmailReceipt">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceipt" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="EmailReceiptForSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheck" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -615,26 +525,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="ApplyCardPaymentToSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPaymentToSplitCheck" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="ApplyCashPayment">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPayment" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ApplyCashPaymentToSplitCheck">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPaymentToSplitCheck" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

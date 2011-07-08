@@ -263,39 +263,43 @@ namespace APITester
 
                 //TODO: ApplyCardPayment
 
-                // ApplyCashPayment
-                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, inv.GrandTotal);
+                // ApplyCashPayment - applying grand total minus 1 dollar
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, -1, inv.GrandTotal -1);
                 if (payResponse.Success)
-                    Console.WriteLine(String.Format("Applied payment, change due {0}", payResponse.ChangeAmount));
+                    Console.WriteLine(String.Format("Applied cash payment, change due {0}", payResponse.ChangeAmount));
                 else
                     Console.WriteLine("***ERROR*** Could not apply payment");
-                
+
+                // ApplyCardPayment - applying remaining 1 dollar
+                payResponse = api.ApplyCardPayment(context, 
+                    inv.InvoiceNumber, 
+                    -1,
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse() 
+                    { Amount = 1,
+                        CardNumber = "4012888888881",
+                        ReferenceNumber = 123456, 
+                        Result = true, 
+                        TipAmount = 1, 
+                        TransactionNumber = 1234 });
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied card payment, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply card payment");
+
                 // EndInvoice
                 if (api.EndInvoice(context, inv.InvoiceNumber))
                     Console.WriteLine("Ended invoice successfully");
                 else
                     Console.WriteLine("***ERROR*** Could not end invoice");
 
-                // PrintReceipt
-                if (api.PrintReceipt(context, inv.InvoiceNumber))
+                // PrintReceipt - providing -1 for the split check # when there are no split checks
+                if (api.PrintReceipt(context, inv.InvoiceNumber, -1))
                     Console.WriteLine("Receipt was printed");
                 else
                     Console.WriteLine("***ERROR*** Receive was NOT printed");
 
-                // PrintReceipt - providing -1 for a split check prints the main check
-                if (api.PrintReceiptForSplitCheck(context, inv.InvoiceNumber, -1))
-                    Console.WriteLine("Receipt was printed");
-                else
-                    Console.WriteLine("***ERROR*** Receive was NOT printed");
-
-                // EmailReceipt
-                if (api.EmailReceipt(context, inv.InvoiceNumber, "asdsadsa"))
-                    Console.WriteLine("Receipt was emailed");
-                else
-                    Console.WriteLine("***ERROR*** Receipt was NOT emailed");
-
-                // EmailReceipt - providing -1 for a split check prints the main check
-                if (api.EmailReceiptForSplitCheck(context, inv.InvoiceNumber, -1, "asdsadsa"))
+                // EmailReceipt - providing -1 for the split check # when there are no split checks
+                if (api.EmailReceipt(context, inv.InvoiceNumber, -1, "asdsadsa"))
                     Console.WriteLine("Receipt was emailed");
                 else
                     Console.WriteLine("***ERROR*** Receipt was NOT emailed");

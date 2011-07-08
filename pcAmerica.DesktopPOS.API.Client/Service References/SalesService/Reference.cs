@@ -1071,22 +1071,12 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/PrintReceipt", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/PrintReceiptResponse")]
-        bool PrintReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/PrintReceiptForSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/PrintReceiptForSplitCheckResponse")]
-        bool PrintReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber);
+        bool PrintReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/EmailReceipt", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/EmailReceiptResponse")]
-        bool EmailReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, string emailAddress);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/EmailReceiptForSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/EmailReceiptForSplitCheckResponse")]
-        bool EmailReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber, string emailAddress);
+        bool EmailReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber, string emailAddress);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SendToKitchen", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1096,22 +1086,12 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCardPayment", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCardPaymentResponse")]
-        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/ApplyCardPaymentToSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/ApplyCardPaymentToSplitCheckResponse")]
-        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response);
+        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse response);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCashPayment", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/ApplyCashPaymentResponse")]
-        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, decimal Amount);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/ApplyCashPaymentToSplitCheck", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
-            "vice/ApplyCashPaymentToSplitCheckResponse")]
-        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, decimal Amount);
+        pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, decimal Amount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1201,40 +1181,24 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             return base.Channel.ModifyItems(context, invoiceNumber, items);
         }
         
-        public bool PrintReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
-            return base.Channel.PrintReceipt(context, invoiceNumber);
+        public bool PrintReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber) {
+            return base.Channel.PrintReceipt(context, invoiceNumber, splitCheckNumber);
         }
         
-        public bool PrintReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber) {
-            return base.Channel.PrintReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber);
-        }
-        
-        public bool EmailReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, string emailAddress) {
-            return base.Channel.EmailReceipt(context, invoiceNumber, emailAddress);
-        }
-        
-        public bool EmailReceiptForSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber, string emailAddress) {
-            return base.Channel.EmailReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber, emailAddress);
+        public bool EmailReceipt(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int splitCheckNumber, string emailAddress) {
+            return base.Channel.EmailReceipt(context, invoiceNumber, splitCheckNumber, emailAddress);
         }
         
         public bool SendToKitchen(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
             return base.Channel.SendToKitchen(context, invoiceNumber);
         }
         
-        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response) {
-            return base.Channel.ApplyCardPayment(context, invoiceNumber, Response);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse response) {
+            return base.Channel.ApplyCardPayment(context, invoiceNumber, subCheckNumber, response);
         }
         
-        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCardPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int SubCheckNumber, pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse Response) {
-            return base.Channel.ApplyCardPaymentToSplitCheck(context, invoiceNumber, SubCheckNumber, Response);
-        }
-        
-        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, decimal Amount) {
-            return base.Channel.ApplyCashPayment(context, invoiceNumber, Amount);
-        }
-        
-        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPaymentToSplitCheck(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, decimal Amount) {
-            return base.Channel.ApplyCashPaymentToSplitCheck(context, invoiceNumber, subCheckNumber, Amount);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse ApplyCashPayment(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int subCheckNumber, decimal Amount) {
+            return base.Channel.ApplyCashPayment(context, invoiceNumber, subCheckNumber, Amount);
         }
         
         public bool SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int numberOfWays) {

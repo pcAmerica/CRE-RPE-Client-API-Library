@@ -154,63 +154,34 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
         /// <summary>
-        /// Prints a receipt to the configured printer for the store id, station id
+        /// Prints a receipt for the specified invoice or split check to the configured printer for the store id, station id
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be printed</param>
+        /// <param name="splitCheckNumber">The split check number, 0-based. Provide -1 if there are no split checks.</param>
         /// <returns>The success/failure of the print request</returns>
-        public bool PrintReceipt(Context context, long invoiceNumber)
+        public bool PrintReceipt(Context context, long invoiceNumber, int splitCheckNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.PrintReceipt(context, invoiceNumber);
+                return client.PrintReceipt(context, invoiceNumber, splitCheckNumber);
             }
         }
         /// <summary>
-        /// Prints a receipt for a specific split check to the configured printer for the store id, station id
-        /// </summary>
-        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
-        /// <param name="invoiceNumber">The number of the invoice that should be printed</param>
-        /// <param name="splitCheckNumber">The split check number, 0-based</param>
-        /// <returns>The success/failure of the print request</returns>
-        public bool PrintReceiptForSplitCheck(Context context, long invoiceNumber, int splitCheckNumber)
-        {
-            using (SalesServiceClient client = new SalesServiceClient())
-            {
-                client.Open();
-                return client.PrintReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber);
-            }
-        }
-        /// <summary>
-        /// Emails a receipt to the specified email address
+        /// Emails a receipt for the specified invoice or split check to the specified email address
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be emailed</param>
+        /// <param name="splitCheckNumber">The split check number, 0-based. Provide -1 if there are no split checks.</param>
         /// <param name="emailAddress">The email address to send the receipt to</param>
         /// <returns>The success/failure of the email request</returns>
-        public bool EmailReceipt(Context context, long invoiceNumber, string emailAddress)
+        public bool EmailReceipt(Context context, long invoiceNumber, int splitCheckNumber, string emailAddress)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.EmailReceipt(context, invoiceNumber, emailAddress);
-            }
-        }
-        /// <summary>
-        /// Emails a receipt for a specific split check to the specified email address
-        /// </summary>
-        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
-        /// <param name="invoiceNumber">The number of the invoice that should be emailed</param>
-        /// <param name="splitCheckNumber">The split check number, 0-based</param>
-        /// <param name="emailAddress">The email address to send the receipt to</param>
-        /// <returns>The success/failure of the email request</returns>
-        public bool EmailReceiptForSplitCheck(Context context, long invoiceNumber, int splitCheckNumber, string emailAddress)
-        {
-            using (SalesServiceClient client = new SalesServiceClient())
-            {
-                client.Open();
-                return client.EmailReceiptForSplitCheck(context, invoiceNumber, splitCheckNumber, emailAddress);
+                return client.EmailReceipt(context, invoiceNumber, splitCheckNumber, emailAddress);
             }
         }
         /// <summary>
@@ -232,30 +203,15 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be paid</param>
+        /// <param name="splitCheckNumber">The split check number, 0-based. Provide -1 if there are no split checks.</param>
         /// <param name="response">Provides the details of the card payment</param>
         /// <returns>An object that contains the success/failure of the request</returns>
-        public AppliedPaymentResponse ApplyCardPayment(Context context, long invoiceNumber, SalesService.PaymentResponse response)
+        public AppliedPaymentResponse ApplyCardPayment(Context context, long invoiceNumber, int splitCheckNumber, SalesService.PaymentResponse response)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.ApplyCardPayment(context, invoiceNumber, response);
-            }
-        }
-        /// <summary>
-        /// Applies a credit card payment to the specified split check on the invoice
-        /// </summary>
-        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
-        /// <param name="invoiceNumber">The number of the invoice that should be paid</param>
-        /// <param name="splitCheckNumber">The split check number, 0-based.</param>
-        /// <param name="response">Provides the details of the card payment</param>
-        /// <returns>An object that contains the success/failure of the request</returns>
-        public AppliedPaymentResponse ApplyCardPaymentToSplitCheck(Context context, long invoiceNumber, int splitCheckNumber, SalesService.PaymentResponse response)
-        {
-            using (SalesServiceClient client = new SalesServiceClient())
-            {
-                client.Open();
-                return client.ApplyCardPaymentToSplitCheck(context, invoiceNumber, splitCheckNumber, response);
+                return client.ApplyCardPayment(context, invoiceNumber, splitCheckNumber, response);
             }
         }
         /// <summary>
@@ -320,30 +276,15 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be paid</param>
+        /// <param name="splitCheckNumber">The split check number, 0-based. Provide -1 if there are no split checks.</param>
         /// <param name="amount">The cash amount being applied</param>
         /// <returns>An object that contains the success/failure of the request, and the change due (if any)</returns>
-        public AppliedPaymentResponse ApplyCashPayment(Context context, long invoiceNumber, decimal amount)
+        public AppliedPaymentResponse ApplyCashPayment(Context context, long invoiceNumber, int splitCheckNumber, decimal amount)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.ApplyCashPayment(context, invoiceNumber, amount);
-            }
-        }
-        /// <summary>
-        /// Applies a cash payment to the specified split check on the invoice
-        /// </summary>
-        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
-        /// <param name="invoiceNumber">The number of the invoice that should be paid</param>
-        /// <param name="splitCheckNumber">The split check number, 0-based</param>
-        /// <param name="amount">The cash amount being applied</param>
-        /// <returns>An object that contains the success/failure of the request, and the change due (if any)</returns>
-        public AppliedPaymentResponse ApplyCashPaymentToSplitCheck(Context context, long invoiceNumber, int splitCheckNumber, decimal amount)
-        {
-            using (SalesServiceClient client = new SalesServiceClient())
-            {
-                client.Open();
-                return client.ApplyCashPaymentToSplitCheck(context, invoiceNumber, splitCheckNumber, amount);
+                return client.ApplyCashPayment(context, invoiceNumber, splitCheckNumber, amount);
             }
         }
     }
