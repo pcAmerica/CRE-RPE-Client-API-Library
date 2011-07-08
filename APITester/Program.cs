@@ -328,7 +328,13 @@ namespace APITester
                 if (menu == null)
                     Console.WriteLine("***ERROR*** No menu was returned");
                 else
+                {
                     Console.WriteLine(String.Format("Menu contains {0} departments", menu.Departments.Count));
+                    foreach (Button dep in menu.Departments)
+                    {
+                        Console.WriteLine(String.Format("Department {0} contains {1} item buttons", dep.ID, dep.ChildButtons.Count));
+                    }
+                }
             }
             catch (Exception ex)
             {
