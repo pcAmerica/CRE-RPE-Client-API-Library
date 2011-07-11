@@ -35,7 +35,8 @@ namespace APITester
                 request.ExpirationMonth = 12;
                 request.ExpirationYear = 12;
 
-                pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse response = PaymentAPI.ProcessCreditCard(request);
+                PaymentAPI api = new PaymentAPI();
+                pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse response = api.ProcessCreditCard(request);
                 Console.WriteLine(String.Format("Response: Result={0}, CardNumber={1}, Amount={2}, Reference={3}, TransactionNumber={4}", response.Result, response.CardNumber, response.Amount, response.ReferenceNumber, response.TransactionNumber));
             }
             catch (Exception ex)
@@ -245,7 +246,7 @@ namespace APITester
                 inv.LineItems[0].State = EntityState.Modified;
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems CHANGED 1st item QUANTITY, new invoice value: {0}", inv.GrandTotal));
-                inv.LineItems.Add(new LineItem() { ItemNumber = "1", ItemName = "Hot dog", Price = 1, Quantity = 1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { ItemNumber = "Non_Inventory", ItemName = "Hot dog", Price = 1, Quantity = 1, State = EntityState.Added });
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems ADDED item # 1, new invoice value: {0}", inv.GrandTotal));
 
@@ -286,30 +287,43 @@ namespace APITester
                 else
                     Console.WriteLine(String.Format("Retrieved {0} OnHoldInfo from GetOnHoldInvoicesForCashier", onHoldInfos.Count));
 
-                //TODO: ApplyCardPayment
+                // ApplyCashPayment - applying grand total minus 1 dollar
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, -1, inv.GrandTotal -1);
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied cash payment, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply payment");
 
-                //TODO: CompleteTransaction
+                // ApplyCardPayment - applying remaining 1 dollar as a credit card
+                payResponse = api.ApplyCardPayment(context, 
+                    inv.InvoiceNumber, 
+                    -1,
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse() 
+                    { Amount = 1,
+                        CardNumber = "4***********1",
+                        ReferenceNumber = 123456, 
+                        Result = true, 
+                        TipAmount = 1, 
+                        TransactionNumber = 1234 });
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied card payment, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply card payment");
 
-                // PrintReceipt
-                if (api.PrintReceipt(context, inv.InvoiceNumber))
+                // EndInvoice
+                if (api.EndInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine("Ended invoice successfully");
+                else
+                    Console.WriteLine("***ERROR*** Could not end invoice");
+
+                // PrintReceipt - providing -1 for the split check # when there are no split checks
+                if (api.PrintReceipt(context, inv.InvoiceNumber, -1))
                     Console.WriteLine("Receipt was printed");
                 else
                     Console.WriteLine("***ERROR*** Receive was NOT printed");
 
-                // PrintReceipt - providing -1 for a split check prints the main check
-                if (api.PrintReceiptForSplitCheck(context, inv.InvoiceNumber, -1))
-                    Console.WriteLine("Receipt was printed");
-                else
-                    Console.WriteLine("***ERROR*** Receive was NOT printed");
-
-                // EmailReceipt
-                if (api.EmailReceipt(context, inv.InvoiceNumber, "asdsadsa"))
-                    Console.WriteLine("Receipt was emailed");
-                else
-                    Console.WriteLine("***ERROR*** Receipt was NOT emailed");
-
-                // EmailReceipt - providing -1 for a split check prints the main check
-                if (api.EmailReceiptForSplitCheck(context, inv.InvoiceNumber, -1, "asdsadsa"))
+                // EmailReceipt - providing -1 for the split check # when there are no split checks
+                if (api.EmailReceipt(context, inv.InvoiceNumber, -1, "asdsadsad"))
                     Console.WriteLine("Receipt was emailed");
                 else
                     Console.WriteLine("***ERROR*** Receipt was NOT emailed");
@@ -339,7 +353,13 @@ namespace APITester
                 if (menu == null)
                     Console.WriteLine("***ERROR*** No menu was returned");
                 else
+                {
                     Console.WriteLine(String.Format("Menu contains {0} departments", menu.Departments.Count));
+                    foreach (Button dep in menu.Departments)
+                    {
+                        Console.WriteLine(String.Format("Department {0} contains {1} item buttons", dep.ID, dep.ChildButtons.Count));
+                    }
+                }
             }
             catch (Exception ex)
             {

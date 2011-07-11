@@ -6,8 +6,18 @@
       <xs:element minOccurs="0" name="CardNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ReferenceNumber" type="xs:int" />
       <xs:element minOccurs="0" name="Result" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TipAmount" type="xs:decimal" />
       <xs:element minOccurs="0" name="TransactionNumber" type="xs:long" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="PaymentResponse" nillable="true" type="tns:PaymentResponse" />
+  <xs:complexType name="AppliedPaymentResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ChangeAmount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="Message" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Success" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TipAmount" type="xs:decimal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="AppliedPaymentResponse" nillable="true" type="tns:AppliedPaymentResponse" />
 </xs:schema>

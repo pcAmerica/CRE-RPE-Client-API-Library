@@ -186,13 +186,16 @@ namespace pcAmerica.DesktopPOS.API.Client.PaymentService {
         private string CardNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ReferenceNumberField;
+        private int ReferenceNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool ResultField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TransactionNumberField;
+        private decimal TipAmountField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private long TransactionNumberField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -231,12 +234,12 @@ namespace pcAmerica.DesktopPOS.API.Client.PaymentService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string ReferenceNumber {
+        public int ReferenceNumber {
             get {
                 return this.ReferenceNumberField;
             }
             set {
-                if ((object.ReferenceEquals(this.ReferenceNumberField, value) != true)) {
+                if ((this.ReferenceNumberField.Equals(value) != true)) {
                     this.ReferenceNumberField = value;
                     this.RaisePropertyChanged("ReferenceNumber");
                 }
@@ -257,12 +260,25 @@ namespace pcAmerica.DesktopPOS.API.Client.PaymentService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string TransactionNumber {
+        public decimal TipAmount {
+            get {
+                return this.TipAmountField;
+            }
+            set {
+                if ((this.TipAmountField.Equals(value) != true)) {
+                    this.TipAmountField = value;
+                    this.RaisePropertyChanged("TipAmount");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public long TransactionNumber {
             get {
                 return this.TransactionNumberField;
             }
             set {
-                if ((object.ReferenceEquals(this.TransactionNumberField, value) != true)) {
+                if ((this.TransactionNumberField.Equals(value) != true)) {
                     this.TransactionNumberField = value;
                     this.RaisePropertyChanged("TransactionNumber");
                 }

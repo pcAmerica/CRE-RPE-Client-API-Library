@@ -75,23 +75,11 @@
   <wsdl:message name="SalesService_PrintReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:PrintReceiptResponse" />
   </wsdl:message>
-  <wsdl:message name="SalesService_PrintReceiptForSplitCheck_InputMessage">
-    <wsdl:part name="parameters" element="tns:PrintReceiptForSplitCheck" />
-  </wsdl:message>
-  <wsdl:message name="SalesService_PrintReceiptForSplitCheck_OutputMessage">
-    <wsdl:part name="parameters" element="tns:PrintReceiptForSplitCheckResponse" />
-  </wsdl:message>
   <wsdl:message name="SalesService_EmailReceipt_InputMessage">
     <wsdl:part name="parameters" element="tns:EmailReceipt" />
   </wsdl:message>
   <wsdl:message name="SalesService_EmailReceipt_OutputMessage">
     <wsdl:part name="parameters" element="tns:EmailReceiptResponse" />
-  </wsdl:message>
-  <wsdl:message name="SalesService_EmailReceiptForSplitCheck_InputMessage">
-    <wsdl:part name="parameters" element="tns:EmailReceiptForSplitCheck" />
-  </wsdl:message>
-  <wsdl:message name="SalesService_EmailReceiptForSplitCheck_OutputMessage">
-    <wsdl:part name="parameters" element="tns:EmailReceiptForSplitCheckResponse" />
   </wsdl:message>
   <wsdl:message name="SalesService_SendToKitchen_InputMessage">
     <wsdl:part name="parameters" element="tns:SendToKitchen" />
@@ -104,6 +92,12 @@
   </wsdl:message>
   <wsdl:message name="SalesService_ApplyCardPayment_OutputMessage">
     <wsdl:part name="parameters" element="tns:ApplyCardPaymentResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_ApplyCashPayment_InputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyCashPayment" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_ApplyCashPayment_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyCashPaymentResponse" />
   </wsdl:message>
   <wsdl:message name="SalesService_SplitInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:SplitInvoice" />
@@ -122,6 +116,12 @@
   </wsdl:message>
   <wsdl:message name="SalesService_CombineSplits_OutputMessage">
     <wsdl:part name="parameters" element="tns:CombineSplitsResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_EndInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_EndInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndInvoiceResponse" />
   </wsdl:message>
   <wsdl:portType name="SalesService">
     <wsdl:operation name="GetTotals">
@@ -168,17 +168,9 @@
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceipt" message="tns:SalesService_PrintReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptResponse" message="tns:SalesService_PrintReceipt_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="PrintReceiptForSplitCheck">
-      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheck" message="tns:SalesService_PrintReceiptForSplitCheck_InputMessage" />
-      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/PrintReceiptForSplitCheckResponse" message="tns:SalesService_PrintReceiptForSplitCheck_OutputMessage" />
-    </wsdl:operation>
     <wsdl:operation name="EmailReceipt">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceipt" message="tns:SalesService_EmailReceipt_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptResponse" message="tns:SalesService_EmailReceipt_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="EmailReceiptForSplitCheck">
-      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheck" message="tns:SalesService_EmailReceiptForSplitCheck_InputMessage" />
-      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EmailReceiptForSplitCheckResponse" message="tns:SalesService_EmailReceiptForSplitCheck_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SendToKitchen">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SendToKitchen" message="tns:SalesService_SendToKitchen_InputMessage" />
@@ -187,6 +179,10 @@
     <wsdl:operation name="ApplyCardPayment">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPayment" message="tns:SalesService_ApplyCardPayment_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCardPaymentResponse" message="tns:SalesService_ApplyCardPayment_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="ApplyCashPayment">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPayment" message="tns:SalesService_ApplyCashPayment_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/ApplyCashPaymentResponse" message="tns:SalesService_ApplyCashPayment_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SplitInvoice">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SplitInvoice" message="tns:SalesService_SplitInvoice_InputMessage" />
@@ -199,6 +195,10 @@
     <wsdl:operation name="CombineSplits">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/CombineSplits" message="tns:SalesService_CombineSplits_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/CombineSplitsResponse" message="tns:SalesService_CombineSplits_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EndInvoice" message="tns:SalesService_EndInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EndInvoiceResponse" message="tns:SalesService_EndInvoice_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>
