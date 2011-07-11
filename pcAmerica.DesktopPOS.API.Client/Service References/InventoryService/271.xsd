@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
   <xs:complexType name="ArrayOfInventoryItem">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="InventoryItem" nillable="true" type="tns:InventoryItem" />
@@ -8,11 +10,14 @@
   <xs:element name="ArrayOfInventoryItem" nillable="true" type="tns:ArrayOfInventoryItem" />
   <xs:complexType name="InventoryItem">
     <xs:sequence>
+      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="ChoiceItems" nillable="true" type="q1:ArrayOfstring" />
       <xs:element minOccurs="0" name="Cost" type="xs:decimal" />
       <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsModifier" type="xs:boolean" />
       <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+      <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="ItemType" type="q2:ItemType" />
+      <xs:element minOccurs="0" name="KitItems" nillable="true" type="tns:ArrayOfKitItem" />
       <xs:element minOccurs="0" name="LastSold" type="xs:dateTime" />
       <xs:element minOccurs="0" name="ModifierGroups" nillable="true" type="tns:ArrayOfModifierGroup" />
       <xs:element minOccurs="0" name="ModifierItems" nillable="true" type="tns:ArrayOfModifierItem" />
@@ -24,6 +29,19 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="InventoryItem" nillable="true" type="tns:InventoryItem" />
+  <xs:complexType name="ArrayOfKitItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="KitItem" nillable="true" type="tns:KitItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfKitItem" nillable="true" type="tns:ArrayOfKitItem" />
+  <xs:complexType name="KitItem">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Quantity" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="KitItem" nillable="true" type="tns:KitItem" />
   <xs:complexType name="ArrayOfModifierGroup">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ModifierGroup" nillable="true" type="tns:ModifierGroup" />

@@ -16,20 +16,22 @@
   </xs:element>
   <xs:element name="GetItemListExtended">
     <xs:complexType>
-      <xs:sequence />
+      <xs:sequence>
+        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q2:Context" />
+      </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetItemListExtendedResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemListExtendedResult" nillable="true" type="q2:ArrayOfInventoryItem" />
+        <xs:element xmlns:q3="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemListExtendedResult" nillable="true" type="q3:ArrayOfInventoryItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetItem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q3:Context" />
+        <xs:element xmlns:q4="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q4:Context" />
         <xs:element minOccurs="0" name="itemNumber" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -37,14 +39,14 @@
   <xs:element name="GetItemResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q4="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemResult" nillable="true" type="q4:InventoryItem" />
+        <xs:element xmlns:q5="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetItemResult" nillable="true" type="q5:InventoryItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetModifierGroupsForItem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q5="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q5:Context" />
+        <xs:element xmlns:q6="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q6:Context" />
         <xs:element minOccurs="0" name="itemNumber" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -52,14 +54,14 @@
   <xs:element name="GetModifierGroupsForItemResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q6="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierGroupsForItemResult" nillable="true" type="q6:ArrayOfModifierGroup" />
+        <xs:element xmlns:q7="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierGroupsForItemResult" nillable="true" type="q7:ArrayOfModifierGroup" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GetModifierItemsForItem">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q7="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q7:Context" />
+        <xs:element xmlns:q8="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q8:Context" />
         <xs:element minOccurs="0" name="itemNumber" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
@@ -67,7 +69,7 @@
   <xs:element name="GetModifierItemsForItemResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q8="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierItemsForItemResult" nillable="true" type="q8:ArrayOfModifierItem" />
+        <xs:element xmlns:q9="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierItemsForItemResult" nillable="true" type="q9:ArrayOfModifierItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

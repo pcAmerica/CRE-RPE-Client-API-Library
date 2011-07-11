@@ -24,12 +24,12 @@ namespace pcAmerica.DesktopPOS.API.Client
                 return client.GetItem(context, itemNumber);
             }
         }
-        public List<InventoryItem> GetItemListExtended()
+        public List<InventoryItem> GetItemListExtended(Context context)
         {
             using (InventoryServiceClient client = new InventoryServiceClient())
             {
                 client.Open();
-                return new List<InventoryItem>(client.GetItemListExtended());
+                return new List<InventoryItem>(client.GetItemListExtended(context));
             }
         }
         public List<ModifierGroup> GetModiferGroupsForItem(Context context, string itemNumber)

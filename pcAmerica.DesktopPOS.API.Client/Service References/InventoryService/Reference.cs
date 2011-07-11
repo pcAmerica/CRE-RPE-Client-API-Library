@@ -23,6 +23,9 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<string> ChoiceItemsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal CostField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -36,6 +39,12 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ItemNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private pcAmerica.DesktopPOS.API.Client.InventoryService.ItemType ItemTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.KitItem> KitItemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime LastSoldField;
@@ -68,6 +77,19 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<string> ChoiceItems {
+            get {
+                return this.ChoiceItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ChoiceItemsField, value) != true)) {
+                    this.ChoiceItemsField = value;
+                    this.RaisePropertyChanged("ChoiceItems");
+                }
             }
         }
         
@@ -132,6 +154,32 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
                 if ((object.ReferenceEquals(this.ItemNumberField, value) != true)) {
                     this.ItemNumberField = value;
                     this.RaisePropertyChanged("ItemNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public pcAmerica.DesktopPOS.API.Client.InventoryService.ItemType ItemType {
+            get {
+                return this.ItemTypeField;
+            }
+            set {
+                if ((this.ItemTypeField.Equals(value) != true)) {
+                    this.ItemTypeField = value;
+                    this.RaisePropertyChanged("ItemType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.KitItem> KitItems {
+            get {
+                return this.KitItemsField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.KitItemsField, value) != true)) {
+                    this.KitItemsField = value;
+                    this.RaisePropertyChanged("KitItems");
                 }
             }
         }
@@ -236,6 +284,114 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
                 if ((object.ReferenceEquals(this.StockLevelField, value) != true)) {
                     this.StockLevelField = value;
                     this.RaisePropertyChanged("StockLevel");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ItemType", Namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26")]
+    public enum ItemType : int {
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Standard = 0,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MixNMatchDiscountAmount = 1,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Kit = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Choice = 3,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        ModifierGroup = 4,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MixNMatchBulkPrice = 5,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        MixNMatchDiscountPercent = 6,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Coupon = 7,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GiftCard = 8,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        GiftCardFree = 9,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Voucher = 10,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        VoucherFree = 11,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Donation = 12,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Pizza = 13,
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="KitItem", Namespace="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27")]
+    [System.SerializableAttribute()]
+    public partial class KitItem : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ItemNumberField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double QuantityField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ItemNumber {
+            get {
+                return this.ItemNumberField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ItemNumberField, value) != true)) {
+                    this.ItemNumberField = value;
+                    this.RaisePropertyChanged("ItemNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Quantity {
+            get {
+                return this.QuantityField;
+            }
+            set {
+                if ((this.QuantityField.Equals(value) != true)) {
+                    this.QuantityField = value;
+                    this.RaisePropertyChanged("Quantity");
                 }
             }
         }
@@ -541,7 +697,7 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItemListExtended", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItemListExtendedResponse")]
-        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemListExtended();
+        System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemListExtended(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
             "ntoryService/GetItem", ReplyAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/Inve" +
@@ -590,8 +746,8 @@ namespace pcAmerica.DesktopPOS.API.Client.InventoryService {
             return base.Channel.GetItemList();
         }
         
-        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemListExtended() {
-            return base.Channel.GetItemListExtended();
+        public System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem> GetItemListExtended(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context) {
+            return base.Channel.GetItemListExtended(context);
         }
         
         public pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem GetItem(pcAmerica.DesktopPOS.API.Client.InventoryService.Context context, string itemNumber) {

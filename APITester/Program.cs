@@ -16,13 +16,13 @@ namespace APITester
     {
         static void Main(string[] args)
         {
-            TestCreditCard();
-            TestCustomers();
-            TestEmployee();
+            //TestCreditCard();
+            //TestCustomers();
+            //TestEmployee();
             TestInventory();
-            TestSales();
-            TestMenus();
-            TestTables();
+            //TestSales();
+            //TestMenus();
+            //TestTables();
         }
 
         static void TestCreditCard()
@@ -140,6 +140,8 @@ namespace APITester
                 else
                     Console.WriteLine("Retrieved Non_Inventory item");
 
+                Console.WriteLine(string.Format("The Non_Inventory item has Item Type of {0}",item.ItemType));
+
                 List<ModifierGroup> modGroups = api.GetModiferGroupsForItem(context, "Non_Inventory");
                 if (modGroups == null || modGroups.Count == 0)
                     Console.WriteLine("No modifier groups exist for the Non_Inventory item!");
@@ -151,6 +153,29 @@ namespace APITester
                     Console.WriteLine("No modifiers exist for the Non_Inventory item!");
                 else
                     Console.WriteLine(String.Format("Found {0} modifiers for the Non_Inventory item!", modifiers.Count));
+
+                if (item.KitItems == null || item.KitItems.Count == 0)
+                    Console.WriteLine("The Non_Inventory has no Kit Items!");
+                else
+                    Console.WriteLine(String.Format("Found {0} Kit Item(s) for the Non_Inventory item!", item.KitItems.Count));
+
+                InventoryItem kitTest = api.GetItem(context, "kit1");
+                if(kitTest.KitItems == null || kitTest.KitItems.Count ==0)
+                    Console.WriteLine("kit1 has no Kit Items!");
+                else
+                    Console.WriteLine(String.Format("Found {0} Kit Item(s) for kit1!", kitTest.KitItems.Count));
+
+                if (item.ChoiceItems == null || item.ChoiceItems.Count == 0)
+                    Console.WriteLine("The Non_Inventory has no Choice Items!");
+                else
+                    Console.WriteLine(String.Format("Found {0} Choice Item(s) for the Non_Inventory item!", item.ChoiceItems.Count));
+
+                InventoryItem choiceTest = api.GetItem(context, "Choice Item One");
+                if (choiceTest.ChoiceItems == null || choiceTest.ChoiceItems.Count == 0)
+                    Console.WriteLine("Choice Item One has no Choice Items!");
+                else
+                    Console.WriteLine(String.Format("Found {0} Choice Item(s) for Choice Item One!", choiceTest.ChoiceItems.Count));
+                
             }
             catch (Exception ex)
             {

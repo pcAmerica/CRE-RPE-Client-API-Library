@@ -147,6 +147,9 @@
     <None Include="Service References\InventoryService\271.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\InventoryService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\InventoryService\pcAmerica.DesktopPOS.API.Client.InventoryService.InventoryItem.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

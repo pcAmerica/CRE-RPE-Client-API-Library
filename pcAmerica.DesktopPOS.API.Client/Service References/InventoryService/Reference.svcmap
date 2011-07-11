@@ -28,6 +28,7 @@
     <MetadataFile FileName="27.xsd" MetadataType="Schema" ID="367236ec-bc45-443d-8f5f-8928ff8dab03" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/InventoryService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="aceac0ae-e37c-4a74-8860-abfb577619da" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/InventoryService/mex" />
     <MetadataFile FileName="271.xsd" MetadataType="Schema" ID="3d31fb73-6494-414e-9ec5-c30a5a0e07f2" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/InventoryService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="4670e72b-bf46-410d-9f97-42a56618d7f1" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/InventoryService/mex" />
     <MetadataFile FileName="26.xsd" MetadataType="Schema" ID="64d2b702-bdfd-4526-9f07-a096600a0bb5" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/InventoryService/mex" />
   </Metadata>
   <Extensions>

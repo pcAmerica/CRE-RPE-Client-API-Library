@@ -1,5 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ItemType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Standard" />
+      <xs:enumeration value="MixNMatchDiscountAmount" />
+      <xs:enumeration value="Kit" />
+      <xs:enumeration value="Choice" />
+      <xs:enumeration value="ModifierGroup" />
+      <xs:enumeration value="MixNMatchBulkPrice" />
+      <xs:enumeration value="MixNMatchDiscountPercent" />
+      <xs:enumeration value="Coupon" />
+      <xs:enumeration value="GiftCard" />
+      <xs:enumeration value="GiftCardFree" />
+      <xs:enumeration value="Voucher" />
+      <xs:enumeration value="VoucherFree" />
+      <xs:enumeration value="Donation" />
+      <xs:enumeration value="Pizza" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ItemType" nillable="true" type="tns:ItemType" />
   <xs:complexType name="Context">
     <xs:sequence>
       <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
