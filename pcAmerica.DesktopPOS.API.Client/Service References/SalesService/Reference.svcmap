@@ -29,6 +29,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="dd975c38-338e-4bc9-bda1-cea8e160cbd2" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
     <MetadataFile FileName="271.xsd" MetadataType="Schema" ID="f01eae2f-5bfa-45ec-ba49-7a98c573cd33" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
     <MetadataFile FileName="26.xsd" MetadataType="Schema" ID="2e6553a1-c63c-408f-ac25-5ab542943c57" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="07a35e06-60ce-4097-a524-dd4040ca6139" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
     <MetadataFile FileName="261.xsd" MetadataType="Schema" ID="3d351bfe-5e91-4408-938e-5a200f7aa48c" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/SalesService/mex" />
   </Metadata>
   <Extensions>

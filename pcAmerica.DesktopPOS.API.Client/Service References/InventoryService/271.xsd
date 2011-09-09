@@ -56,7 +56,7 @@
       <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ModifierItems" nillable="true" type="tns:ArrayOfModifierItem" />
       <xs:element minOccurs="0" name="NumberToSelect" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Prompt" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Prompt" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ModifierGroup" nillable="true" type="tns:ModifierGroup" />

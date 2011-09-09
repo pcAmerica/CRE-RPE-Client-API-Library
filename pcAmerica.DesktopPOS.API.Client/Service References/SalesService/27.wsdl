@@ -6,6 +6,7 @@
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" />
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" />
     </xsd:schema>
   </wsdl:types>
@@ -33,11 +34,23 @@
   <wsdl:message name="SalesService_GetAllOnHoldInvoices_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetAllOnHoldInvoicesResponse" />
   </wsdl:message>
+  <wsdl:message name="SalesService_VoidInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:VoidInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_VoidInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:VoidInvoiceResponse" />
+  </wsdl:message>
   <wsdl:message name="SalesService_StartNewInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:StartNewInvoice" />
   </wsdl:message>
   <wsdl:message name="SalesService_StartNewInvoice_OutputMessage">
     <wsdl:part name="parameters" element="tns:StartNewInvoiceResponse" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SetPartySizeForInvoice_InputMessage">
+    <wsdl:part name="parameters" element="tns:SetPartySizeForInvoice" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_SetPartySizeForInvoice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:SetPartySizeForInvoiceResponse" />
   </wsdl:message>
   <wsdl:message name="SalesService_GetInvoice_InputMessage">
     <wsdl:part name="parameters" element="tns:GetInvoice" />
@@ -140,9 +153,17 @@
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetAllOnHoldInvoices" message="tns:SalesService_GetAllOnHoldInvoices_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetAllOnHoldInvoicesResponse" message="tns:SalesService_GetAllOnHoldInvoices_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="VoidInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/VoidInvoice" message="tns:SalesService_VoidInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/VoidInvoiceResponse" message="tns:SalesService_VoidInvoice_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="StartNewInvoice">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoice" message="tns:SalesService_StartNewInvoice_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoiceResponse" message="tns:SalesService_StartNewInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="SetPartySizeForInvoice">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SetPartySizeForInvoice" message="tns:SalesService_SetPartySizeForInvoice_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SetPartySizeForInvoiceResponse" message="tns:SalesService_SetPartySizeForInvoice_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetInvoice">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetInvoice" message="tns:SalesService_GetInvoice_InputMessage" />

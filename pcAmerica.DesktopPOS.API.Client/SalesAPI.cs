@@ -78,6 +78,34 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
         /// <summary>
+        /// Sets the party size for the invoice
+        /// </summary>
+        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
+        /// <param name="onHoldID">The ID that should represent an invoice.  If the ID matches a Table Number, the table will become reserved.</param>
+        /// <returns>An Invoice object with the newly assigned invoiceNumber, used for future API calls</returns>
+        public bool SetPartySizeForInvoice(Context context,long invoiceNumber,int PartySize)
+        {
+            using (SalesServiceClient client = new SalesServiceClient())
+            {
+                client.Open();
+                return client.SetPartySizeForInvoice(context, invoiceNumber, PartySize);
+            }
+        }
+        /// <summary>
+        /// Voids the invoice the including removing all associated payments
+        /// </summary>
+        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
+        /// <param name="invoiceNumber">The number of the invoice that is to be voided</param>
+        /// <returns>The success or failure of the void request</returns>
+        public bool VoidInvoice(Context context, long invoiceNumber)
+        {
+            using (SalesServiceClient client = new SalesServiceClient())
+            {
+                client.Open();
+                return client.VoidInvoice(context, invoiceNumber);
+            }
+        }
+        /// <summary>
         /// Retrieves the invoice header and line item details for a specified invoice number in context.
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
@@ -221,12 +249,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="invoiceNumber">The number of the invoice that should be split</param>
         /// <param name="numberOfWays">The number of ways to split the check. E.g. Provide 2 to split the check 2 ways.</param>
         /// <returns>The success or failure of the split request</returns>
-        public bool SplitInvoice(Context context, long invoiceNumber, int numberOfWays)
+        public bool SplitInvoice(Context context,ref  Invoice InvoiceToSplit, int numberOfWays)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.SplitInvoice(context, invoiceNumber, numberOfWays);
+                return client.SplitInvoice(context,ref InvoiceToSplit, numberOfWays);
             }
         }
         /// <summary>
@@ -235,12 +263,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be split</param>
         /// <returns>The success or failure of the split request</returns>
-        public bool SplitInvoiceByGuest(Context context, long invoiceNumber)
+        public bool SplitInvoiceByGuest(Context context, ref Invoice InvoiceToSplit)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.SplitInvoiceByGuest(context, invoiceNumber);
+                return client.SplitInvoiceByGuest(context, ref InvoiceToSplit);
             }
         }
         /// <summary>
@@ -249,12 +277,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be combined</param>
         /// <returns>The success or failure of the combine request</returns>
-        public bool CombineSplits(Context context, long invoiceNumber)
+        public bool CombineSplits(Context context, ref Invoice invoiceToCombine)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.CombineSplits(context, invoiceNumber);
+                return client.CombineSplits(context,ref invoiceToCombine);
             }
         }
         /// <summary>

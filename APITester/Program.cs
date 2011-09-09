@@ -19,12 +19,323 @@ namespace APITester
             //TestCreditCard();
             //TestCustomers();
             //TestEmployee();
-            TestInventory();
+            //TestInventory();
             //TestSales();
             //TestMenus();
             //TestTables();
+            TestBurgerExpress();
+            //deleteItemsTest();
+            //TestVoidInvoice();
+
         }
 
+        static void TestVoidInvoice()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                Console.WriteLine("Enter an invoice number to void: ");
+                string answer = Console.ReadLine();
+                api.VoidInvoice(context, Convert.ToInt64(answer));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+        static void deleteItemsTest()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
+                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
+                Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
+
+                // Unlock Invoice
+                /*if (api.UnLockInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine(String.Format("Unlocked invoice # {0}", inv.InvoiceNumber));
+                else
+                    Console.WriteLine(String.Format("Failed to unlock invoice # {0}", inv.InvoiceNumber));*/
+
+                // Lock Invoice
+                if (api.LockInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine(String.Format("Locked invoice # {0}", inv.InvoiceNumber));
+                else
+                    Console.WriteLine(String.Format("Failed to lock invoice # {0}", inv.InvoiceNumber));
+
+                // GetInvoiceHeader
+                inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoiceHeader with #: {0}", inv.InvoiceNumber));
+
+                // GetInvoice
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoice with #: {0}", inv.InvoiceNumber));
+
+                InventoryAPI InvApi = new InventoryAPI();
+
+                pcAmerica.DesktopPOS.API.Client.InventoryService.Context InvContext = new pcAmerica.DesktopPOS.API.Client.InventoryService.Context();
+                InvContext.CashierID = "100101";
+                InvContext.StationID = "01";
+                InvContext.StoreID = "1001";
+
+                Guid parentGuid = new Guid();
+                // ModifyItems
+                inv.LineItems.Add(new LineItem() { Id = parentGuid, ItemName = "BURGER", ItemNumber = "SAND1", Price = 1.99M, Quantity = 2, State = EntityState.Added });
+
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Add Tomato", ItemNumber = "SANDMod3", Price = 0.10M, Quantity = 1, State = EntityState.Added, ParentId = parentGuid });
+
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "BURGER", ItemNumber = "SAND1", Price = 1.99M, Quantity = 1, State = EntityState.Added });
+
+                api.UnLockInvoice(context, inv.InvoiceNumber);
+                api.LockInvoice(context, inv.InvoiceNumber);
+
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+
+                Invoice inv2 = api.GetInvoice(context, inv.InvoiceNumber);
+
+                Console.WriteLine(String.Format("ModifyItems new invoice value: {0}", inv2.GrandTotal));
+                //inv2.LineItems[0].State = EntityState.Deleted;
+                //inv2.LineItems[1].State = EntityState.Deleted;
+                inv2 = api.ModifyItems(context, inv2.InvoiceNumber, inv2.LineItems);
+                Console.WriteLine(String.Format("ModifyItems new invoice value after deleting burger with tomato: {0}", inv2.GrandTotal));
+
+                api.LockInvoice(context, inv2.InvoiceNumber);
+                
+               
+                // ApplyCashPayment - applying grand total minus 1 dollar
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv2.InvoiceNumber, -1, inv2.GrandTotal);
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied cash payment, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply payment");
+
+                // EndInvoice
+                if (api.EndInvoice(context, inv2.InvoiceNumber))
+                    Console.WriteLine("Ended invoice successfully");
+                else
+                    Console.WriteLine("***ERROR*** Could not end invoice");
+
+                // PrintReceipt - providing -1 for the split check # when there are no split checks
+                if (api.PrintReceipt(context, inv2.InvoiceNumber, -1))
+                    Console.WriteLine("Receipt was printed");
+                else
+                    Console.WriteLine("***ERROR*** Receive was NOT printed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+
+        }
+
+        // more examples to work specificly with the sample database Burger Express that comes bundled with Resturant Pro Express
+        // shows getting list of all inventory items, adding items two different ways, selecting a modifier for an item and splitting a check by guest
+        static void TestBurgerExpress()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                DateTime startDateTime = DateTime.Parse("1/1/2010");
+                DateTime endDateTime = DateTime.Parse("12/31/2010");
+
+                SalesTotals totals = api.GetTotals(startDateTime, endDateTime);
+                Console.WriteLine(String.Format("Sales totals between {0}-{1} -- NetSales:{2} TotalTax:{3} GrandTotal:{4}", startDateTime, endDateTime, totals.NetSales, totals.TotalTax, totals.GrandTotal));
+
+                List<ItemSale> sales = api.GetItemsSold(startDateTime, endDateTime);
+                Console.WriteLine(String.Format("Between {0}-{1}, there are {2} records of items being sold", startDateTime, endDateTime, sales.Count));
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
+                Invoice inv = api.StartNewInvoice(context, "Jeremy" + DateTime.Now.Ticks.ToString());
+                Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
+
+                // Unlock Invoice
+                if (api.UnLockInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine(String.Format("Unlocked invoice # {0}", inv.InvoiceNumber));
+                else
+                    Console.WriteLine(String.Format("Failed to unlock invoice # {0}", inv.InvoiceNumber));
+
+                // Lock Invoice
+                if (api.LockInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine(String.Format("Locked invoice # {0}", inv.InvoiceNumber));
+                else
+                    Console.WriteLine(String.Format("Failed to lock invoice # {0}", inv.InvoiceNumber));
+                
+                // GetInvoiceHeader
+                inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoiceHeader with #: {0}", inv.InvoiceNumber));
+
+                // GetInvoice
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoice with #: {0}", inv.InvoiceNumber));
+
+                InventoryAPI InvApi = new InventoryAPI();
+
+                pcAmerica.DesktopPOS.API.Client.InventoryService.Context InvContext = new pcAmerica.DesktopPOS.API.Client.InventoryService.Context();
+                InvContext.CashierID = "100101";
+                InvContext.StationID = "01";
+                InvContext.StoreID = "1001";
+
+                api.SetPartySizeForInvoice(context, inv.InvoiceNumber, 2);
+
+                List<InventoryItem> items = InvApi.GetItemListExtended(InvContext);
+                
+                Console.WriteLine("*******************All Inventory Items************************");
+                foreach(InventoryItem singleItem in items)
+                {
+                    Console.WriteLine(String.Format("Item#: {0} ItemName:{1}",singleItem.ItemNumber,singleItem.ItemName));
+                }
+                Console.WriteLine("***************************************************************");
+
+                // ModifyItems
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1"});
+
+                InventoryItem itemToAdd = InvApi.GetItem(InvContext, "SALAD3");
+                Guid itemToAddID = Guid.NewGuid();
+                LineItem LineItemToAdd = new LineItem(){Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price,Quantity = 1, State = EntityState.Added, Guest = "2"};
+                inv.LineItems.Add(LineItemToAdd);
+
+                itemToAdd.ModifierGroups = InvApi.GetModiferGroupsForItem(InvContext, itemToAdd.ItemNumber);
+                foreach (ModifierGroup ModGroup in itemToAdd.ModifierGroups)
+                {
+                    Console.WriteLine("ModifierGroup:{0}", ModGroup.ItemName);
+                    Console.WriteLine("{0}", ModGroup.Prompt);
+                    int i = 1;
+                    if (ModGroup.Forced == false)
+                    {
+                        Console.WriteLine("{0} - NONE", i);
+                        i++;
+                    }
+                    ModGroup.ModifierItems = InvApi.GetModifierItemsForItem(InvContext, ModGroup.ItemNumber);
+                    foreach (ModifierItem ModItem in ModGroup.ModifierItems)
+                    {
+                        Console.WriteLine("{0} - {1} : {2}", i, ModItem.ItemNumber, ModItem.ItemName);
+                        i++;
+                    }
+                    string answer = Console.ReadLine();
+                    if (answer.Length > 1)
+                    {
+                        Console.WriteLine("Invalid answer i Choose option 1 is chosen by default");
+                        answer = "1";
+                    }
+                    else if (char.IsDigit(answer[0]) == false)
+                    {
+                        Console.WriteLine("Invalid answer i Choose option 1 chosen by defualt");
+                        answer = "1";
+                    }
+                    InventoryItem dressing = InvApi.GetItem(InvContext, ModGroup.ModifierItems[Convert.ToInt32(answer)-1].ItemNumber);
+                    decimal Price = 0;
+                    if (ModGroup.Charged == true) { Price = dressing.Price; }
+                    inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = dressing.ItemName, ItemNumber = dressing.ItemNumber, Price = dressing.Price, Quantity = 1, State = EntityState.Added, Guest = "2" });
+                }
+                
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems new invoice value: {0}", inv.GrandTotal));
+                
+                inv.LineItems[0].Quantity = 2;
+                inv.LineItems[0].State = EntityState.Modified;
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems CHANGED 1st item QUANTITY, new invoice value: {0}", inv.GrandTotal));
+                
+                // SendToKitchen
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                    Console.WriteLine("Invoice was printed in kitchen");
+                else
+                    Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
+
+                // Splitcheck
+                if (api.SplitInvoiceByGuest(context,ref inv))
+                    Console.WriteLine("Split invoice by guest");
+                else
+                    Console.WriteLine("***ERROR*** Invoice could be split");
+
+
+
+                // ApplyCashPayment - applying grand total minus 1 dollar (NOTE SPLITS Starts counting at 0 not 1)
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, 0, inv.GrandTotalForSplit[0] -1);
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied cash payment to split 1, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply payment");
+                
+                // ApplyCardPayment - applying remaining 1 dollar as a credit card
+                payResponse = api.ApplyCardPayment(context, 
+                    inv.InvoiceNumber, 
+                    0,
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.PaymentResponse() 
+                    { Amount = 1,
+                        CardNumber = "4***********1",
+                        ReferenceNumber = 123456, 
+                        Result = true, 
+                        TipAmount = 1, 
+                        TransactionNumber = 1234 });
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied card payment to split 1, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply card payment");
+
+                payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, 1, inv.GrandTotalForSplit[1] + 13);
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied cash payment to split 2, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply payment");
+
+                // EndInvoice
+                if (api.EndInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine("Ended invoice successfully");
+                else
+                    Console.WriteLine("***ERROR*** Could not end invoice");
+
+                // looping and printing receipt for all splits
+                for (int i = 0; i < inv.NumberOfSplitChecks; i++)
+                {
+                    if (api.PrintReceipt(context, inv.InvoiceNumber, i))
+                        Console.WriteLine("Receipt was printed");
+                    else
+                        Console.WriteLine("***ERROR*** Receive was NOT printed");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+
+        }
+
+        
         static void TestCreditCard()
         {
             try
@@ -262,13 +573,13 @@ namespace APITester
                     Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
 
                 // Splitcheck
-                if (api.SplitInvoice(context, inv.InvoiceNumber, 2))
+                if (api.SplitInvoice(context, ref inv, 2))
                     Console.WriteLine("Split invoice 2 ways");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");
 
                 // CombineSplits
-                if (api.CombineSplits(context, inv.InvoiceNumber))
+                if (api.CombineSplits(context, ref inv))
                     Console.WriteLine("Combined split checks");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");

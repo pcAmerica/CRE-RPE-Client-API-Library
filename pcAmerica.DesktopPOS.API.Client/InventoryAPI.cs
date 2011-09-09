@@ -74,5 +74,20 @@ namespace pcAmerica.DesktopPOS.API.Client
                 return new List<ModifierItem>(client.GetModifierItemsForItem(context, itemNumber));
             }
         }
+
+        /// <summary>
+        /// Retrieves the individual modifiers associated with the specified Modifier Group
+        /// </summary>
+        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
+        /// <param name="itemNumber">The item number to retrieve info for</param>
+        /// <returns>A list of ModifierItems for the item number</returns>
+        public List<ModifierItem> GetModifierItemsFoGetModifiersForModifierGrouprItem(Context context, string itemNumber)
+        {
+            using (InventoryServiceClient client = new InventoryServiceClient())
+            {
+                client.Open();
+                return new List<ModifierItem>(client.GetModifierItemsForModifierGroup(context, itemNumber));
+            }
+        }
     }
 }

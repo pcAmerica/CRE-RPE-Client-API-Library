@@ -207,6 +207,9 @@
     <None Include="Service References\SalesService\271.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SalesService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\SalesService\pcAmerica.DesktopPOS.API.Client.SalesService.AppliedPaymentResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

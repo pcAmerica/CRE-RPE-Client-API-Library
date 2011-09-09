@@ -85,8 +85,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VoidInvoice">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/VoidInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="StartNewInvoice">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPartySizeForInvoice">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SetPartySizeForInvoice" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -259,8 +277,26 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VoidInvoice">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/VoidInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="StartNewInvoice">
       <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPartySizeForInvoice">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SetPartySizeForInvoice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -435,8 +471,26 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="VoidInvoice">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/VoidInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="StartNewInvoice">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/StartNewInvoice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetPartySizeForInvoice">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/SetPartySizeForInvoice" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -586,7 +640,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.pipe://localhost/pcAmerica/Services/SalesService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>RobertHorvath\Robert Horvath</Upn>
+          <Upn>dtomasheski@PCAmericaINC.local</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>
