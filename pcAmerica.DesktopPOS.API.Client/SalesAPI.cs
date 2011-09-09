@@ -249,12 +249,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="invoiceNumber">The number of the invoice that should be split</param>
         /// <param name="numberOfWays">The number of ways to split the check. E.g. Provide 2 to split the check 2 ways.</param>
         /// <returns>The success or failure of the split request</returns>
-        public bool SplitInvoice(Context context,ref  Invoice InvoiceToSplit, int numberOfWays)
+        public Invoice SplitInvoice(Context context, long invoiceNumber, int numberOfWays)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.SplitInvoice(context,ref InvoiceToSplit, numberOfWays);
+                return client.SplitInvoice(context,invoiceNumber, numberOfWays);
             }
         }
         /// <summary>
@@ -263,12 +263,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be split</param>
         /// <returns>The success or failure of the split request</returns>
-        public bool SplitInvoiceByGuest(Context context, ref Invoice InvoiceToSplit)
+        public Invoice SplitInvoiceByGuest(Context context, long invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.SplitInvoiceByGuest(context, ref InvoiceToSplit);
+                return client.SplitInvoiceByGuest(context, invoiceNumber);
             }
         }
         /// <summary>
@@ -277,12 +277,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that should be combined</param>
         /// <returns>The success or failure of the combine request</returns>
-        public bool CombineSplits(Context context, ref Invoice invoiceToCombine)
+        public Invoice CombineSplits(Context context, long invoiceNumber)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.CombineSplits(context,ref invoiceToCombine);
+                return client.CombineSplits(context,invoiceNumber);
             }
         }
         /// <summary>

@@ -20,10 +20,10 @@ namespace APITester
             //TestCustomers();
             //TestEmployee();
             //TestInventory();
-            //TestSales();
+            TestSales();
             //TestMenus();
             //TestTables();
-            TestBurgerExpress();
+            //TestBurgerExpress();
             //deleteItemsTest();
             //TestVoidInvoice();
 
@@ -272,7 +272,8 @@ namespace APITester
                     Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
 
                 // Splitcheck
-                if (api.SplitInvoiceByGuest(context,ref inv))
+                inv = api.SplitInvoiceByGuest(context,inv.InvoiceNumber);
+                if (inv.NumberOfSplitChecks == 2)
                     Console.WriteLine("Split invoice by guest");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");
@@ -573,13 +574,15 @@ namespace APITester
                     Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
 
                 // Splitcheck
-                if (api.SplitInvoice(context, ref inv, 2))
+                inv = api.SplitInvoice(context, inv.InvoiceNumber, 2);
+                if (inv.NumberOfSplitChecks == 2)
                     Console.WriteLine("Split invoice 2 ways");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");
 
                 // CombineSplits
-                if (api.CombineSplits(context, ref inv))
+                inv = api.CombineSplits(context, inv.InvoiceNumber);
+                if (inv.NumberOfSplitChecks == 0)
                     Console.WriteLine("Combined split checks");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");

@@ -269,7 +269,7 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q28="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q28:Context" />
-        <xs:element xmlns:q29="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="InvoiceToSplit" nillable="true" type="q29:Invoice" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
         <xs:element minOccurs="0" name="numberOfWays" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
@@ -277,47 +277,44 @@
   <xs:element name="SplitInvoiceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="SplitInvoiceResult" type="xs:boolean" />
-        <xs:element xmlns:q30="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="InvoiceToSplit" nillable="true" type="q30:Invoice" />
+        <xs:element xmlns:q29="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="SplitInvoiceResult" nillable="true" type="q29:Invoice" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SplitInvoiceByGuest">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q31:Context" />
-        <xs:element xmlns:q32="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="InvoiceToSplit" nillable="true" type="q32:Invoice" />
+        <xs:element xmlns:q30="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q30:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SplitInvoiceByGuestResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="SplitInvoiceByGuestResult" type="xs:boolean" />
-        <xs:element xmlns:q33="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="InvoiceToSplit" nillable="true" type="q33:Invoice" />
+        <xs:element xmlns:q31="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="SplitInvoiceByGuestResult" nillable="true" type="q31:Invoice" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CombineSplits">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q34:Context" />
-        <xs:element xmlns:q35="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="InoiceToCombine" nillable="true" type="q35:Invoice" />
+        <xs:element xmlns:q32="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q32:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CombineSplitsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="CombineSplitsResult" type="xs:boolean" />
-        <xs:element xmlns:q36="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="InoiceToCombine" nillable="true" type="q36:Invoice" />
+        <xs:element xmlns:q33="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" minOccurs="0" name="CombineSplitsResult" nillable="true" type="q33:Invoice" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="EndInvoice">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q37:Context" />
+        <xs:element xmlns:q34="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q34:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
       </xs:sequence>
     </xs:complexType>

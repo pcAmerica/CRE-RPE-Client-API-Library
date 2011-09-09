@@ -1122,17 +1122,17 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoiceResponse")]
-        bool SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, ref pcAmerica.DesktopPOS.API.Client.SalesService.Invoice InvoiceToSplit, int numberOfWays);
+        pcAmerica.DesktopPOS.API.Client.SalesService.Invoice SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int numberOfWays);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoiceByGuest", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SplitInvoiceByGuestResponse")]
-        bool SplitInvoiceByGuest(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, ref pcAmerica.DesktopPOS.API.Client.SalesService.Invoice InvoiceToSplit);
+        pcAmerica.DesktopPOS.API.Client.SalesService.Invoice SplitInvoiceByGuest(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/CombineSplits", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/CombineSplitsResponse")]
-        bool CombineSplits(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, ref pcAmerica.DesktopPOS.API.Client.SalesService.Invoice InoiceToCombine);
+        pcAmerica.DesktopPOS.API.Client.SalesService.Invoice CombineSplits(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/EndInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1235,16 +1235,16 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             return base.Channel.ApplyCashPayment(context, invoiceNumber, subCheckNumber, Amount);
         }
         
-        public bool SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, ref pcAmerica.DesktopPOS.API.Client.SalesService.Invoice InvoiceToSplit, int numberOfWays) {
-            return base.Channel.SplitInvoice(context, ref InvoiceToSplit, numberOfWays);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.Invoice SplitInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber, int numberOfWays) {
+            return base.Channel.SplitInvoice(context, invoiceNumber, numberOfWays);
         }
         
-        public bool SplitInvoiceByGuest(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, ref pcAmerica.DesktopPOS.API.Client.SalesService.Invoice InvoiceToSplit) {
-            return base.Channel.SplitInvoiceByGuest(context, ref InvoiceToSplit);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.Invoice SplitInvoiceByGuest(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
+            return base.Channel.SplitInvoiceByGuest(context, invoiceNumber);
         }
         
-        public bool CombineSplits(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, ref pcAmerica.DesktopPOS.API.Client.SalesService.Invoice InoiceToCombine) {
-            return base.Channel.CombineSplits(context, ref InoiceToCombine);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.Invoice CombineSplits(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
+            return base.Channel.CombineSplits(context, invoiceNumber);
         }
         
         public bool EndInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber) {
