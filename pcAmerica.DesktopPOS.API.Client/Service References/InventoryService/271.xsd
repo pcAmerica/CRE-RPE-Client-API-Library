@@ -15,6 +15,7 @@
       <xs:element minOccurs="0" name="Department" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IsModifier" type="xs:boolean" />
       <xs:element minOccurs="0" name="ItemName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ItemName2" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="ItemNumber" nillable="true" type="xs:string" />
       <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="ItemType" type="q2:ItemType" />
       <xs:element minOccurs="0" name="KitItems" nillable="true" type="tns:ArrayOfKitItem" />

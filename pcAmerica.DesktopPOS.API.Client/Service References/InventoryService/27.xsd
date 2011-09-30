@@ -58,7 +58,7 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetModifierItemsForModifierGroup">
+  <xs:element name="GetIndividualModifiers">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q8="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q8:Context" />
@@ -66,14 +66,14 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetModifierItemsForModifierGroupResponse">
+  <xs:element name="GetIndividualModifiersResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q9="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierItemsForModifierGroupResult" nillable="true" type="q9:ArrayOfModifierItem" />
+        <xs:element xmlns:q9="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetIndividualModifiersResult" nillable="true" type="q9:ArrayOfModifierItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetModifierItemsForItem">
+  <xs:element name="GetModifierItemsForModifierGroup">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q10="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q10:Context" />
@@ -81,10 +81,10 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetModifierItemsForItemResponse">
+  <xs:element name="GetModifierItemsForModifierGroupResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierItemsForItemResult" nillable="true" type="q11:ArrayOfModifierItem" />
+        <xs:element xmlns:q11="http://pcAmerica.com/DesktopPOS/InventoryService/DataContracts/2010/07/27" minOccurs="0" name="GetModifierItemsForModifierGroupResult" nillable="true" type="q11:ArrayOfModifierItem" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

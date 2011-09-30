@@ -85,8 +85,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForModifierGroup">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" style="document" />
+    <wsdl:operation name="GetIndividualModifiers">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetIndividualModifiers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -94,8 +94,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForItem">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForItem" style="document" />
+    <wsdl:operation name="GetModifierItemsForModifierGroup">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -142,8 +142,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForModifierGroup">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" style="document" />
+    <wsdl:operation name="GetIndividualModifiers">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetIndividualModifiers" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -151,8 +151,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForItem">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForItem" style="document" />
+    <wsdl:operation name="GetModifierItemsForModifierGroup">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -201,8 +201,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForModifierGroup">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" style="document" />
+    <wsdl:operation name="GetIndividualModifiers">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetIndividualModifiers" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -210,8 +210,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForItem">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForItem" style="document" />
+    <wsdl:operation name="GetModifierItemsForModifierGroup">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

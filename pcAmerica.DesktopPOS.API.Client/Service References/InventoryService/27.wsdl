@@ -33,17 +33,17 @@
   <wsdl:message name="InventoryService_GetModifierGroupsForItem_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetModifierGroupsForItemResponse" />
   </wsdl:message>
+  <wsdl:message name="InventoryService_GetIndividualModifiers_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndividualModifiers" />
+  </wsdl:message>
+  <wsdl:message name="InventoryService_GetIndividualModifiers_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIndividualModifiersResponse" />
+  </wsdl:message>
   <wsdl:message name="InventoryService_GetModifierItemsForModifierGroup_InputMessage">
     <wsdl:part name="parameters" element="tns:GetModifierItemsForModifierGroup" />
   </wsdl:message>
   <wsdl:message name="InventoryService_GetModifierItemsForModifierGroup_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetModifierItemsForModifierGroupResponse" />
-  </wsdl:message>
-  <wsdl:message name="InventoryService_GetModifierItemsForItem_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetModifierItemsForItem" />
-  </wsdl:message>
-  <wsdl:message name="InventoryService_GetModifierItemsForItem_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetModifierItemsForItemResponse" />
   </wsdl:message>
   <wsdl:portType name="InventoryService">
     <wsdl:operation name="GetItemList">
@@ -62,13 +62,13 @@
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierGroupsForItem" message="tns:InventoryService_GetModifierGroupsForItem_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierGroupsForItemResponse" message="tns:InventoryService_GetModifierGroupsForItem_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="GetIndividualModifiers">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetIndividualModifiers" message="tns:InventoryService_GetIndividualModifiers_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetIndividualModifiersResponse" message="tns:InventoryService_GetIndividualModifiers_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GetModifierItemsForModifierGroup">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroup" message="tns:InventoryService_GetModifierItemsForModifierGroup_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForModifierGroupResponse" message="tns:InventoryService_GetModifierItemsForModifierGroup_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="GetModifierItemsForItem">
-      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForItem" message="tns:InventoryService_GetModifierItemsForItem_InputMessage" />
-      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/InventoryService/ServiceContracts/2010/07/27/InventoryService/GetModifierItemsForItemResponse" message="tns:InventoryService_GetModifierItemsForItem_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

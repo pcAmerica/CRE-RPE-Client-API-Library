@@ -20,12 +20,43 @@ namespace APITester
             //TestCustomers();
             //TestEmployee();
             //TestInventory();
-            TestSales();
+            //TestSales();
             //TestMenus();
             //TestTables();
-            //TestBurgerExpress();
+            TestBurgerExpress();
             //deleteItemsTest();
             //TestVoidInvoice();
+            //TestSectionsAndTables();
+
+
+        }
+
+        static void TestSectionsAndTables()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
+                api.LockInvoice(context, inv.InvoiceNumber);
+
+                inv = api.StartNewInvoice(context, "13");
+                api.LockInvoice(context, inv.InvoiceNumber);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
 
         }
 
@@ -234,7 +265,8 @@ namespace APITester
                         Console.WriteLine("{0} - NONE", i);
                         i++;
                     }
-                    ModGroup.ModifierItems = InvApi.GetModifierItemsForItem(InvContext, ModGroup.ItemNumber);
+                    //NOTE THIS HAS CHANGED Modifier Items for Groups now are retrieved by calling GetModiferItemsForModiferGroups
+                    ModGroup.ModifierItems = InvApi.GetModifierItemsForModifierGroup(InvContext, ModGroup.ItemNumber);
                     foreach (ModifierItem ModItem in ModGroup.ModifierItems)
                     {
                         Console.WriteLine("{0} - {1} : {2}", i, ModItem.ItemNumber, ModItem.ItemName);
@@ -256,7 +288,44 @@ namespace APITester
                     if (ModGroup.Charged == true) { Price = dressing.Price; }
                     inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = dressing.ItemName, ItemNumber = dressing.ItemNumber, Price = dressing.Price, Quantity = 1, State = EntityState.Added, Guest = "2" });
                 }
+
+
+                itemToAdd = InvApi.GetItem(InvContext, "DaveBurger");
+                itemToAddID = Guid.NewGuid();
+                LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
+                inv.LineItems.Add(LineItemToAdd);
+                itemToAdd.ModifierItems = InvApi.GetIndividualModifiers(InvContext, itemToAdd.ItemNumber);
+                if( itemToAdd.ModifierItems.Count > 0)
+                    inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = itemToAdd.ModifierItems[0].ItemName, ItemNumber = itemToAdd.ModifierItems[0].ItemNumber, Price = 0.00M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+
                 
+                // This is a sample Kit Item I made that i added some items to you just have to ring up the base item(test) and the kit items will add along with it automaticly
+                itemToAdd = InvApi.GetItem(InvContext, "test");
+                itemToAddID = Guid.NewGuid();
+                LineItemToAdd = new LineItem(){ Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
+                inv.LineItems.Add(LineItemToAdd);
+
+                itemToAdd = InvApi.GetItem(InvContext, "test");
+                itemToAddID = Guid.NewGuid();
+                LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
+                inv.LineItems.Add(LineItemToAdd);
+
+                itemToAdd = InvApi.GetItem(InvContext, "DRINKCHOICE");
+                int j = 1;
+                Console.WriteLine(itemToAdd.ItemName2);
+                InventoryItem Choice;
+                foreach(String choiceItemNumber in itemToAdd.ChoiceItems)
+                {
+                    Choice = InvApi.GetItem(InvContext, choiceItemNumber);
+                    Console.WriteLine(string.Format("{0}: ",Choice.ItemName));
+                    j++;
+                }
+                int choiceItemSelection = Convert.ToInt32(Console.ReadLine()) -1;
+                itemToAdd = InvApi.GetItem(InvContext, itemToAdd.ChoiceItems[choiceItemSelection]);
+                itemToAddID = Guid.NewGuid();
+                LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "1" };
+                inv.LineItems.Add(LineItemToAdd);
+
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems new invoice value: {0}", inv.GrandTotal));
                 
@@ -461,7 +530,7 @@ namespace APITester
                 else
                     Console.WriteLine(String.Format("Found {0} modifier groups for the Non_Inventory item!", modGroups.Count));
 
-                List<ModifierItem> modifiers = api.GetModifierItemsForItem(context, "Non_Inventory");
+                List<ModifierItem> modifiers = api.GetIndividualModifiers(context, "Non_Inventory");
                 if (modifiers == null || modifiers.Count == 0)
                     Console.WriteLine("No modifiers exist for the Non_Inventory item!");
                 else
