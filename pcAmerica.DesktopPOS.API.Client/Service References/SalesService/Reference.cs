@@ -1062,7 +1062,7 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/StartNewInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/StartNewInvoiceResponse")]
-        pcAmerica.DesktopPOS.API.Client.SalesService.Invoice StartNewInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, string onHoldID);
+        pcAmerica.DesktopPOS.API.Client.SalesService.Invoice StartNewInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, string onHoldID, string SectionID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
             "vice/SetPartySizeForInvoice", ReplyAction="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesSer" +
@@ -1187,8 +1187,8 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
             return base.Channel.VoidInvoice(context, invoiceNumber);
         }
         
-        public pcAmerica.DesktopPOS.API.Client.SalesService.Invoice StartNewInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, string onHoldID) {
-            return base.Channel.StartNewInvoice(context, onHoldID);
+        public pcAmerica.DesktopPOS.API.Client.SalesService.Invoice StartNewInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, string onHoldID, string SectionID) {
+            return base.Channel.StartNewInvoice(context, onHoldID, SectionID);
         }
         
         public bool SetPartySizeForInvoice(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long InvoiceNumber, int PartySize) {

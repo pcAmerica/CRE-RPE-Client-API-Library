@@ -14,6 +14,7 @@
       <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Occupied" type="xs:boolean" />
       <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PreAuthorized" type="xs:boolean" />
       <xs:element minOccurs="0" name="SectionID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="TableNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Total" type="xs:decimal" />

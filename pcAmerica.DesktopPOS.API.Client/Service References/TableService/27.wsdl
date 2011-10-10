@@ -8,16 +8,16 @@
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="TableService_GetTables_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetTables" />
+  <wsdl:message name="TableService_GetAllTablesAndOpenInvoices_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTablesAndOpenInvoices" />
   </wsdl:message>
-  <wsdl:message name="TableService_GetTables_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetTablesResponse" />
+  <wsdl:message name="TableService_GetAllTablesAndOpenInvoices_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllTablesAndOpenInvoicesResponse" />
   </wsdl:message>
   <wsdl:portType name="TableService">
-    <wsdl:operation name="GetTables">
-      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetTables" message="tns:TableService_GetTables_InputMessage" />
-      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetTablesResponse" message="tns:TableService_GetTables_OutputMessage" />
+    <wsdl:operation name="GetAllTablesAndOpenInvoices">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetAllTablesAndOpenInvoices" message="tns:TableService_GetAllTablesAndOpenInvoices_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetAllTablesAndOpenInvoicesResponse" message="tns:TableService_GetAllTablesAndOpenInvoices_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

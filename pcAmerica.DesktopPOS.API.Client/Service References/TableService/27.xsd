@@ -2,17 +2,17 @@
 <xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
   <xs:import namespace="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27" />
-  <xs:element name="GetTables">
+  <xs:element name="GetAllTablesAndOpenInvoices">
     <xs:complexType>
       <xs:sequence>
         <xs:element xmlns:q1="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q1:Context" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetTablesResponse">
+  <xs:element name="GetAllTablesAndOpenInvoicesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27" minOccurs="0" name="GetTablesResult" nillable="true" type="q2:ArrayOfTableInfo" />
+        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/TableService/DataContracts/2010/07/27" minOccurs="0" name="GetAllTablesAndOpenInvoicesResult" nillable="true" type="q2:ArrayOfTableInfo" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -23,15 +23,17 @@ namespace APITester
             //TestSales();
             //TestMenus();
             //TestTables();
-            TestBurgerExpress();
+            //TestBurgerExpress();
             //deleteItemsTest();
             //TestVoidInvoice();
-            //TestSectionsAndTables();
+            TestSectionsAndTables();
+            //TestSplits();
 
 
         }
 
-        static void TestSectionsAndTables()
+
+        static void TestSplits()
         {
             try
             {
@@ -42,11 +44,97 @@ namespace APITester
                 context.StoreID = "1001";
                 context.StationID = "01";
 
-                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
+                Invoice inv = api.StartNewInvoice(context, "Rich", "XXOPEN TABS");
                 api.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                api.UnLockInvoice(context, inv.InvoiceNumber);
 
-                inv = api.StartNewInvoice(context, "13");
+                inv = api.SplitInvoice(context, inv.InvoiceNumber, 3);
+
+                for (int i = 0; i < inv.NumberOfSplitChecks; i++)
+                {
+                    Console.WriteLine(String.Format("Rich - SPLIT #{0}: ${1}", i + 1, inv.GrandTotalForSplit[i]));
+                }
+
+                inv = api.StartNewInvoice(context, "Steve", "XXOPEN TABS");
+                api.SetPartySizeForInvoice(context, inv.InvoiceNumber, 3);
                 api.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "2" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "3" });
+                api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                api.UnLockInvoice(context, inv.InvoiceNumber);
+
+                inv = api.SplitInvoice(context, inv.InvoiceNumber, 3);
+
+                for (int i = 0; i < inv.NumberOfSplitChecks; i++)
+                {
+                    Console.WriteLine(String.Format("Steve - SPLIT #{0}: ${1}", i + 1, inv.GrandTotalForSplit[i]));
+                }
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+
+        static void TestSectionsAndTables()
+        {
+            try
+            {
+                SalesAPI salesAPI = new SalesAPI();
+                TableAPI tableAPI = new TableAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                pcAmerica.DesktopPOS.API.Client.TableService.Context tableContext = new pcAmerica.DesktopPOS.API.Client.TableService.Context();
+                tableContext.CashierID = "100101";
+                tableContext.StationID = "01";
+                tableContext.StoreID = "1001";
+                Invoice inv;
+                List<TableInfo> tables = tableAPI.GetAllTablesAndOpenInvoices(tableContext);
+                if (tables.Count > 0)
+                {
+                    int i = 0;
+                    for (i = 0; i < tables.Count - 1; i++)
+                    {
+                        if(tables[i].SectionID .StartsWith("XX") && !tables[i].Occupied) { continue;}
+                        inv = salesAPI.StartNewInvoice(context, tables[i].TableNumber, tables[i].SectionID);
+                        salesAPI.LockInvoice(context, inv.InvoiceNumber);
+                        inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+                        salesAPI.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                        salesAPI.UnLockInvoice(context, inv.InvoiceNumber);
+                        break;
+                    }
+                }
+
+                inv = salesAPI.StartNewInvoice(context, "Dave", "XXTAKEOUT");
+                salesAPI.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+                salesAPI.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                salesAPI.UnLockInvoice(context, inv.InvoiceNumber);
+
+                inv = salesAPI.StartNewInvoice(context, "Jay", "XXOPEN TABS");
+                salesAPI.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+                salesAPI.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                salesAPI.UnLockInvoice(context, inv.InvoiceNumber);
+
+
+                //NOTE: Delivery invoices will be put into the delivery tab section however the will not be put
+                //into Delivery Tracking as there is curently no way to provide customer numbers or a time promised
+                inv = salesAPI.StartNewInvoice(context, "Sara", "XXDELIVERY");
+                salesAPI.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+                salesAPI.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                salesAPI.UnLockInvoice(context, inv.InvoiceNumber);
+
+                Console.WriteLine("There should now be open invoices on the first empty table in the list as well as in the Delivery, Takeout and  Open Tabs sections.");
             }
             catch (Exception ex)
             {
@@ -97,7 +185,7 @@ namespace APITester
                 context.StationID = "01";
 
                 // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
-                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
+                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString(),"XXOPEN TABS");
                 Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
 
                 // Unlock Invoice
@@ -205,7 +293,7 @@ namespace APITester
                 context.StationID = "01";
 
                 // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
-                Invoice inv = api.StartNewInvoice(context, "Jeremy" + DateTime.Now.Ticks.ToString());
+                Invoice inv = api.StartNewInvoice(context, "Jeremy" + DateTime.Now.Ticks.ToString(), "XXOPEN TABS");
                 Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
 
                 // Unlock Invoice
@@ -591,7 +679,7 @@ namespace APITester
                 context.StationID = "01";
 
                 // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
-                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString());
+                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString(),"XXOPEN TABS");
                 Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
 
                 // Unlock Invoice
@@ -766,11 +854,44 @@ namespace APITester
 
                 TableAPI api = new TableAPI();
 
-                List<TableInfo> tables = api.GetTables(context);
+                List<TableInfo> tables = api.GetAllTablesAndOpenInvoices(context);
+                int takeoutOrders = 0;
+                int openTabOrders = 0;
+                int deliveryOrders = 0;
+                int occupiedTables = 0;
+                int emptyTables = 0;
                 if (tables == null)
-                    Console.WriteLine("***ERROR*** No tables were returned");
+                    Console.WriteLine("***ERROR*** No tables or invoices were returned");
                 else
-                    Console.WriteLine(String.Format("There were {0} open invoices returned", tables.Count));
+                    
+                    foreach (TableInfo table in tables)
+                    {
+                        if (table.SectionID == "XXTAKEOUT")
+                        {
+                            takeoutOrders++;
+                        }
+                        else if (table.SectionID == "XXOPEN TABS")
+                        {
+                            openTabOrders++;
+                        }
+                        else if (table.SectionID == "XXDELIVERY")
+                        {
+                            deliveryOrders++;
+                        }
+                        else if (!string.IsNullOrEmpty(table.OnHoldID))
+                        {
+                            occupiedTables++;
+                        }
+                        else
+                        {
+                            emptyTables++;
+                        }                        
+                    }
+                Console.WriteLine("Takeout Order Count: {0}", takeoutOrders);
+                Console.WriteLine("Open Tabs Order Count: {0}", openTabOrders);
+                Console.WriteLine("Delivery Order Count: {0}", deliveryOrders);
+                Console.WriteLine("Occupied Table Count: {0}", occupiedTables);
+                Console.WriteLine("Empty Table Count: {0}", emptyTables);
             }
             catch (Exception ex)
             {

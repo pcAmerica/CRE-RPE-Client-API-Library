@@ -68,15 +68,17 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="onHoldID">The ID that should represent an invoice.  If the ID matches a Table Number, the table will become reserved.</param>
+        /// <param name="SectionID">The section for the invoice to be put into see TableAPI for section info</param>
         /// <returns>An Invoice object with the newly assigned invoiceNumber, used for future API calls</returns>
-        public Invoice StartNewInvoice(Context context, String onHoldID)
+        public Invoice StartNewInvoice(Context context, String onHoldID, String SectionID)
         {
             using (SalesServiceClient client = new SalesServiceClient())
             {
                 client.Open();
-                return client.StartNewInvoice(context, onHoldID);
+                return client.StartNewInvoice(context, onHoldID, SectionID);
             }
         }
+
         /// <summary>
         /// Sets the party size for the invoice
         /// </summary>

@@ -42,8 +42,8 @@
   <wsdl:binding name="NetTcpBinding_TableService" type="i0:TableService">
     <wsp:PolicyReference URI="#NetTcpBinding_TableService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
-    <wsdl:operation name="GetTables">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetTables" style="document" />
+    <wsdl:operation name="GetAllTablesAndOpenInvoices">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetAllTablesAndOpenInvoices" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -54,8 +54,8 @@
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_TableService" type="i0:TableService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetTables">
-      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetTables" style="document" />
+    <wsdl:operation name="GetAllTablesAndOpenInvoices">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetAllTablesAndOpenInvoices" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -67,8 +67,8 @@
   <wsdl:binding name="NetNamedPipeBinding_TableService" type="i0:TableService">
     <wsp:PolicyReference URI="#NetNamedPipeBinding_TableService_policy" />
     <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
-    <wsdl:operation name="GetTables">
-      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetTables" style="document" />
+    <wsdl:operation name="GetAllTablesAndOpenInvoices">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/TableService/ServiceContracts/2010/07/27/TableService/GetAllTablesAndOpenInvoices" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -92,7 +92,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>net.pipe://localhost/pcAmerica/Services/TableService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>RobertHorvath\Robert Horvath</Upn>
+          <Upn>dtomasheski@PCAmericaINC.local</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

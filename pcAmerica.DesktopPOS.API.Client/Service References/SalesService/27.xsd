@@ -81,6 +81,7 @@
       <xs:sequence>
         <xs:element xmlns:q8="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q8:Context" />
         <xs:element minOccurs="0" name="onHoldID" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="SectionID" nillable="true" type="xs:string" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
