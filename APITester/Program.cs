@@ -26,12 +26,81 @@ namespace APITester
             //TestBurgerExpress();
             //deleteItemsTest();
             //TestVoidInvoice();
-            TestSectionsAndTables();
-            //TestSplits();
-
+            //TestSectionsAndTables();
+            TestSplits();
+            TestSentToKitchenFlag();
 
         }
 
+        static void TestSentToKitchenFlag()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                Invoice inv = api.StartNewInvoice(context, "Audry", "XXOPEN TABS");
+                api.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber);// should output line 1, 2 and 3 need to be sent to kitchen
+                if (api.SendToKitchen(context, inv.InvoiceNumber))// should output items sent to kitchen
+                {
+                    Console.WriteLine("Items Sent To Kitchen");
+                }
+                else
+                {
+                    Console.WriteLine("Failed sending items to kitchen");
+                }
+
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber); // should output no items need to be sent to kitchen
+
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv.LineItems[1].Quantity = 5;
+                inv.LineItems[1].State = EntityState.Modified;
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber); // should output lines 2 and 4 need to be sent to kitchen
+
+                if (api.SendToKitchen(context, inv.InvoiceNumber)) // should output items sent to kitchen
+                {
+                    Console.WriteLine("Items Sent To Kitchen");
+                }
+                else
+                {
+                    Console.WriteLine("Failed sending items to kitchen");
+                }
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber); //should output no items need to be sent to kitchen
+               
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+
+        static void DoItemsNeedToBeSentToKitchen(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber)
+        {
+            SalesAPI api = new SalesAPI();
+            Invoice inv = api.GetInvoice(context, invoiceNumber);
+            int i = 0, count = 0;
+            for (i = 0; i <= inv.LineItems.Count - 1; i++)
+            {
+                if (inv.LineItems[i].SentToKitchen == false)
+                {
+                    Console.WriteLine(String.Format("Line#{0} needs to be sent to the Kitchen", i + 1));
+                    count++;
+                }
+            }
+            if (count == 0) { Console.WriteLine("No items need to be sent to the Kitchen"); }
+        }
 
         static void TestSplits()
         {
@@ -52,9 +121,9 @@ namespace APITester
 
                 inv = api.SplitInvoice(context, inv.InvoiceNumber, 3);
 
-                for (int i = 0; i < inv.NumberOfSplitChecks; i++)
+                for (int i = 0; i <= inv.SplitInfo.NumberOfSplitChecks -1; i++)
                 {
-                    Console.WriteLine(String.Format("Rich - SPLIT #{0}: ${1}", i + 1, inv.GrandTotalForSplit[i]));
+                    Console.WriteLine(String.Format("Rich - Guest #{0}: ${1}", i + 1, inv.SplitInfo.GrandTotalForSplit[i]));
                 }
 
                 inv = api.StartNewInvoice(context, "Steve", "XXOPEN TABS");
@@ -68,9 +137,23 @@ namespace APITester
 
                 inv = api.SplitInvoice(context, inv.InvoiceNumber, 3);
 
-                for (int i = 0; i < inv.NumberOfSplitChecks; i++)
+                api.ApplyCashPayment(context, inv.InvoiceNumber, 1, 2.00M);
+                api.ApplyCashPayment(context, inv.InvoiceNumber, 2, 50.00M);
+                //updates the split information so it has the payment info
+                inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
+                // shows split info grand total and if it is completly paid
+                // NOTE: Even if you have fully paid a sub check it won't be marked as paid until you run EndSubCheck on it
+                for (int i = 0; i <= inv.SplitInfo.NumberOfSplitChecks - 1; i++)
                 {
-                    Console.WriteLine(String.Format("Steve - SPLIT #{0}: ${1}", i + 1, inv.GrandTotalForSplit[i]));
+                    Console.WriteLine(String.Format("Steve -  Grand Total SPLIT #{0}: ${1}", i + 1, inv.SplitInfo.GrandTotalForSplit[i]));
+                    Console.WriteLine(String.Format("Steve -  Paid SPLIT #{0}: {1}", i + 1, inv.SplitInfo.IsSplitPaid[i]));
+                }
+                api.EndSubCheck(context, inv.InvoiceNumber, 2);
+                inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
+                for (int i = 0; i <= inv.SplitInfo.NumberOfSplitChecks - 1; i++)
+                {
+                    Console.WriteLine(String.Format("Steve -  Grand Total SPLIT #{0}: ${1}", i + 1, inv.SplitInfo.GrandTotalForSplit[i]));
+                    Console.WriteLine(String.Format("Steve -  Paid SPLIT #{0}: {1}", i + 1, inv.SplitInfo.IsSplitPaid[i]));
                 }
             }
             finally
@@ -430,7 +513,7 @@ namespace APITester
 
                 // Splitcheck
                 inv = api.SplitInvoiceByGuest(context,inv.InvoiceNumber);
-                if (inv.NumberOfSplitChecks == 2)
+                if (inv.SplitInfo.NumberOfSplitChecks == 2)
                     Console.WriteLine("Split invoice by guest");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");
@@ -438,7 +521,7 @@ namespace APITester
 
 
                 // ApplyCashPayment - applying grand total minus 1 dollar (NOTE SPLITS Starts counting at 0 not 1)
-                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, 0, inv.GrandTotalForSplit[0] -1);
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, 0, inv.SplitInfo.GrandTotalForSplit[0] - 1);
                 if (payResponse.Success)
                     Console.WriteLine(String.Format("Applied cash payment to split 1, change due {0}", payResponse.ChangeAmount));
                 else
@@ -460,7 +543,7 @@ namespace APITester
                 else
                     Console.WriteLine("***ERROR*** Could not apply card payment");
 
-                payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, 1, inv.GrandTotalForSplit[1] + 13);
+                payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, 1, inv.SplitInfo.GrandTotalForSplit[1] + 13);
                 if (payResponse.Success)
                     Console.WriteLine(String.Format("Applied cash payment to split 2, change due {0}", payResponse.ChangeAmount));
                 else
@@ -473,7 +556,7 @@ namespace APITester
                     Console.WriteLine("***ERROR*** Could not end invoice");
 
                 // looping and printing receipt for all splits
-                for (int i = 0; i < inv.NumberOfSplitChecks; i++)
+                for (int i = 0; i < inv.SplitInfo.NumberOfSplitChecks; i++)
                 {
                     if (api.PrintReceipt(context, inv.InvoiceNumber, i))
                         Console.WriteLine("Receipt was printed");
@@ -732,14 +815,14 @@ namespace APITester
 
                 // Splitcheck
                 inv = api.SplitInvoice(context, inv.InvoiceNumber, 2);
-                if (inv.NumberOfSplitChecks == 2)
+                if (inv.SplitInfo.NumberOfSplitChecks == 2)
                     Console.WriteLine("Split invoice 2 ways");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");
 
                 // CombineSplits
                 inv = api.CombineSplits(context, inv.InvoiceNumber);
-                if (inv.NumberOfSplitChecks == 0)
+                if (inv.SplitInfo.NumberOfSplitChecks == 0)
                     Console.WriteLine("Combined split checks");
                 else
                     Console.WriteLine("***ERROR*** Invoice could be split");

@@ -136,6 +136,12 @@
   <wsdl:message name="SalesService_EndInvoice_OutputMessage">
     <wsdl:part name="parameters" element="tns:EndInvoiceResponse" />
   </wsdl:message>
+  <wsdl:message name="SalesService_EndSubCheck_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndSubCheck" />
+  </wsdl:message>
+  <wsdl:message name="SalesService_EndSubCheck_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndSubCheckResponse" />
+  </wsdl:message>
   <wsdl:portType name="SalesService">
     <wsdl:operation name="GetTotals">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/GetTotals" message="tns:SalesService_GetTotals_InputMessage" />
@@ -220,6 +226,10 @@
     <wsdl:operation name="EndInvoice">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EndInvoice" message="tns:SalesService_EndInvoice_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EndInvoiceResponse" message="tns:SalesService_EndInvoice_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="EndSubCheck">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EndSubCheck" message="tns:SalesService_EndSubCheck_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/SalesService/ServiceContracts/2010/07/27/SalesService/EndSubCheckResponse" message="tns:SalesService_EndSubCheck_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

@@ -8,8 +8,6 @@
       <xs:element minOccurs="0" name="ExpirationMonth" type="xs:int" />
       <xs:element minOccurs="0" name="ExpirationYear" type="xs:int" />
       <xs:element minOccurs="0" name="ReferenceNumber" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="RequestType" type="xs:boolean" />
-      <xs:element minOccurs="0" name="TipAmount" type="xs:decimal" />
       <xs:element minOccurs="0" name="TransactionNumber" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Void" type="xs:boolean" />
     </xs:sequence>

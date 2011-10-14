@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/SalesService/DataContracts/2010/07/27" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
   <xs:complexType name="SalesTotals">
     <xs:sequence>
       <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
@@ -49,12 +49,11 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
-      <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GrandTotalForSplit" nillable="true" type="q1:ArrayOfdecimal" />
       <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
       <xs:element minOccurs="0" name="LineItems" nillable="true" type="tns:ArrayOfLineItem" />
-      <xs:element minOccurs="0" name="NumberOfSplitChecks" type="xs:int" />
       <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
-      <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="OrderType" type="q2:OrderTypes" />
+      <xs:element xmlns:q1="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="OrderType" type="q1:OrderTypes" />
+      <xs:element minOccurs="0" name="SplitInfo" nillable="true" type="tns:InfoForSplits" />
       <xs:element minOccurs="0" name="TipAmount" type="xs:decimal" />
       <xs:element minOccurs="0" name="TotalTax" type="xs:decimal" />
     </xs:sequence>
@@ -75,8 +74,17 @@
       <xs:element minOccurs="0" name="ParentId" type="ser:guid" />
       <xs:element minOccurs="0" name="Price" type="xs:decimal" />
       <xs:element minOccurs="0" name="Quantity" type="xs:double" />
-      <xs:element xmlns:q3="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="State" type="q3:EntityState" />
+      <xs:element minOccurs="0" name="SentToKitchen" type="xs:boolean" />
+      <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="State" type="q2:EntityState" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="LineItem" nillable="true" type="tns:LineItem" />
+  <xs:complexType name="InfoForSplits">
+    <xs:sequence>
+      <xs:element xmlns:q3="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="GrandTotalForSplit" nillable="true" type="q3:ArrayOfdecimal" />
+      <xs:element xmlns:q4="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="IsSplitPaid" nillable="true" type="q4:ArrayOfboolean" />
+      <xs:element minOccurs="0" name="NumberOfSplitChecks" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="InfoForSplits" nillable="true" type="tns:InfoForSplits" />
 </xs:schema>

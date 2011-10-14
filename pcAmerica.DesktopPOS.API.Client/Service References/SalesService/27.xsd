@@ -327,4 +327,20 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="EndSubCheck">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q35:Context" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="subCheckNumber" type="xs:short" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="EndSubCheckResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="EndSubCheckResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>
