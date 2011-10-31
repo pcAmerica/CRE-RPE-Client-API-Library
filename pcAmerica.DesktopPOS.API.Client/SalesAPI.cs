@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using pcAmerica.DesktopPOS.API.Client.SalesService;
-
+using pcAmerica.DesktopPOS.API.Client;
+using pcAmerica.Utilities.ExternalEncryption;
 namespace pcAmerica.DesktopPOS.API.Client
 {
     public class SalesAPI
@@ -78,7 +79,6 @@ namespace pcAmerica.DesktopPOS.API.Client
                 return client.StartNewInvoice(context, onHoldID, SectionID);
             }
         }
-
         /// <summary>
         /// Sets the party size for the invoice
         /// </summary>
@@ -235,13 +235,27 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="invoiceNumber">The number of the invoice that should be paid</param>
         /// <param name="splitCheckNumber">The split check number, 0-based. Provide -1 if there are no split checks.</param>
         /// <param name="response">Provides the details of the card payment</param>
+        /// <param name="paymentIndex">Index for a payment being updated(post authing Credit Cards). Provide -1 if not updating a payment</param>
         /// <returns>An object that contains the success/failure of the request</returns>
-        public AppliedPaymentResponse ApplyCardPayment(Context context, long invoiceNumber, int splitCheckNumber, SalesService.PaymentResponse response)
+        public AppliedPaymentResponse ApplyCardPayment(Context context, long invoiceNumber, int splitCheckNumber, CreditCardPaymentProcessingResponse response, int paymentIndex)
         {
-            using (SalesServiceClient client = new SalesServiceClient())
+            var cardNumber = response.CardNumber;
+            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
+            response.CardNumber = encryptor.Encrypt(cardNumber);
+            AppliedPaymentResponse returnValue = new AppliedPaymentResponse();
+            try
             {
-                client.Open();
-                return client.ApplyCardPayment(context, invoiceNumber, splitCheckNumber, response);
+                using (SalesServiceClient client = new SalesServiceClient())
+                {
+                    client.Open();
+                    returnValue = client.ApplyCardPayment(context, invoiceNumber, splitCheckNumber, response, paymentIndex);
+                    return returnValue;
+                }
+            }
+            finally
+            {
+                response.CardNumber = cardNumber;
+                             
             }
         }
         /// <summary>

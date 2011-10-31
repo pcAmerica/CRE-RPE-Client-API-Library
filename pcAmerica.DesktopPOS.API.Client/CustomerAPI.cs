@@ -10,18 +10,38 @@ namespace pcAmerica.DesktopPOS.API.Client
     {
         public Customer FindRecord(string customerNumber)
         {
-            using (CustomerServiceClient client = new CustomerServiceClient())
+            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
+            Customer customer = new Customer();
+            try
             {
-                client.Open();
-                return client.FindRecord(customerNumber);
+                using (CustomerServiceClient client = new CustomerServiceClient())
+                {
+                    client.Open();
+                    customer = client.FindRecord(customerNumber);
+                    return customer;
+                }
+            }
+            finally
+            {
+                customer.CreditCardNumber = encryptor.Decrypt(customer.CreditCardNumber);
             }
         }
         public bool UpdateRecord(MessageAction action, Customer customer)
         {
-            using (CustomerServiceClient client = new CustomerServiceClient())
+            var cardNumber = customer.CreditCardNumber;
+            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
+            customer.CreditCardNumber = encryptor.Encrypt(cardNumber);
+            try
             {
-                client.Open();
-                return client.UpdateRecord(action, customer);
+                using (CustomerServiceClient client = new CustomerServiceClient())
+                {
+                    client.Open();
+                    return client.UpdateRecord(action, customer);
+                }
+            }
+            finally
+            {
+                customer.CreditCardNumber = cardNumber;
             }
         }
     }

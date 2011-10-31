@@ -11,7 +11,22 @@
   <xs:element name="ProcessCreditCardResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="ProcessCreditCardResult" nillable="true" type="q2:PaymentResponse" />
+        <xs:element xmlns:q2="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="ProcessCreditCardResult" nillable="true" type="q2:CreditCardPaymentProcessingResponse" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompletePreAuth">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q3="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="request" nillable="true" type="q3:CreditCardRequest" />
+        <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="CompletePreAuthResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q4="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" minOccurs="0" name="CompletePreAuthResult" nillable="true" type="q4:CreditCardPaymentProcessingResponse" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

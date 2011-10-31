@@ -6,4 +6,10 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfdecimal" nillable="true" type="tns:ArrayOfdecimal" />
+  <xs:complexType name="ArrayOfboolean">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="boolean" type="xs:boolean" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfboolean" nillable="true" type="tns:ArrayOfboolean" />
 </xs:schema>

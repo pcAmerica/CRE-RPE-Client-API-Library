@@ -28,6 +28,7 @@
     <MetadataFile FileName="26.xsd" MetadataType="Schema" ID="d0fec2e1-510e-467a-a735-800f00de0f63" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/PaymentService/mex" />
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b4552726-724f-48e3-88a0-8a385c637d7c" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/PaymentService/mex" />
     <MetadataFile FileName="261.xsd" MetadataType="Schema" ID="e2cbf9fa-51bc-459c-9d88-b4d0b1a6b14c" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/PaymentService/mex" />
+    <MetadataFile FileName="262.xsd" MetadataType="Schema" ID="0f15851f-5a96-41d0-ad18-45fdc2ce6664" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/PaymentService/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

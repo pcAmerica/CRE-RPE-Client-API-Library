@@ -58,11 +58,29 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CompletePreAuth">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/CompletePreAuth" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_PaymentService" type="i0:PaymentService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="ProcessCreditCard">
       <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/ProcessCreditCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompletePreAuth">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/CompletePreAuth" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -77,6 +95,15 @@
     <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
     <wsdl:operation name="ProcessCreditCard">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/ProcessCreditCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CompletePreAuth">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/CompletePreAuth" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

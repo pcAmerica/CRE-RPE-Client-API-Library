@@ -5,6 +5,7 @@
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://pcAmerica.com/DesktopPOS/PaymentService/DataContracts/2009/10/26" />
+      <xsd:import namespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="PaymentService_ProcessCreditCard_InputMessage">
@@ -13,10 +14,20 @@
   <wsdl:message name="PaymentService_ProcessCreditCard_OutputMessage">
     <wsdl:part name="parameters" element="tns:ProcessCreditCardResponse" />
   </wsdl:message>
+  <wsdl:message name="PaymentService_CompletePreAuth_InputMessage">
+    <wsdl:part name="parameters" element="tns:CompletePreAuth" />
+  </wsdl:message>
+  <wsdl:message name="PaymentService_CompletePreAuth_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CompletePreAuthResponse" />
+  </wsdl:message>
   <wsdl:portType name="PaymentService">
     <wsdl:operation name="ProcessCreditCard">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/ProcessCreditCard" message="tns:PaymentService_ProcessCreditCard_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/ProcessCreditCardResponse" message="tns:PaymentService_ProcessCreditCard_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CompletePreAuth">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/CompletePreAuth" message="tns:PaymentService_CompletePreAuth_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/PaymentService/ServiceContracts/2009/10/26/PaymentService/CompletePreAuthResponse" message="tns:PaymentService_CompletePreAuth_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

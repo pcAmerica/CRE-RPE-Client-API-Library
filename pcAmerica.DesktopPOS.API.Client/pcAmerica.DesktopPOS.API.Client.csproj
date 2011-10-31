@@ -53,6 +53,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="pcAmerica.Utilities.ExternalEncryption">
+      <HintPath>..\lib\pcAmerica.Utilities.ExternalEncryption.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Runtime.Serialization, Version=3.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL" />
@@ -187,7 +190,10 @@
     <None Include="Service References\PaymentService\261.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PaymentService\pcAmerica.DesktopPOS.API.Client.PaymentService.PaymentResponse.datasource">
+    <None Include="Service References\PaymentService\262.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\PaymentService\pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardPaymentProcessingResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\PaymentService\service.wsdl" />

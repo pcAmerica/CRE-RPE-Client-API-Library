@@ -110,4 +110,17 @@
     </xs:restriction>
   </xs:simpleType>
   <xs:element name="OrderTypes" nillable="true" type="tns:OrderTypes" />
+  <xs:simpleType name="ProcessingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sale" />
+      <xs:enumeration value="PreAuth" />
+      <xs:enumeration value="PostAuth" />
+      <xs:enumeration value="Force" />
+      <xs:enumeration value="Credit" />
+      <xs:enumeration value="VoidSale" />
+      <xs:enumeration value="VoidCredit" />
+      <xs:enumeration value="VoidPreAuth" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProcessingType" nillable="true" type="tns:ProcessingType" />
 </xs:schema>
