@@ -316,6 +316,21 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
         }
         /// <summary>
+        /// Marks the specified subcheck as complete, only if it's fully paid. Also sends the order to the kitchen if it has not been printed yet.
+        /// </summary>
+        /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
+        /// <param name="invoiceNumber">The number of the invoice that should be ended</param>
+        /// <param name="subCheckNumber">The number for the subcheck to be ended</param>
+        /// <returns>The success or failure of the EndInvoice request</returns>
+        public bool EndSubCheck(Context context, long invoiceNumber, short subcheckNumber)
+        {
+            using (SalesServiceClient client = new SalesServiceClient())
+            {
+                client.Open();
+                return client.EndSubCheck(context, invoiceNumber, subcheckNumber);
+            }
+        }
+        /// <summary>
         /// Applies a cash payment to the specified invoice
         /// </summary>
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
