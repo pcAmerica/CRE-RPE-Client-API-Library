@@ -63,6 +63,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompanyInformationAPI.cs" />
     <Compile Include="CustomerAPI.cs" />
     <Compile Include="EmployeeAPI.cs" />
     <Compile Include="InventoryAPI.cs" />
@@ -70,6 +71,11 @@
     <Compile Include="PaymentAPI.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SalesAPI.cs" />
+    <Compile Include="Service References\CompanyInformationService\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\CustomerService\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -112,6 +118,17 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="ClassDiagram1.cd" />
+    <None Include="Service References\CompanyInformationService\27.wsdl" />
+    <None Include="Service References\CompanyInformationService\27.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompanyInformationService\Arrays.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\CompanyInformationService\service.wsdl" />
+    <None Include="Service References\CompanyInformationService\service.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\CustomerService\26.wsdl" />
     <None Include="Service References\CustomerService\26.xsd">
       <SubType>Designer</SubType>
@@ -274,6 +291,7 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\CompanyInformationService\" />
     <WCFMetadataStorage Include="Service References\CustomerService\" />
     <WCFMetadataStorage Include="Service References\EmployeeService\" />
     <WCFMetadataStorage Include="Service References\InventoryService\" />
@@ -362,6 +380,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Service References\TableService\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CompanyInformationService\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CompanyInformationService\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\CompanyInformationService\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
