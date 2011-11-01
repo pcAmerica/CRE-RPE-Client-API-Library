@@ -4,6 +4,7 @@ using System.Text;
 using pcAmerica.DesktopPOS.API.Client;
 using pcAmerica.DesktopPOS.API.Client.PaymentService;
 using pcAmerica.DesktopPOS.API.Client.CustomerService;
+using pcAmerica.DesktopPOS.API.Client.CompanyInformationService;
 using pcAmerica.DesktopPOS.API.Client.EmployeeService;
 using pcAmerica.DesktopPOS.API.Client.InventoryService;
 using pcAmerica.DesktopPOS.API.Client.SalesService;
@@ -30,8 +31,107 @@ namespace APITester
             //TestSectionsAndTables();
             //TestSplits();
             //TestSentToKitchenFlag();
-            TestPreAuthInvoice();
+            //TestPreAuthInvoice();
+            TestGetStoreIDsAndGetStationIDs();
 
+        }
+
+        static void TestPreAuthInvoice()
+        {
+            try
+            {
+                SalesAPI salesAPI = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context salesContext = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                salesContext.CashierID = "100101";
+                salesContext.StoreID = "1001";
+                salesContext.StationID = "01";
+
+                PaymentAPI paymentAPI = new PaymentAPI();
+
+                // first create the credit card object
+                pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardRequest creditCard1 = new pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardRequest();
+                creditCard1.Amount = 5.00M;
+                creditCard1.CardNumber = "5454545454545454";
+                creditCard1.ExpirationMonth = 05;
+                creditCard1.ExpirationYear = 13;
+                creditCard1.BarTab = true;// set this for a pre authed bar tab
+                creditCard1.ProcessingType = pcAmerica.DesktopPOS.API.Client.PaymentService.ProcessingType.PreAuth;
+                pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardPaymentProcessingResponse ProcessingResponse1 = paymentAPI.ProcessCreditCard(creditCard1);
+
+                // create an invoice to apply your payment to
+                Invoice inv = salesAPI.StartNewInvoice(salesContext, "Jane", "XXOPEN TABS");
+
+                // use paymentIndex of -1 since the card isn't attached to the invoice yet
+                AppliedPaymentResponse paymentResponse1 = salesAPI.ApplyCardPayment(salesContext, inv.InvoiceNumber, -1, new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() { Amount = ProcessingResponse1.Amount, ApprovalCode = ProcessingResponse1.ApprovalCode, CardNumber = ProcessingResponse1.CardNumber, ExpirationMonth = ProcessingResponse1.ExpirationMonth, ExpirationYear = ProcessingResponse1.ExpirationYear, ExtensionData = ProcessingResponse1.ExtensionData, IsPrePaidCard = ProcessingResponse1.IsPrePaidCard, PostAuthReferenceNumber = ProcessingResponse1.PostAuthReferenceNumber, ProcessType = pcAmerica.DesktopPOS.API.Client.SalesService.ProcessingType.PreAuth, ReferenceNumber = ProcessingResponse1.ReferenceNumber, Result = ProcessingResponse1.Result, TipAmount = ProcessingResponse1.TipAmount, TransactionNumber = ProcessingResponse1.TransactionNumber }, -1);
+
+                // some time passes and items are added to the invoice
+                InventoryAPI invAPI = new InventoryAPI();
+                pcAmerica.DesktopPOS.API.Client.InventoryService.Context invContext = new pcAmerica.DesktopPOS.API.Client.InventoryService.Context();
+                invContext.CashierID = "100101";
+                invContext.StationID = "01";
+                invContext.StoreID = "1001";
+
+                salesAPI.LockInvoice(salesContext, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "2" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "3" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "4" });
+                inv = salesAPI.ModifyItems(salesContext, inv.InvoiceNumber, inv.LineItems);
+
+
+                //to complete the earlier pre auth card you must call CompletePreAuth and pass it the PaymentIndex you got back from ApplyCardPayment earlier
+                creditCard1.Amount = inv.GrandTotal - 7.98M;
+                creditCard1.ProcessingType = pcAmerica.DesktopPOS.API.Client.PaymentService.ProcessingType.PostAuth;
+                creditCard1.PostAuthReferenceNumber = ProcessingResponse1.PostAuthReferenceNumber;
+                creditCard1.ReferenceNumber = ProcessingResponse1.ReferenceNumber;
+                creditCard1.PaymentIndex = paymentResponse1.PaymentIndex;
+
+                ProcessingResponse1 = paymentAPI.CompletePreAuth(creditCard1, inv.InvoiceNumber);
+                paymentResponse1 = salesAPI.ApplyCardPayment(salesContext, inv.InvoiceNumber, -1, new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() { Amount = ProcessingResponse1.Amount, ApprovalCode = ProcessingResponse1.ApprovalCode, CardNumber = ProcessingResponse1.CardNumber, ExpirationMonth = ProcessingResponse1.ExpirationMonth, ExpirationYear = ProcessingResponse1.ExpirationYear, ExtensionData = ProcessingResponse1.ExtensionData, IsPrePaidCard = ProcessingResponse1.IsPrePaidCard, PostAuthReferenceNumber = ProcessingResponse1.PostAuthReferenceNumber, ProcessType = pcAmerica.DesktopPOS.API.Client.SalesService.ProcessingType.PostAuth, ReferenceNumber = ProcessingResponse1.ReferenceNumber, Result = ProcessingResponse1.Result, TipAmount = ProcessingResponse1.TipAmount, TransactionNumber = ProcessingResponse1.TransactionNumber }, paymentResponse1.PaymentIndex);
+
+                // create a second credit card object
+                pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardRequest creditCard2 = new pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardRequest();
+                creditCard2.Amount = 7.98M;
+                creditCard2.CardNumber = "4545454545454545";
+                creditCard2.ExpirationMonth = 05;
+                creditCard2.ExpirationYear = 13;
+                creditCard2.BarTab = false;// this card is not a bar tab
+                creditCard2.ProcessingType = pcAmerica.DesktopPOS.API.Client.PaymentService.ProcessingType.PreAuth;
+                //process and apply the 2nd card
+                pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardPaymentProcessingResponse ProcessingResponse2 = paymentAPI.ProcessCreditCard(creditCard2);
+                AppliedPaymentResponse paymentResponse2 = salesAPI.ApplyCardPayment(salesContext, inv.InvoiceNumber, -1, new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() { Amount = ProcessingResponse2.Amount, ApprovalCode = ProcessingResponse2.ApprovalCode, CardNumber = ProcessingResponse2.CardNumber, ExpirationMonth = ProcessingResponse2.ExpirationMonth, ExpirationYear = ProcessingResponse2.ExpirationYear, ExtensionData = ProcessingResponse2.ExtensionData, IsPrePaidCard = ProcessingResponse2.IsPrePaidCard, PostAuthReferenceNumber = ProcessingResponse2.PostAuthReferenceNumber, ProcessType = pcAmerica.DesktopPOS.API.Client.SalesService.ProcessingType.PreAuth, ReferenceNumber = ProcessingResponse2.ReferenceNumber, Result = ProcessingResponse2.Result, TipAmount = ProcessingResponse2.TipAmount, TransactionNumber = ProcessingResponse2.TransactionNumber }, -1);
+
+                //update the invoice object and end the transaction
+                inv = salesAPI.GetInvoice(salesContext, inv.InvoiceNumber);
+                salesAPI.EndInvoice(salesContext, inv.InvoiceNumber);
+
+                //salesAPI.PrintReceipt(salesContext, inv.InvoiceNumber,-1);
+
+                //add a tips to the invoice
+                creditCard1.TipAmount = 1.5M;
+                creditCard1.BarTab = false;
+                ProcessingResponse1 = paymentAPI.CompletePreAuth(creditCard1, inv.InvoiceNumber);
+                salesAPI.ApplyCardPayment(salesContext, inv.InvoiceNumber, -1, new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() { Amount = ProcessingResponse1.Amount, ApprovalCode = ProcessingResponse1.ApprovalCode, CardNumber = ProcessingResponse1.CardNumber, ExpirationMonth = ProcessingResponse1.ExpirationMonth, ExpirationYear = ProcessingResponse1.ExpirationYear, ExtensionData = ProcessingResponse1.ExtensionData, IsPrePaidCard = ProcessingResponse1.IsPrePaidCard, PostAuthReferenceNumber = ProcessingResponse1.PostAuthReferenceNumber, ProcessType = pcAmerica.DesktopPOS.API.Client.SalesService.ProcessingType.PostAuth, ReferenceNumber = ProcessingResponse1.ReferenceNumber, Result = ProcessingResponse1.Result, TipAmount = ProcessingResponse1.TipAmount, TransactionNumber = ProcessingResponse1.TransactionNumber }, paymentResponse1.PaymentIndex);
+
+
+                //to complete the earlier pre auth card you must call CompletePreAuth and pass it the PaymentIndex you got back from ApplyCardPayment earlier
+                creditCard2.Amount = 7.98M;
+                creditCard2.TipAmount = 1.77M;
+                creditCard2.ProcessingType = pcAmerica.DesktopPOS.API.Client.PaymentService.ProcessingType.PostAuth;
+                creditCard2.PostAuthReferenceNumber = ProcessingResponse2.PostAuthReferenceNumber;
+                creditCard2.ReferenceNumber = ProcessingResponse2.ReferenceNumber;
+                creditCard2.PaymentIndex = paymentResponse2.PaymentIndex;
+                ProcessingResponse2 = paymentAPI.CompletePreAuth(creditCard2, inv.InvoiceNumber);
+                salesAPI.ApplyCardPayment(salesContext, inv.InvoiceNumber, -1, new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() { Amount = ProcessingResponse2.Amount, ApprovalCode = ProcessingResponse2.ApprovalCode, CardNumber = ProcessingResponse2.CardNumber, ExpirationMonth = ProcessingResponse2.ExpirationMonth, ExpirationYear = ProcessingResponse2.ExpirationYear, ExtensionData = ProcessingResponse2.ExtensionData, IsPrePaidCard = ProcessingResponse2.IsPrePaidCard, PostAuthReferenceNumber = ProcessingResponse2.PostAuthReferenceNumber, ProcessType = pcAmerica.DesktopPOS.API.Client.SalesService.ProcessingType.PostAuth, ReferenceNumber = ProcessingResponse2.ReferenceNumber, Result = ProcessingResponse2.Result, TipAmount = ProcessingResponse2.TipAmount, TransactionNumber = ProcessingResponse2.TransactionNumber }, paymentResponse2.PaymentIndex);
+
+                salesAPI.PrintReceipt(salesContext, inv.InvoiceNumber, -1);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
         }
 
         static void TestSentToKitchenFlag()
@@ -86,50 +186,6 @@ namespace APITester
                 Console.WriteLine("PRESS ENTER TO CONTINUE...");
                 Console.ReadLine();
             }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         }
 
         static void DoItemsNeedToBeSentToKitchen(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber)
@@ -1032,5 +1088,34 @@ namespace APITester
                 Console.ReadLine();
             }
         }
+        static void TestGetStoreIDsAndGetStationIDs()
+        {
+            try
+            {
+                CompanyInformationAPI api = new CompanyInformationAPI();
+                List<String> StoreIDs = api.GetStoreIDs();
+                List<String> StationIDs;
+                foreach (String StoreID in StoreIDs)
+                {
+                    StationIDs = api.GetStationIDs(StoreID);
+                    Console.WriteLine("Store {0} has the following Stations:", StoreID);
+                    foreach (String StationID in StationIDs)
+                    {
+                        Console.WriteLine("  {0}", StationID);
+                    }
+                    Console.WriteLine("");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+
     }
 }
