@@ -1,0 +1,135 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:i0="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="CompanyInformationService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_CompanyInformationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="NetNamedPipeBinding_CompanyInformationService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <sp:TransportBinding xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <wsp:Policy>
+            <sp:TransportToken>
+              <wsp:Policy>
+                <msf:WindowsTransportSecurity xmlns:msf="http://schemas.microsoft.com/ws/2006/05/framing/policy">
+                  <msf:ProtectionLevel>EncryptAndSign</msf:ProtectionLevel>
+                </msf:WindowsTransportSecurity>
+              </wsp:Policy>
+            </sp:TransportToken>
+            <sp:AlgorithmSuite>
+              <wsp:Policy>
+                <sp:Basic256>
+                </sp:Basic256>
+              </wsp:Policy>
+            </sp:AlgorithmSuite>
+            <sp:Layout>
+              <wsp:Policy>
+                <sp:Strict>
+                </sp:Strict>
+              </wsp:Policy>
+            </sp:Layout>
+          </wsp:Policy>
+        </sp:TransportBinding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:import namespace="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27" location="" />
+  <wsdl:types />
+  <wsdl:binding name="NetTcpBinding_CompanyInformationService" type="i0:CompanyInformationService">
+    <wsp:PolicyReference URI="#NetTcpBinding_CompanyInformationService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetStoreIDs">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStoreIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationIDs">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BasicHttpBinding_CompanyInformationService" type="i0:CompanyInformationService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetStoreIDs">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStoreIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationIDs">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="NetNamedPipeBinding_CompanyInformationService" type="i0:CompanyInformationService">
+    <wsp:PolicyReference URI="#NetNamedPipeBinding_CompanyInformationService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/named-pipe" />
+    <wsdl:operation name="GetStoreIDs">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStoreIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetStationIDs">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CompanyInformationService">
+    <wsdl:port name="NetTcpBinding_CompanyInformationService" binding="tns:NetTcpBinding_CompanyInformationService">
+      <soap12:address location="net.tcp://localhost:38567/Services/CompanyInformationService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost:38567/Services/CompanyInformationService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+    <wsdl:port name="BasicHttpBinding_CompanyInformationService" binding="tns:BasicHttpBinding_CompanyInformationService">
+      <soap:address location="http://localhost:38568/Services/CompanyInformationService" />
+    </wsdl:port>
+    <wsdl:port name="NetNamedPipeBinding_CompanyInformationService" binding="tns:NetNamedPipeBinding_CompanyInformationService">
+      <soap12:address location="net.pipe://localhost/pcAmerica/Services/CompanyInformationService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.pipe://localhost/pcAmerica/Services/CompanyInformationService</wsa10:Address>
+        <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
+          <Upn>dtomasheski@PCAmericaINC.local</Upn>
+        </Identity>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

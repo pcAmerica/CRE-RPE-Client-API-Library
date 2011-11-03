@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ebc7df3a-18a2-4c83-b48a-56af994d3671" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.Generic.List`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="net.pipe://localhost/pcAmerica/Services/CompanyInformationService/mex" Protocol="mex" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="27.wsdl" MetadataType="Wsdl" ID="ce77cade-27bc-4d84-8f2b-81441ddcd414" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/CompanyInformationService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="5b045ed4-0ed3-4daf-967a-541cd6ca6a0e" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/CompanyInformationService/mex" />
+    <MetadataFile FileName="27.xsd" MetadataType="Schema" ID="d808449d-adf8-407f-a1e9-7016c834b939" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/CompanyInformationService/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="81c0bc65-97a0-41ec-8183-265fad8d1d16" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/CompanyInformationService/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="69f264c6-5c41-4a3a-a1a0-75aa38d11315" SourceId="1" SourceUrl="net.pipe://localhost/pcAmerica/Services/CompanyInformationService/mex" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
