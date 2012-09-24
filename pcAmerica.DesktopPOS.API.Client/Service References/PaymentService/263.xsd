@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" elementFormDefault="qualified" targetNamespace="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:simpleType name="ProcessingType">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="Sale" />
+      <xs:enumeration value="PreAuth" />
+      <xs:enumeration value="PostAuth" />
+      <xs:enumeration value="Force" />
+      <xs:enumeration value="Credit" />
+      <xs:enumeration value="VoidSale" />
+      <xs:enumeration value="VoidCredit" />
+      <xs:enumeration value="VoidPreAuth" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:element name="ProcessingType" nillable="true" type="tns:ProcessingType" />
+</xs:schema>

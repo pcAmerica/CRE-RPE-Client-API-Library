@@ -3,3 +3,5 @@ APITester/bin/*
 APITester/obj/*
 *.suo
 pcAmerica.DesktopPOS.API.Client/obj/*
+*.user
+_ReSharper.pcAmerica.DesktopPOS.API.Client

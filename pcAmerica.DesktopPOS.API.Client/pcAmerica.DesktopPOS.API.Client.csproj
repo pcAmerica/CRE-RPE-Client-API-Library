@@ -207,7 +207,7 @@
     <None Include="Service References\PaymentService\261.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\PaymentService\262.xsd">
+    <None Include="Service References\PaymentService\263.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\PaymentService\pcAmerica.DesktopPOS.API.Client.PaymentService.CreditCardPaymentProcessingResponse.datasource">

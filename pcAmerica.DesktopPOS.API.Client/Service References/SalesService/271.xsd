@@ -41,6 +41,8 @@
       <xs:element minOccurs="0" name="CashierID" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="GrandTotal" type="xs:decimal" />
       <xs:element minOccurs="0" name="InvoiceNumber" type="xs:long" />
+      <xs:element minOccurs="0" name="Locked" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LockedByStation" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
