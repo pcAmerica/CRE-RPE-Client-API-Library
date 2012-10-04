@@ -471,10 +471,19 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         private System.Collections.Generic.List<pcAmerica.DesktopPOS.API.Client.SalesService.LineItem> LineItemsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool LockedField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LockedByStationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OnHoldIDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private pcAmerica.DesktopPOS.API.Client.SalesService.OrderTypes OrderTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int PartySizeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private pcAmerica.DesktopPOS.API.Client.SalesService.InfoForSplits SplitInfoField;
@@ -548,6 +557,32 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool Locked {
+            get {
+                return this.LockedField;
+            }
+            set {
+                if ((this.LockedField.Equals(value) != true)) {
+                    this.LockedField = value;
+                    this.RaisePropertyChanged("Locked");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LockedByStation {
+            get {
+                return this.LockedByStationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LockedByStationField, value) != true)) {
+                    this.LockedByStationField = value;
+                    this.RaisePropertyChanged("LockedByStation");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string OnHoldID {
             get {
                 return this.OnHoldIDField;
@@ -569,6 +604,19 @@ namespace pcAmerica.DesktopPOS.API.Client.SalesService {
                 if ((this.OrderTypeField.Equals(value) != true)) {
                     this.OrderTypeField = value;
                     this.RaisePropertyChanged("OrderType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int PartySize {
+            get {
+                return this.PartySizeField;
+            }
+            set {
+                if ((this.PartySizeField.Equals(value) != true)) {
+                    this.PartySizeField = value;
+                    this.RaisePropertyChanged("PartySize");
                 }
             }
         }

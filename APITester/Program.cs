@@ -22,7 +22,7 @@ namespace APITester
             //TestCustomers();
             //TestEmployee();
             //TestInventory();
-            TestSales();
+            //TestSales();
             //TestMenus();
             //TestTables();
             //TestBurgerExpress();
@@ -33,9 +33,160 @@ namespace APITester
             //TestSentToKitchenFlag();
             //TestPreAuthInvoice();
             //TestGetStoreIDsAndGetStationIDs();
-
+            NewTest();
         }
 
+        static void NewTest()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context salesContext = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                salesContext.CashierID = "100101";
+                salesContext.StoreID = "1001";
+                salesContext.StationID = "07";
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context =
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "07";
+
+                InventoryAPI InvApi = new InventoryAPI();
+
+                pcAmerica.DesktopPOS.API.Client.InventoryService.Context InvContext = new pcAmerica.DesktopPOS.API.Client.InventoryService.Context();
+                InvContext.CashierID = "100101";
+                InvContext.StationID = "07";
+                InvContext.StoreID = "1001";
+
+                // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
+                Invoice inv = api.StartNewInvoice(context, "Luigi" + DateTime.Now.Second.ToString(), "XXOPEN TABS");
+                Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
+
+                // getting invoice to show locked status should be locked by this station(7)
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                if (inv.Locked == true)
+                {
+                    Console.WriteLine("Invoice #{0} is locked by Station: {1}", inv.InvoiceNumber.ToString(), inv.LockedByStation);
+                }
+                else
+                {
+                    Console.WriteLine("Invoice #{0} is unlocked", inv.InvoiceNumber.ToString());
+                }
+                //setting party size
+                api.SetPartySizeForInvoice(context, inv.InvoiceNumber, 3);
+
+
+                InventoryItem itemToAdd = InvApi.GetItem(InvContext, "SALAD1");
+                Guid itemToAddID = Guid.NewGuid();
+                LineItem LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "42" };
+                inv.LineItems.Add(LineItemToAdd);
+
+                itemToAdd.ModifierGroups = InvApi.GetModiferGroupsForItem(InvContext, itemToAdd.ItemNumber);
+                foreach (ModifierGroup ModGroup in itemToAdd.ModifierGroups)
+                {
+                    Console.WriteLine("ModifierGroup:{0}", ModGroup.ItemName);
+                    Console.WriteLine("{0}", ModGroup.Prompt);
+                    int i = 1;
+                    if (ModGroup.Forced == false)
+                    {
+                        Console.WriteLine("{0} - NONE", i);
+                        i++;
+                    }
+                    //NOTE THIS HAS CHANGED Modifier Items for Groups now are retrieved by calling GetModiferItemsForModiferGroups
+                    ModGroup.ModifierItems = InvApi.GetModifierItemsForModifierGroup(InvContext, ModGroup.ItemNumber);
+                    foreach (ModifierItem ModItem in ModGroup.ModifierItems)
+                    {
+                        Console.WriteLine("{0} - {1} : {2}", i, ModItem.ItemNumber, ModItem.ItemName);
+                        i++;
+                    }
+                    string answer = Console.ReadLine();
+                    if (answer.Length > 1)
+                    {
+                        Console.WriteLine("Invalid answer i Choose option 1 is chosen by default");
+                        answer = "1";
+                    }
+                    else if (char.IsDigit(answer[0]) == false)
+                    {
+                        Console.WriteLine("Invalid answer i Choose option 1 chosen by defualt");
+                        answer = "1";
+                    }
+                    InventoryItem dressing = InvApi.GetItem(InvContext, ModGroup.ModifierItems[Convert.ToInt32(answer) - 1].ItemNumber);
+                    decimal Price = 0;
+                    if (ModGroup.Charged == true) { Price = dressing.Price; }
+                    inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = itemToAdd.ItemName, ItemNumber = dressing.ItemNumber, Price = dressing.Price, Quantity = 1, State = EntityState.Added, Guest = "42" });
+                }
+
+                // I created this item with the prompt description status set.
+                itemToAdd = InvApi.GetItem(InvContext, "MiscItem");
+                itemToAddID = Guid.NewGuid();
+                LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = "Keychain", ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "11" };
+                inv.LineItems.Add(LineItemToAdd);
+
+                api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                api.UnLockInvoice(context, inv.InvoiceNumber);
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                Console.WriteLine("The invoice has {0} guests",inv.PartySize);
+                foreach (LineItem individualItem in inv.LineItems)
+                {
+                    Console.WriteLine("Guest {0} has ordered: {1}-{2}",individualItem.Guest,individualItem.ItemNumber,individualItem.ItemName);
+                }
+
+                //should show this invoice as locked by this station
+                api.LockInvoice(context, inv.InvoiceNumber);
+                List<OnHoldInfo> onHoldInfos = api.GetAllOnHoldInvoices(context);
+                Console.WriteLine(String.Format("Retrieved {0} OnHoldInfo from GetAllOnHoldInvoices",
+                                                    onHoldInfos.Count));
+                foreach (OnHoldInfo onHoldInfo in onHoldInfos)
+                {
+                    
+                    foreach (OnHoldInfo OHI in onHoldInfos)
+                    {
+                        if (OHI.Locked == true)
+                        {
+                            Console.WriteLine(String.Format("Invoice {0} is locked by Station {1}",
+                                                            OHI.InvoiceNumber, OHI.LockedByStation));
+                        }
+                    }
+                }
+
+                //checking locked status should be locked by this station
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                if(inv.Locked == true)
+                {
+                    Console.WriteLine("Invoice #{0} is locked by Station: {1}",inv.InvoiceNumber.ToString(),inv.LockedByStation);
+                }
+                else
+                {
+                    Console.WriteLine("Invoice #{0} is unlocked", inv.InvoiceNumber.ToString());
+                }
+
+                api.UnLockInvoice(context, inv.InvoiceNumber);
+                onHoldInfos.Clear();
+                onHoldInfos = api.GetAllOnHoldInvoices(context);
+                //should show this invoice as unlocked.
+                Console.WriteLine(String.Format("Retrieved {0} OnHoldInfo from GetAllOnHoldInvoices",
+                                                    onHoldInfos.Count));
+                foreach (OnHoldInfo onHoldInfo in onHoldInfos)
+                {
+                    
+                    foreach (OnHoldInfo OHI in onHoldInfos)
+                    {
+                        if (OHI.Locked == true)
+                        {
+                            Console.WriteLine(String.Format("Invoice {0} is locked by Station {1}",
+                                                            OHI.InvoiceNumber, OHI.LockedByStation));
+                        }
+                    }
+                }
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
         static void TestPreAuthInvoice()
         {
             try
