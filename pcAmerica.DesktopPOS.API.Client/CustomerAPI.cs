@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using pcAmerica.DesktopPOS.API.Client.CustomerService;
-using System.Runtime.InteropServices;
+using pcAmerica.Utilities.ExternalEncryption;
 
 namespace pcAmerica.DesktopPOS.API.Client
 {
@@ -10,11 +7,11 @@ namespace pcAmerica.DesktopPOS.API.Client
     {
         public Customer FindRecord(string customerNumber)
         {
-            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
-            Customer customer = new Customer();
+            var encryptor = new CreditCardEncryption();
+            var customer = new Customer();
             try
             {
-                using (CustomerServiceClient client = new CustomerServiceClient())
+                using (var client = new CustomerServiceClient())
                 {
                     client.Open();
                     customer = client.FindRecord(customerNumber);
@@ -23,17 +20,19 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
             finally
             {
-                customer.CreditCardNumber = encryptor.Decrypt(customer.CreditCardNumber);
+                if (customer != null)
+                    customer.CreditCardNumber = encryptor.Decrypt(customer.CreditCardNumber);
             }
         }
+
         public bool UpdateRecord(MessageAction action, Customer customer)
         {
-            var cardNumber = customer.CreditCardNumber;
-            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
+            string cardNumber = customer.CreditCardNumber;
+            var encryptor = new CreditCardEncryption();
             customer.CreditCardNumber = encryptor.Encrypt(cardNumber);
             try
             {
-                using (CustomerServiceClient client = new CustomerServiceClient())
+                using (var client = new CustomerServiceClient())
                 {
                     client.Open();
                     return client.UpdateRecord(action, customer);

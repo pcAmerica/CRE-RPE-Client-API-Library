@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
 using pcAmerica.DesktopPOS.API.Client.PaymentService;
-
+using pcAmerica.Utilities.ExternalEncryption;
 
 namespace pcAmerica.DesktopPOS.API.Client
 {
@@ -10,15 +7,15 @@ namespace pcAmerica.DesktopPOS.API.Client
     {
         public CreditCardPaymentProcessingResponse ProcessCreditCard(CreditCardRequest request)
         {
-            var cardNumber = request.CardNumber;
-            var swipe = request.CardSwipe;
-            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
+            string cardNumber = request.CardNumber;
+            string swipe = request.CardSwipe;
+            var encryptor = new CreditCardEncryption();
             request.CardNumber = encryptor.Encrypt(cardNumber);
             request.CardSwipe = encryptor.Encrypt(swipe);
-            CreditCardPaymentProcessingResponse returnValue = new CreditCardPaymentProcessingResponse();
+            var returnValue = new CreditCardPaymentProcessingResponse();
             try
             {
-                using (PaymentServiceClient client = new PaymentServiceClient())
+                using (var client = new PaymentServiceClient())
                 {
                     client.Open();
                     returnValue = client.ProcessCreditCard(request);
@@ -32,17 +29,18 @@ namespace pcAmerica.DesktopPOS.API.Client
                 returnValue.CardNumber = cardNumber;
             }
         }
+
         public CreditCardPaymentProcessingResponse CompletePreAuth(CreditCardRequest request, long invoiceNumber)
         {
-            var cardNumber = request.CardNumber;
-            var swipe = request.CardSwipe;
-            var encryptor = new Utilities.ExternalEncryption.CreditCardEncryption();
+            string cardNumber = request.CardNumber;
+            string swipe = request.CardSwipe;
+            var encryptor = new CreditCardEncryption();
             request.CardNumber = encryptor.Encrypt(cardNumber);
             request.CardSwipe = encryptor.Encrypt(swipe);
-            CreditCardPaymentProcessingResponse returnValue = new CreditCardPaymentProcessingResponse();
+            var returnValue = new CreditCardPaymentProcessingResponse();
             try
             {
-                using (PaymentServiceClient client = new PaymentServiceClient())
+                using (var client = new PaymentServiceClient())
                 {
                     client.Open();
                     returnValue = client.CompletePreAuth(request, invoiceNumber);
@@ -56,6 +54,5 @@ namespace pcAmerica.DesktopPOS.API.Client
                 returnValue.CardNumber = cardNumber;
             }
         }
-
     }
 }

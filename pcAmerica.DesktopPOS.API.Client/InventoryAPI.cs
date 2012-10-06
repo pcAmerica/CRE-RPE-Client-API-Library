@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using pcAmerica.DesktopPOS.API.Client.InventoryService;
 
 namespace pcAmerica.DesktopPOS.API.Client
@@ -14,12 +11,13 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <returns>A list of inventory items</returns>
         public List<InventoryItem> GetItemList()
         {
-            using (InventoryServiceClient client = new InventoryServiceClient())
+            using (var client = new InventoryServiceClient())
             {
                 client.Open();
                 return new List<InventoryItem>(client.GetItemList());
             }
         }
+
         /// <summary>
         /// Retrieves information about a specific item, including nested modifier groups and modifiers
         /// </summary>
@@ -28,24 +26,26 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <returns>An inventory item</returns>
         public InventoryItem GetItem(Context context, string itemNumber)
         {
-            using (InventoryServiceClient client = new InventoryServiceClient())
+            using (var client = new InventoryServiceClient())
             {
                 client.Open();
                 return client.GetItem(context, itemNumber);
             }
         }
+
         /// <summary>
         /// Retrieves more properties of an item than GetItemList()
         /// </summary>
         /// <returns>A list of inventory items</returns>
         public List<InventoryItem> GetItemListExtended(Context context)
         {
-            using (InventoryServiceClient client = new InventoryServiceClient())
+            using (var client = new InventoryServiceClient())
             {
                 client.Open();
                 return new List<InventoryItem>(client.GetItemListExtended(context));
             }
         }
+
         /// <summary>
         /// Retrieves the modifier groups associated with the specified item
         /// </summary>
@@ -54,12 +54,13 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <returns>A list of ModifierGroups for the item number</returns>
         public List<ModifierGroup> GetModiferGroupsForItem(Context context, string itemNumber)
         {
-            using (InventoryServiceClient client = new InventoryServiceClient())
+            using (var client = new InventoryServiceClient())
             {
                 client.Open();
                 return new List<ModifierGroup>(client.GetModifierGroupsForItem(context, itemNumber));
             }
         }
+
         /// <summary>
         /// Retrieves the individual modifiers associated with the specified item (modifiers that are not in groups)
         /// </summary>
@@ -68,7 +69,7 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <returns>A list of ModifierItems for the item number</returns>
         public List<ModifierItem> GetIndividualModifiers(Context context, string itemNumber)
         {
-            using (InventoryServiceClient client = new InventoryServiceClient())
+            using (var client = new InventoryServiceClient())
             {
                 client.Open();
                 return new List<ModifierItem>(client.GetIndividualModifiers(context, itemNumber));
@@ -83,7 +84,7 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <returns>A list of ModifierItems for the item number</returns>
         public List<ModifierItem> GetModifierItemsForModifierGroup(Context context, string itemNumber)
         {
-            using (InventoryServiceClient client = new InventoryServiceClient())
+            using (var client = new InventoryServiceClient())
             {
                 client.Open();
                 return new List<ModifierItem>(client.GetModifierItemsForModifierGroup(context, itemNumber));
