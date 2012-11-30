@@ -28,5 +28,14 @@ namespace pcAmerica.DesktopPOS.API.Client
             }
 
         }
+
+        public void GetDBInfo(ref String DBName, ref String InstanceName)
+        {
+            using (CompanyInformationServiceClient client = new CompanyInformationServiceClient())
+            {
+                client.Open();
+                client.GetDBInfo(ref DBName,ref InstanceName);
+            }
+        }
     }
 }

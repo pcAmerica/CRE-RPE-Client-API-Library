@@ -55,6 +55,7 @@
       <xs:element minOccurs="0" name="LineItems" nillable="true" type="tns:ArrayOfLineItem" />
       <xs:element minOccurs="0" name="Locked" type="xs:boolean" />
       <xs:element minOccurs="0" name="LockedByStation" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="NeedsToBeSentToKitchen" type="xs:boolean" />
       <xs:element minOccurs="0" name="OnHoldID" nillable="true" type="xs:string" />
       <xs:element xmlns:q1="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="OrderType" type="q1:OrderTypes" />
       <xs:element minOccurs="0" name="PartySize" type="xs:int" />

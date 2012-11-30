@@ -66,6 +66,7 @@
       <xs:sequence>
         <xs:element xmlns:q7="http://pcAmerica.com/DesktopPOS/General/DataContracts/2009/10/26" minOccurs="0" name="context" nillable="true" type="q7:Context" />
         <xs:element minOccurs="0" name="invoiceNumber" type="xs:long" />
+        <xs:element minOccurs="0" name="SendVoidToKitchen" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -104,12 +104,12 @@ namespace pcAmerica.DesktopPOS.API.Client
         /// <param name="context">The store id, station id, and cashier id the information should be restricted to.</param>
         /// <param name="invoiceNumber">The number of the invoice that is to be voided</param>
         /// <returns>The success or failure of the void request</returns>
-        public bool VoidInvoice(Context context, long invoiceNumber)
+        public bool VoidInvoice(Context context, long invoiceNumber,bool SendVoidToKitchen)
         {
             using (var client = new SalesServiceClient())
             {
                 client.Open();
-                return client.VoidInvoice(context, invoiceNumber);
+                return client.VoidInvoice(context, invoiceNumber, SendVoidToKitchen);
             }
         }
 

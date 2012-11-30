@@ -19,6 +19,12 @@
   <wsdl:message name="CompanyInformationService_GetStationIDs_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetStationIDsResponse" />
   </wsdl:message>
+  <wsdl:message name="CompanyInformationService_GetDBInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetDBInfo" />
+  </wsdl:message>
+  <wsdl:message name="CompanyInformationService_GetDBInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetDBInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="CompanyInformationService">
     <wsdl:operation name="GetStoreIDs">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStoreIDs" message="tns:CompanyInformationService_GetStoreIDs_InputMessage" />
@@ -27,6 +33,10 @@
     <wsdl:operation name="GetStationIDs">
       <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDs" message="tns:CompanyInformationService_GetStationIDs_InputMessage" />
       <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDsResponse" message="tns:CompanyInformationService_GetStationIDs_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetDBInfo">
+      <wsdl:input wsaw:Action="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetDBInfo" message="tns:CompanyInformationService_GetDBInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetDBInfoResponse" message="tns:CompanyInformationService_GetDBInfo_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
 </wsdl:definitions>

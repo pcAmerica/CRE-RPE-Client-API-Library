@@ -25,6 +25,11 @@ namespace pcAmerica.DesktopPOS.API.Client.CompanyInformationService {
             "7/27/CompanyInformationService/GetStationIDs", ReplyAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/0" +
             "7/27/CompanyInformationService/GetStationIDsResponse")]
         System.Collections.Generic.List<string> GetStationIDs(string StoreID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/0" +
+            "7/27/CompanyInformationService/GetDBInfo", ReplyAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/0" +
+            "7/27/CompanyInformationService/GetDBInfoResponse")]
+        void GetDBInfo(ref string DatabaseName, ref string InstanceName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -60,6 +65,10 @@ namespace pcAmerica.DesktopPOS.API.Client.CompanyInformationService {
         
         public System.Collections.Generic.List<string> GetStationIDs(string StoreID) {
             return base.Channel.GetStationIDs(StoreID);
+        }
+        
+        public void GetDBInfo(ref string DatabaseName, ref string InstanceName) {
+            base.Channel.GetDBInfo(ref DatabaseName, ref InstanceName);
         }
     }
 }

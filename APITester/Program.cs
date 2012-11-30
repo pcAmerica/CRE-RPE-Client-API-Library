@@ -1,3 +1,5 @@
+
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,8 +16,10 @@ using pcAmerica.DesktopPOS.API.Client.TableService;
 
 namespace APITester
 {
+    
     class Program
     {
+        Random random = new Random();
         static void Main(string[] args)
         {
             //TestCreditCard();
@@ -30,10 +34,11 @@ namespace APITester
             //TestVoidInvoice();
             //TestSectionsAndTables();
             //TestSplits();
-            //TestSentToKitchenFlag();
             //TestPreAuthInvoice();
             //TestGetStoreIDsAndGetStationIDs();
-            NewTest();
+            AddItemsOutOfOrderTest();
+            TestDBInfo();
+            testSendToKitchen();
         }
 
         static void NewTest()
@@ -127,10 +132,10 @@ namespace APITester
                 api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 api.UnLockInvoice(context, inv.InvoiceNumber);
                 inv = api.GetInvoice(context, inv.InvoiceNumber);
-                Console.WriteLine("The invoice has {0} guests",inv.PartySize);
+                Console.WriteLine("The invoice has {0} guests", inv.PartySize);
                 foreach (LineItem individualItem in inv.LineItems)
                 {
-                    Console.WriteLine("Guest {0} has ordered: {1}-{2}",individualItem.Guest,individualItem.ItemNumber,individualItem.ItemName);
+                    Console.WriteLine("Guest {0} has ordered: {1}-{2}", individualItem.Guest, individualItem.ItemNumber, individualItem.ItemName);
                 }
 
                 //should show this invoice as locked by this station
@@ -140,7 +145,7 @@ namespace APITester
                                                     onHoldInfos.Count));
                 foreach (OnHoldInfo onHoldInfo in onHoldInfos)
                 {
-                    
+
                     foreach (OnHoldInfo OHI in onHoldInfos)
                     {
                         if (OHI.Locked == true)
@@ -153,9 +158,9 @@ namespace APITester
 
                 //checking locked status should be locked by this station
                 inv = api.GetInvoice(context, inv.InvoiceNumber);
-                if(inv.Locked == true)
+                if (inv.Locked == true)
                 {
-                    Console.WriteLine("Invoice #{0} is locked by Station: {1}",inv.InvoiceNumber.ToString(),inv.LockedByStation);
+                    Console.WriteLine("Invoice #{0} is locked by Station: {1}", inv.InvoiceNumber.ToString(), inv.LockedByStation);
                 }
                 else
                 {
@@ -170,7 +175,7 @@ namespace APITester
                                                     onHoldInfos.Count));
                 foreach (OnHoldInfo onHoldInfo in onHoldInfos)
                 {
-                    
+
                     foreach (OnHoldInfo OHI in onHoldInfos)
                     {
                         if (OHI.Locked == true)
@@ -285,60 +290,7 @@ namespace APITester
             }
         }
 
-        static void TestSentToKitchenFlag()
-        {
-            try
-            {
-                SalesAPI api = new SalesAPI();
-
-                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
-                context.CashierID = "100101";
-                context.StoreID = "1001";
-                context.StationID = "01";
-
-                Invoice inv = api.StartNewInvoice(context, "Audry", "XXOPEN TABS");
-                api.LockInvoice(context, inv.InvoiceNumber);
-                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
-                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
-                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
-                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
-                
-                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber);// should output line 1, 2 and 3 need to be sent to kitchen
-                if (api.SendToKitchen(context, inv.InvoiceNumber))// should output items sent to kitchen
-                {
-                    Console.WriteLine("Items Sent To Kitchen");
-                }
-                else
-                {
-                    Console.WriteLine("Failed sending items to kitchen");
-                }
-
-                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber); // should output no items need to be sent to kitchen
-
-                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
-                inv.LineItems[1].Quantity = 5;
-                inv.LineItems[1].State = EntityState.Modified;
-                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
-                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber); // should output lines 2 and 4 need to be sent to kitchen
-
-                if (api.SendToKitchen(context, inv.InvoiceNumber)) // should output items sent to kitchen
-                {
-                    Console.WriteLine("Items Sent To Kitchen");
-                }
-                else
-                {
-                    Console.WriteLine("Failed sending items to kitchen");
-                }
-                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber); //should output no items need to be sent to kitchen
-               
-            }
-            finally
-            {
-                Console.WriteLine("PRESS ENTER TO CONTINUE...");
-                Console.ReadLine();
-            }
-        }
-
+        
         static void DoItemsNeedToBeSentToKitchen(pcAmerica.DesktopPOS.API.Client.SalesService.Context context, long invoiceNumber)
         {
             SalesAPI api = new SalesAPI();
@@ -374,7 +326,7 @@ namespace APITester
 
                 inv = api.SplitInvoice(context, inv.InvoiceNumber, 3);
 
-                for (int i = 0; i <= inv.SplitInfo.NumberOfSplitChecks -1; i++)
+                for (int i = 0; i <= inv.SplitInfo.NumberOfSplitChecks - 1; i++)
                 {
                     Console.WriteLine(String.Format("Rich - Guest #{0}: ${1}", i + 1, inv.SplitInfo.GrandTotalForSplit[i]));
                 }
@@ -439,7 +391,7 @@ namespace APITester
                     int i = 0;
                     for (i = 0; i < tables.Count - 1; i++)
                     {
-                        if(tables[i].SectionID .StartsWith("XX") && !tables[i].Occupied) { continue;}
+                        if (tables[i].SectionID.StartsWith("XX") && !tables[i].Occupied) { continue; }
                         inv = salesAPI.StartNewInvoice(context, tables[i].TableNumber, tables[i].SectionID);
                         salesAPI.LockInvoice(context, inv.InvoiceNumber);
                         inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
@@ -497,7 +449,10 @@ namespace APITester
 
                 Console.WriteLine("Enter an invoice number to void: ");
                 string answer = Console.ReadLine();
-                api.VoidInvoice(context, Convert.ToInt64(answer));
+                Console.WriteLine("Send voided invoice to the kitchen printer?" + Environment.NewLine + "1 for YES" + Environment.NewLine + "0 for NO");
+                string answer2 = Console.ReadLine();
+                
+                api.VoidInvoice(context, Convert.ToInt64(answer), answer2 == "1" ? true : false );
             }
             catch (Exception ex)
             {
@@ -521,7 +476,7 @@ namespace APITester
                 context.StationID = "01";
 
                 // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
-                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString(),"XXOPEN TABS");
+                Invoice inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Ticks.ToString(), "XXOPEN TABS");
                 Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
 
                 // Unlock Invoice
@@ -573,8 +528,8 @@ namespace APITester
                 Console.WriteLine(String.Format("ModifyItems new invoice value after deleting burger with tomato: {0}", inv2.GrandTotal));
 
                 api.LockInvoice(context, inv2.InvoiceNumber);
-                
-               
+
+
                 // ApplyCashPayment - applying grand total minus 1 dollar
                 AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv2.InvoiceNumber, -1, inv2.GrandTotal);
                 if (payResponse.Success)
@@ -643,7 +598,7 @@ namespace APITester
                     Console.WriteLine(String.Format("Locked invoice # {0}", inv.InvoiceNumber));
                 else
                     Console.WriteLine(String.Format("Failed to lock invoice # {0}", inv.InvoiceNumber));
-                
+
                 // GetInvoiceHeader
                 inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
                 Console.WriteLine(String.Format("GetInvoiceHeader with #: {0}", inv.InvoiceNumber));
@@ -662,20 +617,20 @@ namespace APITester
                 api.SetPartySizeForInvoice(context, inv.InvoiceNumber, 2);
 
                 List<InventoryItem> items = InvApi.GetItemListExtended(InvContext);
-                
+
                 Console.WriteLine("*******************All Inventory Items************************");
-                foreach(InventoryItem singleItem in items)
+                foreach (InventoryItem singleItem in items)
                 {
-                    Console.WriteLine(String.Format("Item#: {0} ItemName:{1}",singleItem.ItemNumber,singleItem.ItemName));
+                    Console.WriteLine(String.Format("Item#: {0} ItemName:{1}", singleItem.ItemNumber, singleItem.ItemName));
                 }
                 Console.WriteLine("***************************************************************");
 
                 // ModifyItems
-                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1"});
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 1, State = EntityState.Added, Guest = "1" });
 
                 InventoryItem itemToAdd = InvApi.GetItem(InvContext, "SALAD3");
                 Guid itemToAddID = Guid.NewGuid();
-                LineItem LineItemToAdd = new LineItem(){Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price,Quantity = 1, State = EntityState.Added, Guest = "2"};
+                LineItem LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
                 inv.LineItems.Add(LineItemToAdd);
 
                 itemToAdd.ModifierGroups = InvApi.GetModiferGroupsForItem(InvContext, itemToAdd.ItemNumber);
@@ -707,7 +662,7 @@ namespace APITester
                         Console.WriteLine("Invalid answer i Choose option 1 chosen by defualt");
                         answer = "1";
                     }
-                    InventoryItem dressing = InvApi.GetItem(InvContext, ModGroup.ModifierItems[Convert.ToInt32(answer)-1].ItemNumber);
+                    InventoryItem dressing = InvApi.GetItem(InvContext, ModGroup.ModifierItems[Convert.ToInt32(answer) - 1].ItemNumber);
                     decimal Price = 0;
                     if (ModGroup.Charged == true) { Price = dressing.Price; }
                     inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = dressing.ItemName, ItemNumber = dressing.ItemNumber, Price = dressing.Price, Quantity = 1, State = EntityState.Added, Guest = "2" });
@@ -719,14 +674,14 @@ namespace APITester
                 LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
                 inv.LineItems.Add(LineItemToAdd);
                 itemToAdd.ModifierItems = InvApi.GetIndividualModifiers(InvContext, itemToAdd.ItemNumber);
-                if( itemToAdd.ModifierItems.Count > 0)
+                if (itemToAdd.ModifierItems.Count > 0)
                     inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = itemToAdd.ModifierItems[0].ItemName, ItemNumber = itemToAdd.ModifierItems[0].ItemNumber, Price = 0.00M, Quantity = 1, State = EntityState.Added, Guest = "1" });
 
-                
+
                 // This is a sample Kit Item I made that i added some items to you just have to ring up the base item(test) and the kit items will add along with it automaticly
                 itemToAdd = InvApi.GetItem(InvContext, "test");
                 itemToAddID = Guid.NewGuid();
-                LineItemToAdd = new LineItem(){ Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
+                LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "2" };
                 inv.LineItems.Add(LineItemToAdd);
 
                 itemToAdd = InvApi.GetItem(InvContext, "test");
@@ -738,13 +693,13 @@ namespace APITester
                 int j = 1;
                 Console.WriteLine(itemToAdd.ItemName2);
                 InventoryItem Choice;
-                foreach(String choiceItemNumber in itemToAdd.ChoiceItems)
+                foreach (String choiceItemNumber in itemToAdd.ChoiceItems)
                 {
                     Choice = InvApi.GetItem(InvContext, choiceItemNumber);
-                    Console.WriteLine(string.Format("{0}: ",Choice.ItemName));
+                    Console.WriteLine(string.Format("{0}: ", Choice.ItemName));
                     j++;
                 }
-                int choiceItemSelection = Convert.ToInt32(Console.ReadLine()) -1;
+                int choiceItemSelection = Convert.ToInt32(Console.ReadLine()) - 1;
                 itemToAdd = InvApi.GetItem(InvContext, itemToAdd.ChoiceItems[choiceItemSelection]);
                 itemToAddID = Guid.NewGuid();
                 LineItemToAdd = new LineItem() { Id = itemToAddID, ItemName = itemToAdd.ItemName, ItemNumber = itemToAdd.ItemNumber, Price = itemToAdd.Price, Quantity = 1, State = EntityState.Added, Guest = "1" };
@@ -752,12 +707,12 @@ namespace APITester
 
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems new invoice value: {0}", inv.GrandTotal));
-                
+
                 inv.LineItems[0].Quantity = 2;
                 inv.LineItems[0].State = EntityState.Modified;
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems CHANGED 1st item QUANTITY, new invoice value: {0}", inv.GrandTotal));
-                
+
                 // SendToKitchen
                 if (api.SendToKitchen(context, inv.InvoiceNumber))
                     Console.WriteLine("Invoice was printed in kitchen");
@@ -765,7 +720,7 @@ namespace APITester
                     Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
 
                 // Splitcheck
-                inv = api.SplitInvoiceByGuest(context,inv.InvoiceNumber);
+                inv = api.SplitInvoiceByGuest(context, inv.InvoiceNumber);
                 if (inv.SplitInfo.NumberOfSplitChecks == 2)
                     Console.WriteLine("Split invoice by guest");
                 else
@@ -779,18 +734,20 @@ namespace APITester
                     Console.WriteLine(String.Format("Applied cash payment to split 1, change due {0}", payResponse.ChangeAmount));
                 else
                     Console.WriteLine("***ERROR*** Could not apply payment");
-                
+
                 // ApplyCardPayment - applying remaining 1 dollar as a credit card
-                payResponse = api.ApplyCardPayment(context, 
-                    inv.InvoiceNumber, 
+                payResponse = api.ApplyCardPayment(context,
+                    inv.InvoiceNumber,
                     0,
-                    new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() 
-                    { Amount = 1,
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse()
+                    {
+                        Amount = 1,
                         CardNumber = "4***********1",
-                        ReferenceNumber = "123456", 
-                        Result = true, 
-                        TipAmount = 1, 
-                        TransactionNumber = 1234 }, -1);
+                        ReferenceNumber = "123456",
+                        Result = true,
+                        TipAmount = 1,
+                        TransactionNumber = 1234
+                    }, -1);
                 if (payResponse.Success)
                     Console.WriteLine(String.Format("Applied card payment to split 1, change due {0}", payResponse.ChangeAmount));
                 else
@@ -829,7 +786,7 @@ namespace APITester
 
         }
 
-        
+
         static void TestCreditCard()
         {
             try
@@ -946,7 +903,7 @@ namespace APITester
                 else
                     Console.WriteLine("Retrieved Non_Inventory item");
 
-                Console.WriteLine(string.Format("The Non_Inventory item has Item Type of {0}",item.ItemType));
+                Console.WriteLine(string.Format("The Non_Inventory item has Item Type of {0}", item.ItemType));
 
                 List<ModifierGroup> modGroups = api.GetModiferGroupsForItem(context, "Non_Inventory");
                 if (modGroups == null || modGroups.Count == 0)
@@ -966,7 +923,7 @@ namespace APITester
                     Console.WriteLine(String.Format("Found {0} Kit Item(s) for the Non_Inventory item!", item.KitItems.Count));
 
                 InventoryItem kitTest = api.GetItem(context, "kit1");
-                if(kitTest.KitItems == null || kitTest.KitItems.Count ==0)
+                if (kitTest.KitItems == null || kitTest.KitItems.Count == 0)
                     Console.WriteLine("kit1 has no Kit Items!");
                 else
                     Console.WriteLine(String.Format("Found {0} Kit Item(s) for kit1!", kitTest.KitItems.Count));
@@ -981,7 +938,7 @@ namespace APITester
                     Console.WriteLine("Choice Item One has no Choice Items!");
                 else
                     Console.WriteLine(String.Format("Found {0} Choice Item(s) for Choice Item One!", choiceTest.ChoiceItems.Count));
-                
+
             }
             catch (Exception ex)
             {
@@ -1044,33 +1001,33 @@ namespace APITester
 
                 // ModifyItems
                 inv.LineItems.Add(new LineItem()
-                                      {
-                                          Id = Guid.NewGuid(),
-                                          ItemName = "Non Inventory",
-                                          ItemNumber = "Non_Inventory",
-                                          Price = 1,
-                                          Quantity = 1,
-                                          State = EntityState.Added
-                                      });
+                {
+                    Id = Guid.NewGuid(),
+                    ItemName = "Non Inventory",
+                    ItemNumber = "Non_Inventory",
+                    Price = 1,
+                    Quantity = 1,
+                    State = EntityState.Added
+                });
                 inv.LineItems.Add(new LineItem()
-                                      {
-                                          Id = Guid.NewGuid(),
-                                          ItemName = "Non Inventory",
-                                          ItemNumber = "Non_Inventory",
-                                          Price = 2,
-                                          Quantity = 1,
-                                          State = EntityState.Added
-                                      });
+                {
+                    Id = Guid.NewGuid(),
+                    ItemName = "Non Inventory",
+                    ItemNumber = "Non_Inventory",
+                    Price = 2,
+                    Quantity = 1,
+                    State = EntityState.Added
+                });
                 inv.LineItems.Add(new LineItem()
-                                      {
-                                          Id = Guid.NewGuid(),
-                                          ItemName = "Non Inventory",
-                                          ItemNumber = "Non_Inventory",
-                                          Price = 3,
-                                          Quantity = 1,
-                                          State = EntityState.Added,
-                                          ParentId = inv.LineItems[1].Id
-                                      });
+                {
+                    Id = Guid.NewGuid(),
+                    ItemName = "Non Inventory",
+                    ItemNumber = "Non_Inventory",
+                    Price = 3,
+                    Quantity = 1,
+                    State = EntityState.Added,
+                    ParentId = inv.LineItems[1].Id
+                });
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems new invoice value: {0}", inv.GrandTotal));
                 inv.LineItems[0].State = EntityState.Deleted;
@@ -1082,13 +1039,13 @@ namespace APITester
                 Console.WriteLine(String.Format("ModifyItems CHANGED 1st item QUANTITY, new invoice value: {0}",
                                                 inv.GrandTotal));
                 inv.LineItems.Add(new LineItem()
-                                      {
-                                          ItemNumber = "Non_Inventory",
-                                          ItemName = "Hot dog",
-                                          Price = 1,
-                                          Quantity = 1,
-                                          State = EntityState.Added
-                                      });
+                {
+                    ItemNumber = "Non_Inventory",
+                    ItemName = "Hot dog",
+                    Price = 1,
+                    Quantity = 1,
+                    State = EntityState.Added
+                });
                 inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
                 Console.WriteLine(String.Format("ModifyItems ADDED item # 1, new invoice value: {0}", inv.GrandTotal));
 
@@ -1154,24 +1111,26 @@ namespace APITester
                 }
 
 
-            // ApplyCashPayment - applying grand total minus 1 dollar
-                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, -1, inv.GrandTotal -1);
+                // ApplyCashPayment - applying grand total minus 1 dollar
+                AppliedPaymentResponse payResponse = api.ApplyCashPayment(context, inv.InvoiceNumber, -1, inv.GrandTotal - 1);
                 if (payResponse.Success)
                     Console.WriteLine(String.Format("Applied cash payment, change due {0}", payResponse.ChangeAmount));
                 else
                     Console.WriteLine("***ERROR*** Could not apply payment");
 
                 // ApplyCardPayment - applying remaining 1 dollar as a credit card
-                payResponse = api.ApplyCardPayment(context, 
-                    inv.InvoiceNumber, 
+                payResponse = api.ApplyCardPayment(context,
+                    inv.InvoiceNumber,
                     -1,
-                    new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse() 
-                    { Amount = 1,
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse()
+                    {
+                        Amount = 1,
                         CardNumber = "4***********1",
-                        ReferenceNumber = "123456", 
-                        Result = true, 
-                        TipAmount = 1, 
-                        TransactionNumber = 1234 }, -1);
+                        ReferenceNumber = "123456",
+                        Result = true,
+                        TipAmount = 1,
+                        TransactionNumber = 1234
+                    }, -1);
                 if (payResponse.Success)
                     Console.WriteLine(String.Format("Applied card payment, change due {0}", payResponse.ChangeAmount));
                 else
@@ -1259,7 +1218,7 @@ namespace APITester
                 if (tables == null)
                     Console.WriteLine("***ERROR*** No tables or invoices were returned");
                 else
-                    
+
                     foreach (TableInfo table in tables)
                     {
                         if (table.SectionID == "XXTAKEOUT")
@@ -1281,7 +1240,7 @@ namespace APITester
                         else
                         {
                             emptyTables++;
-                        }                        
+                        }
                     }
                 Console.WriteLine("Takeout Order Count: {0}", takeoutOrders);
                 Console.WriteLine("Open Tabs Order Count: {0}", openTabOrders);
@@ -1327,6 +1286,176 @@ namespace APITester
                 Console.ReadLine();
             }
         }
+
+        static void AddItemsOutOfOrderTest()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "01";
+                context.StoreID = "1001";
+                context.StationID = "02";
+
+                // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
+                Invoice inv = api.StartNewInvoice(context, Guid.NewGuid().ToString().Substring(0, 8), "XXOPEN TABS");
+                Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
+
+                // GetInvoiceHeader
+                inv = api.GetInvoiceHeader(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoiceHeader with #: {0}", inv.InvoiceNumber));
+
+                // GetInvoice
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                Console.WriteLine(String.Format("GetInvoice with #: {0}", inv.InvoiceNumber));
+
+
+                Guid parent1 = Guid.NewGuid();
+                Guid parent2 = Guid.NewGuid();
+
+                // ModifyItems
+                inv.LineItems.Add(new LineItem() { Id = parent1, ItemName = "All American Meatloaf", ItemNumber = "All American Meat", Price = 6.00M, Quantity = 1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = parent2, ItemName = "Green St. Greek Salad", ItemNumber = "Greek Salad", Price = 6.50M, Quantity = 2, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Lobster Roll", ItemNumber = "Lobster", Price = 13.50M, Quantity = 2, State = EntityState.Added });
+
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Avocado", ItemNumber = "Avocado FREE", ParentId = parent2, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Add", ItemNumber = "ADD", ParentId = parent2, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "No Blue Cheese", ItemNumber = "NO Blue Cheese", ParentId = parent2, State = EntityState.Added });
+
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Bulkie", ItemNumber = "Bulkie", ParentId = parent1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Blue Cheese", ItemNumber = "BLUE CHEESE", ParentId = parent1, State = EntityState.Added });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "Avocado", ItemNumber = "Avocado FREE", ParentId = parent1, State = EntityState.Added });
+
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+
+                Invoice inv2 = api.GetInvoice(context, inv.InvoiceNumber);
+
+
+                //We see all the modifier items now have the parentID set to the Lobster item which is incorrect:
+                foreach (LineItem item in inv2.LineItems)
+                {
+                    Console.WriteLine("item name:{0}, id:{1}, parentId:{2}", item.ItemName, item.Id, item.ParentId);
+                }
+                //Also in addition sometimes there is exception "Can't add item "some item" to the invoice"
+
+                api.UnLockInvoice(context, inv2.InvoiceNumber);
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+
+        }
+
+        static void TestDBInfo()
+        {
+            try
+            {
+                string DBName = "";
+                string InstanceName = "";
+                CompanyInformationAPI api = new CompanyInformationAPI();
+                api.GetDBInfo(ref DBName,ref InstanceName);
+                Console.WriteLine("Database name:{0}", DBName);
+                Console.WriteLine("Instance name:{0}", InstanceName);
+
+            }
+            catch (Exception ex)
+            {
+                
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+
+        }
+
+        static void testSendToKitchen()
+        {
+            try
+            {
+                SalesAPI api = new SalesAPI();
+
+                pcAmerica.DesktopPOS.API.Client.SalesService.Context context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context();
+                context.CashierID = "100101";
+                context.StoreID = "1001";
+                context.StationID = "01";
+
+                Random random = new Random();
+                Invoice inv = api.StartNewInvoice(context, "Audry" + random.Next(0,10000) , "XXOPEN TABS");
+                api.LockInvoice(context, inv.InvoiceNumber);
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv.LineItems.Add(new LineItem() { Id = Guid.NewGuid(), ItemName = "TRIPPLE CHEESE BURGER", ItemNumber = "SAND4", Price = 3.99M, Quantity = 3, State = EntityState.Added, Guest = "1" });
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine("Three Tripple Cheese Burgers added to invoice");
+
+                Console.WriteLine("Needs to be sent to kitchen: {0}", inv.NeedsToBeSentToKitchen);
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber);
+                
+                if (api.SendToKitchen(context, inv.InvoiceNumber))// should output items sent to kitchen
+                {
+                    Console.WriteLine("Items Sent To Kitchen");
+                }
+                else
+                {
+                    Console.WriteLine("Failed sending items to kitchen");
+                }
+                Console.WriteLine("");
+
+                inv.LineItems[1].State = EntityState.Deleted;
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine("Tripple Cheese Burger in position 1 deletd");
+                Console.WriteLine("Needs to be sent to kitchen: {0}",inv.NeedsToBeSentToKitchen);
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber);
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                {
+                    Console.WriteLine("Items Sent To Kitchen");
+                }
+                else
+                {
+                    Console.WriteLine("Failed sending items to kitchen");
+                }
+                Console.WriteLine("");
+
+                Console.WriteLine("Did nothing checking for false");
+                inv = api.GetInvoice(context, inv.InvoiceNumber);
+                Console.WriteLine("Needs to be sent to kitchen: {0}", inv.NeedsToBeSentToKitchen);
+                DoItemsNeedToBeSentToKitchen(context, inv.InvoiceNumber);
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                {
+                    Console.WriteLine("Items Sent To Kitchen");
+                }
+                else
+                {
+                    Console.WriteLine("Failed sending items to kitchen");
+                }
+
+
+                api.VoidInvoice(context, inv.InvoiceNumber, true);
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
+
 
     }
 }

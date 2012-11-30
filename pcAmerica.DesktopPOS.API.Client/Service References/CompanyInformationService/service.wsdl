@@ -67,6 +67,15 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetDBInfo">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetDBInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="BasicHttpBinding_CompanyInformationService" type="i0:CompanyInformationService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -81,6 +90,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetStationIDs">
       <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDs" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDBInfo">
+      <soap:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetDBInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -104,6 +122,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetStationIDs">
       <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetStationIDs" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetDBInfo">
+      <soap12:operation soapAction="http://pcAmerica.com/DesktopPOS/CompanyInformationService/ServiceContracts/2010/07/27/CompanyInformationService/GetDBInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
