@@ -36,9 +36,10 @@ namespace APITester
             //TestSplits();
             //TestPreAuthInvoice();
             //TestGetStoreIDsAndGetStationIDs();
-            AddItemsOutOfOrderTest();
-            TestDBInfo();
-            testSendToKitchen();
+            //AddItemsOutOfOrderTest();
+            //TestDBInfo();
+            //testSendToKitchen();
+            TestSaleWithCreditCardPayment();
         }
 
         static void NewTest()
@@ -1456,6 +1457,85 @@ namespace APITester
             }
         }
 
+        static void TestSaleWithCreditCardPayment()
+        {
+            try
+            {
+                var api = new SalesAPI();
 
+                var context = new pcAmerica.DesktopPOS.API.Client.SalesService.Context
+                    {
+                        CashierID = "100101",
+                        StoreID = "1001",
+                        StationID = "01"
+                    };
+
+                // StartNewInvoice - this also automatically locks an invoice so it can't be opened by a terminal
+                var inv = api.StartNewInvoice(context, "ROB" + DateTime.Now.Second.ToString(), "XXOPEN TABS");
+                Console.WriteLine(String.Format("Started new invoice with #: {0}", inv.InvoiceNumber));
+
+                inv.LineItems.Add(new LineItem()
+                {
+                    ItemNumber = "Non_Inventory",
+                    ItemName = "Hot dog",
+                    Price = 1,
+                    Quantity = 1,
+                    State = EntityState.Added
+                });
+                inv = api.ModifyItems(context, inv.InvoiceNumber, inv.LineItems);
+                Console.WriteLine(String.Format("ModifyItems ADDED item # 1, new invoice value: {0}", inv.GrandTotal));
+
+                // SendToKitchen
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                    Console.WriteLine("Invoice was printed in kitchen");
+                else
+                    Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
+
+                if (api.SendToKitchen(context, inv.InvoiceNumber))
+                    Console.WriteLine(
+                        "Invoice was printed in kitchen, it should not have printed anything out the 2nd time");
+                else
+                    Console.WriteLine("***ERROR*** Invoice was NOT printed in kitchen");
+
+                // ApplyCardPayment - applying remaining 1 dollar as a credit card
+                var payResponse = api.ApplyCardPayment(context,
+                    inv.InvoiceNumber,
+                    -1,
+                    new pcAmerica.DesktopPOS.API.Client.SalesService.CreditCardPaymentProcessingResponse()
+                    {
+                        Amount = inv.GrandTotal,
+                        CardNumber = "4***********1",
+                        ReferenceNumber = "123456",
+                        Result = true,
+                        TipAmount = 1,
+                        TransactionNumber = 1234
+                    }, -1);
+                if (payResponse.Success)
+                    Console.WriteLine(String.Format("Applied card payment, change due {0}", payResponse.ChangeAmount));
+                else
+                    Console.WriteLine("***ERROR*** Could not apply card payment");
+
+                // EndInvoice
+                if (api.EndInvoice(context, inv.InvoiceNumber))
+                    Console.WriteLine("Ended invoice successfully");
+                else
+                    Console.WriteLine("***ERROR*** Could not end invoice");
+
+                // PrintReceipt - providing -1 for the split check # when there are no split checks
+                if (api.PrintReceipt(context, inv.InvoiceNumber, -1))
+                    Console.WriteLine("Receipt was printed");
+                else
+                    Console.WriteLine("***ERROR*** Receive was NOT printed");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            finally
+            {
+                Console.WriteLine("PRESS ENTER TO CONTINUE...");
+                Console.ReadLine();
+            }
+        }
     }
 }
